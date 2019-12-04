@@ -43,7 +43,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 12.0,
+        horizontal: 15.0,
         vertical: 16.0,
       ),
       child: TextFormField(
