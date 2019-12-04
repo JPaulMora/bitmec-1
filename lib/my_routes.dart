@@ -3,7 +3,7 @@ import 'package:bitmec/screens/login_screen.dart';
 
 class MyRoutes {
   static String initialRoute() {
-    return HomeScreen.routeName;
+    return LoginScreen.routeName;
   }
 
   static final routes = {

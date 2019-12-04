@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components/my_drawer.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBody(BuildContext context) {
     return Center(
-      child: Text('Content'),
+      child: Text('Home Page'),
     );
   }
 }

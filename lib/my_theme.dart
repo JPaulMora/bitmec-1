@@ -9,7 +9,15 @@ class MyTheme {
       primaryColor: Colors.white,
       appBarTheme: AppBarTheme(
         elevation: 0,
-      )
+      ),
+
+      hintColor: Colors.blue,
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(
+          color: Colors.blue,
+          fontSize: 24.0,
+        ),
+      ),
     );
   }
 
