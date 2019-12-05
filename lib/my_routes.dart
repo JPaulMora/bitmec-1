@@ -7,9 +7,11 @@ class MyRoutes {
 
   static final routes = {
     HomeScreen.routeName: (context) => HomeScreen(),
+
     LoginScreen.routeName: (context) => LoginScreen(),
 
     // Patient Routes
     PatientListScreen.routeName: (context) => PatientListScreen(),
+    PatientDetailScreen.routeName: (context) => PatientDetailScreen(),
   };
 }

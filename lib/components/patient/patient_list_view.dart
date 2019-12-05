@@ -24,12 +24,7 @@ class _PatientListViewState extends State<PatientListView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          widget.title != null
-          ? Text(widget.title, style: TextStyle(
-            color: widget.color,
-            fontSize: 50.0,
-          ))
-          : Container(),
+          _buildTitle(context),
 
           PatientCard(),
           PatientCard(),
@@ -39,5 +34,16 @@ class _PatientListViewState extends State<PatientListView> {
         ],
       ),
     );
+  }
+
+  Widget _buildTitle(BuildContext context) {
+    if (widget.title == null) {
+      return Container();
+    }
+
+    return Text(widget.title, style: TextStyle(
+      color: widget.color,
+      fontSize: 50.0,
+    ));
   }
 }
