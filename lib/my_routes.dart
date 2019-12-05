@@ -1,5 +1,4 @@
-import 'package:bitmec/screens/home_screen.dart';
-import 'package:bitmec/screens/login_screen.dart';
+import 'package:bitmec/screens/screens.dart';
 
 class MyRoutes {
   static String initialRoute() {
@@ -9,5 +8,8 @@ class MyRoutes {
   static final routes = {
     HomeScreen.routeName: (context) => HomeScreen(),
     LoginScreen.routeName: (context) => LoginScreen(),
+
+    // Patient Routes
+    PatientListScreen.routeName: (context) => PatientListScreen(),
   };
 }

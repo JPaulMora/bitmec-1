@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:bitmec/components/my_drawer.dart';
 import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/appointment_components.dart';
+import 'package:bitmec/components/appointment/appointment_components.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/';
@@ -17,11 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      key: _scaffoldKey,
-      drawer: MyDrawer(),
-      body: _buildBody(context),
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: _buildAppBar(context),
+        drawer: _buildAppDrawer(context),
+        body: _buildBody(context),
+      ),
     );
   }
 
@@ -30,6 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
       scaffoldKey: _scaffoldKey,
       title: 'Citas',
     );
+  }
+
+  Widget _buildAppDrawer(BuildContext context) {
+    return MyDrawer();
   }
 
   Widget _buildBody(BuildContext context) {
