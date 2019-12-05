@@ -1,8 +1,8 @@
-import 'package:bitmec/my_app.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components/my_app_bar.dart';
 import 'package:bitmec/components/my_drawer.dart';
+import 'package:bitmec/components/patient/patient_components.dart';
 
 class PatientDetailScreen extends StatefulWidget {
   static const routeName = '/patient/detail';
@@ -41,44 +41,39 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       return DefaultTabController(
         length: 5,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Center(
-              child: Container(
-                width: 200.0,
-                height: 200.0,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage("https://images.pexels.com/photos/235805/pexels-photo-235805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
-                    )
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 10.0),
-              child: Text('Nombre Apellido', style: TextStyle(
-                  fontSize: 30.0
-              )),
-            ),
-
+            _buildTopHeader(context),
             _buildTabBar(context),
-
-            Expanded(
-              child: TabBarView(
-                children: <Widget>[
-                  Text('General'),
-                  Text('Historial Médico'),
-                  Text('Historial Familiar'),
-                  Text('Hábito'),
-                  Text('Dependientes'),
-                ],
-              ),
-            )
+            _buildContent(context),
           ],
         ),
       );
+  }
+
+  Widget _buildTopHeader(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Center(
+          child: Container(
+            width: 200.0,
+            height: 200.0,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage("https://images.pexels.com/photos/235805/pexels-photo-235805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
+                )
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(bottom: 10.0),
+          child: Text('Nombre Apellido', style: TextStyle(
+              fontSize: 30.0
+          )),
+        ),
+      ],
+    );
   }
 
   Widget _buildTabBar(BuildContext context) {
@@ -95,6 +90,20 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           Tab(child: Text('Historial Familiar')),
           Tab(child: Text('Hábitos')),
           Tab(child: Text('Dependientes')),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    return Expanded(
+      child: TabBarView(
+        children: <Widget>[
+          PatientDetailGeneralView(),
+          Text('Historial Médico'),
+          Text('Historial Familiar'),
+          Text('Hábito'),
+          Text('Dependientes'),
         ],
       ),
     );
