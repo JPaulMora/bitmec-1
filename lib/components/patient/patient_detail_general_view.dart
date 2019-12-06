@@ -14,7 +14,8 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _QuickActionsSection(),
-          _buildGeneralInformation(context)
+          _buildGeneralInformation(context),
+          _ConsultationsSection(),
         ],
       ),
     );
@@ -132,6 +133,78 @@ class _QuickActionIcon extends StatelessWidget {
             iconSize: 50.0,
             onPressed: () {},
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ConsultationsSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Consultas', style: TextStyle(
+              fontSize: 30.0,
+              color: Colors.blue
+          )),
+
+          Column(
+            children: <Widget>[
+              _ConsultationCard(),
+              _ConsultationCard(),
+              _ConsultationCard(),
+              _ConsultationCard(),
+              _ConsultationCard(),
+              _ConsultationCard(),
+              _ConsultationCard(),
+              _ConsultationCard(),
+              _ConsultationCard(),
+              _ConsultationCard(),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _ConsultationCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 10.0
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Registro', style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                )),
+                Text('Fecha'),
+                Text('Hora'),
+              ],
+            ),
+            Row(
+              textDirection: TextDirection.rtl,
+              children: <Widget>[
+                Text('Estado', style: TextStyle(
+                  color: Colors.blueAccent,
+                ))
+              ],
+            ),
+          ],
         ),
       ),
     );
