@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PatientDetailGeneralView extends StatefulWidget {
@@ -10,8 +11,55 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _QuickActionsSection(),
+          _buildGeneralInformation(context)
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGeneralInformation(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('General', style: TextStyle(
+            fontSize: 30.0,
+            color: Colors.blue
+          )),
+          Card(
+            elevation: 3.0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 10.0
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Nombres', style: TextStyle(fontSize: 25.0)),
+                      Text('Apellidos', style: TextStyle(fontSize: 25.0)),
+                      Text('CUI'),
+                      Text('Edad'),
+                    ],
+                  ),
+                  Row(
+                    textDirection: TextDirection.rtl,
+                    children: <Widget>[
+                      Text('Género')
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
