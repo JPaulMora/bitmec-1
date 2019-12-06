@@ -18,6 +18,7 @@ class _PatientDetailMedicalHistoryViewState
         children: <Widget>[
           _MedicalConditionsSection(),
           _MedicalSurgeriesSection(),
+          _MedicinesSection(),
         ],
       ),
     );
@@ -120,6 +121,61 @@ class _MedicalSurgeryCard extends StatelessWidget {
               textDirection: TextDirection.rtl,
               children: <Widget>[
                 Text('Fecha : Hora', style: TextStyle(
+                  color: Colors.blueAccent,
+                ))
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MedicinesSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListOfSection(
+      title: 'Medicamentos',
+      children: <Widget>[
+        _MedicineCard(),
+        _MedicineCard(),
+        _MedicineCard(),
+      ],
+    );
+  }
+}
+
+class _MedicineCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 10.0
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Medicamento', style: TextStyle(fontSize: 24.0)),
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                Text('Dosis de:'),
+                Text('Descripción de dosis', style: TextStyle(
+                    fontWeight: FontWeight.bold
+                )),
+              ],
+            ),
+
+            Row(
+              textDirection: TextDirection.rtl,
+              children: <Widget>[
+                Text('Inicio - Fin', style: TextStyle(
                   color: Colors.blueAccent,
                 ))
               ],
