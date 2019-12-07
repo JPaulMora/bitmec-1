@@ -19,7 +19,7 @@ class _PatientDetailMedicalHistoryViewState
           _MedicalConditionsSection(),
           _MedicalSurgeriesSection(),
           _MedicinesSection(),
-
+          _ReproductiveHealthSection(),
           _ContraceptivesSection(),
         ],
       ),
@@ -184,6 +184,99 @@ class _MedicineCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ReproductiveHealthSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Salud Reproductiva', style: TextStyle(
+              fontSize: 30.0,
+              color: Colors.blue
+          )),
+
+          Card(
+            elevation: 3.0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 10.0
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('¿Has tenido uno más ciclos mestruales?'),
+                      Row(
+                        textDirection: TextDirection.rtl,
+                        children: <Widget>[
+                          Text('Sí', style: TextStyle(
+                            color: Colors.blueAccent,
+                          ))
+                        ],
+                      ),
+                      Padding(padding: const EdgeInsets.symmetric(vertical: 10.0)),
+                      Text('Primer Mestruación: << Fecha >>'),
+                      Text('Última Mestruación: << Fecha >>'),
+                    ],
+                  ),
+
+                  Padding(padding: const EdgeInsets.only(top: 10.0)),
+                  Divider(height: 2.0, color: Colors.grey),
+                  Padding(padding: const EdgeInsets.only(bottom: 10.0)),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('¿Has estado embarazada?'),
+                      Row(
+                        textDirection: TextDirection.rtl,
+                        children: <Widget>[
+                          Text('Sí', style: TextStyle(
+                            color: Colors.blueAccent,
+                          ))
+                        ],
+                      ),
+                      Padding(padding: const EdgeInsets.symmetric(vertical: 10.0)),
+                      Text('Embaranzos: << Cantidad >>'),
+                      Text('Hijos Vivos: << Cantidad >>'),
+                    ],
+                  ),
+
+                  Padding(padding: const EdgeInsets.only(top: 10.0)),
+                  Divider(height: 2.0, color: Colors.grey),
+                  Padding(padding: const EdgeInsets.only(bottom: 10.0)),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('¿Has perdido algún bebé?'),
+                      Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                      Row(
+                        textDirection: TextDirection.rtl,
+                        children: <Widget>[
+                          Text('No', style: TextStyle(
+                            color: Colors.blueAccent,
+                          ))
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
