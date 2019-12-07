@@ -101,7 +101,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
         children: <Widget>[
           PatientDetailGeneralView(),
           PatientDetailMedicalHistoryView(),
-          Text('Historial Familiar'),
+          PatientDetailFamilyHistoryView(),
           Text('Hábito'),
           Text('Dependientes'),
         ],
