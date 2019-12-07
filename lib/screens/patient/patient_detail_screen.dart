@@ -103,7 +103,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           PatientDetailMedicalHistoryView(),
           PatientDetailFamilyHistoryView(),
           PatientDetailHabitsView(),
-          Text('Dependientes'),
+          PatientDetailDependentsView(),
         ],
       ),
     );
