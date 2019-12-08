@@ -4,6 +4,8 @@ import 'package:bitmec/components/my_app_bar.dart';
 import 'package:bitmec/components/my_drawer.dart';
 import 'package:bitmec/components/patient/patient_components.dart';
 
+import 'package:bitmec/screens/patient/patient_edit_screen.dart';
+
 class PatientDetailScreen extends StatefulWidget {
   static const routeName = '/patient/detail';
 
@@ -30,6 +32,15 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
     return MyAppBar(
       title: 'Detalle',
       scaffoldKey: _scaffoldKey,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.edit),
+          tooltip: 'Editar',
+          onPressed: () {
+            Navigator.pushNamed(context, PatientEditScreen.routeName);
+          },
+        )
+      ],
     );
   }
   
