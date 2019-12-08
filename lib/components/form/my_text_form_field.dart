@@ -11,6 +11,7 @@ class MyTextFormField extends StatefulWidget {
   final TextInputAction action;
   final TextInputType keyboardType;
   final bool obscureText;
+  final Icon icon;
 
   MyTextFormField({
     Key key,
@@ -24,6 +25,7 @@ class MyTextFormField extends StatefulWidget {
     this.action = TextInputAction.next,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -58,12 +60,11 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         keyboardType: widget.keyboardType,
         obscureText: widget.obscureText,
         decoration: InputDecoration(
+          icon: widget.icon,
           labelText: widget.label,
           isDense: true,
           border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: _getColor(context),
-            ),
+            borderSide: BorderSide(color: _getColor(context)),
           ),
           labelStyle: _theme.inputDecorationTheme.labelStyle.copyWith(
             color: _getColor(context),
