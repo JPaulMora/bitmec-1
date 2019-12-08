@@ -84,7 +84,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
             _buildDepartmentInput(context),
             _buildCityInput(context),
             _buildAddressInput(context),
-            _buildSubmitButton(context),c
+            _buildSubmitButton(context),
             Padding(padding: const EdgeInsets.only(bottom: 15.0))
           ],
         ),
