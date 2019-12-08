@@ -14,5 +14,6 @@ class MyRoutes {
     PatientListScreen.routeName: (context) => PatientListScreen(),
     PatientDetailScreen.routeName: (context) => PatientDetailScreen(),
     PatientEditScreen.routeName: (context) => PatientEditScreen(),
+    PatientCreateScreen.routeName: (context) => PatientCreateScreen(),
   };
 }

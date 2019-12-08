@@ -4,6 +4,8 @@ import 'package:bitmec/components/my_drawer.dart';
 import 'package:bitmec/components/my_app_bar.dart';
 import 'package:bitmec/components/patient/patient_components.dart';
 
+import 'package:bitmec/screens/patient/patient_create_screen.dart';
+
 class PatientListScreen extends StatefulWidget {
   static const routeName = '/patient/list';
 
@@ -30,6 +32,15 @@ class _PatientListScreenState extends State<PatientListScreen> {
     return MyAppBar(
       title: 'Pacientes',
       scaffoldKey: _scaffoldKey,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          tooltip: 'Agregar Paciente',
+          onPressed: () {
+            Navigator.pushNamed(context, PatientCreateScreen.routeName);
+          },
+        )
+      ],
     );
   }
 
