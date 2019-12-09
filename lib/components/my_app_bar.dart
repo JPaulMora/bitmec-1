@@ -4,12 +4,14 @@ class MyAppBar extends StatelessWidget implements PreferredSize {
   final String title;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final List<Widget> actions;
+  final bool backLeading;
 
   MyAppBar({
     Key key,
     @required this.title,
     @required this.scaffoldKey,
     this.actions,
+    this.backLeading = false,
   }) : super(key: key);
 
   @override
@@ -17,12 +19,12 @@ class MyAppBar extends StatelessWidget implements PreferredSize {
     return AppBar(
       title: Text(title),
       centerTitle: true,
-      actions: this.actions,
-      leading: IconButton(
+      actions: actions,
+      leading: backLeading ? null : IconButton(
         icon: const Icon(Icons.menu),
         onPressed: () { scaffoldKey.currentState.openDrawer(); },
         tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-      ),
+      )
     );
   }
 

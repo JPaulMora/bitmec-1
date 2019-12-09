@@ -22,7 +22,6 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: _buildAppBar(context),
-        drawer: _buildAppDrawer(context),
         body: _buildBody(context),
       ),
     );
@@ -32,6 +31,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
     return MyAppBar(
       title: 'Detalle',
       scaffoldKey: _scaffoldKey,
+      backLeading: true,
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.edit),
@@ -42,10 +42,6 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
         )
       ],
     );
-  }
-  
-  Widget _buildAppDrawer(BuildContext context) {
-    return MyDrawer();
   }
 
   Widget _buildBody(BuildContext context) {
