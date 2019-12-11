@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components/my_app_bar.dart';
+import 'package:bitmec/components/quick_actions_components.dart';
+import 'package:bitmec/components/list_of_section.dart';
 
 class AppointmentDetailScreen extends StatefulWidget {
   static const routeName = '/appointment/detail';
@@ -35,10 +37,69 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Hello World!'),
+          _buildQuickActionsSection(context),
+          _buildVitalSignsSection(context),
+          _buildSymptomsSection(context),
+          _buildLaboratoryOrdersSection(context),
         ],
       ),
+    );
+  }
+
+  Widget _buildQuickActionsSection(BuildContext context) {
+    return QuickActionsSection(
+      children: <QuickActionIcon>[
+        QuickActionIcon(
+          icon: Icon(Icons.fiber_manual_record),
+          color: Colors.red,
+          label: 'Signos Vitales',
+          onTap: () {},
+        ),
+
+        QuickActionIcon(
+          icon: Icon(Icons.assignment_ind),
+          color: Colors.purple,
+          label: 'Sintomas',
+          onTap: () {},
+        ),
+
+        QuickActionIcon(
+          icon: Icon(Icons.chat),
+          color: Colors.green,
+          label: 'Chat',
+          onTap: () {},
+        ),
+
+        QuickActionIcon(
+          icon: Icon(Icons.dock),
+          color: Colors.lightBlueAccent,
+          label: 'Consulta',
+          onTap: () {},
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVitalSignsSection(BuildContext context) {
+    return ListOfSection(
+      title: 'Signos Vitales',
+      children: <Widget>[],
+    );
+  }
+
+  Widget _buildSymptomsSection(BuildContext context) {
+    return ListOfSection(
+      title: 'Sintomas',
+      children: <Widget>[],
+    );
+  }
+
+  Widget _buildLaboratoryOrdersSection(BuildContext context) {
+    return ListOfSection(
+      title: 'Órdenes de Laboratorio',
+      children: <Widget>[],
     );
   }
 }

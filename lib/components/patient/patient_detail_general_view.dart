@@ -19,19 +19,19 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
               QuickActionIcon(
                 icon: Icon(Icons.add),
                 color: Colors.yellow,
-                tooltip: 'Agregar Cita',
+                label: 'Agregar Cita',
               ),
 
               QuickActionIcon(
                 icon: Icon(Icons.calendar_today),
                 color: Colors.blue,
-                tooltip: 'Citas',
+                label: 'Citas',
               ),
 
               QuickActionIcon(
                 icon: Icon(Icons.monetization_on),
                 color: Colors.green,
-                tooltip: 'Créditos',
+                label: 'Créditos',
               ),
             ],
           ),
