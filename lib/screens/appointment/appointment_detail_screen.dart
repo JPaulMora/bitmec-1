@@ -4,6 +4,8 @@ import 'package:bitmec/components/my_app_bar.dart';
 import 'package:bitmec/components/quick_actions_components.dart';
 import 'package:bitmec/components/list_of_section.dart';
 
+import '../vital_sign/vital_sign_create_screen.dart';
+
 class AppointmentDetailScreen extends StatefulWidget {
   static const routeName = '/appointment/detail';
 
@@ -55,7 +57,8 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
           icon: Icon(Icons.fiber_manual_record),
           color: Colors.red,
           label: 'Signos Vitales',
-          onTap: () {},
+          onTap: () {
+          },
         ),
 
         QuickActionIcon(
