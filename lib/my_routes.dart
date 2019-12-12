@@ -17,5 +17,8 @@ class MyRoutes {
 
     // Appointment Routes
     AppointmentDetailScreen.routeName: (context) => AppointmentDetailScreen(),
+
+    // Vital Sign Routes
+    VitalSignCreateScreen.routeName: (context) => VitalSignCreateScreen(),
   };
 }

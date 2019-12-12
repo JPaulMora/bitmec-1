@@ -58,6 +58,7 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
           color: Colors.red,
           label: 'Signos Vitales',
           onTap: () {
+            Navigator.pushNamed(context, VitalSignCreateScreen.routeName);
           },
         ),
 

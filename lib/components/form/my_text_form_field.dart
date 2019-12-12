@@ -21,7 +21,7 @@ class MyTextFormField extends StatefulWidget {
     this.isEnabled,
     this.submitted,
     this.validator,
-    this.maxLines,
+    this.maxLines = 1,
     this.action = TextInputAction.next,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
