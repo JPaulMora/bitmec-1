@@ -11,3 +11,5 @@ export 'patient/patient_create_screen.dart';
 export 'appointment/appointment_detail_screen.dart';
 
 export 'vital_sign/vital_sign_create_screen.dart';
+
+export 'chat_screen.dart';

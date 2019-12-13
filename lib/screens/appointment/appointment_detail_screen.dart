@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:bitmec/components/my_app_bar.dart';
 import 'package:bitmec/components/quick_actions_components.dart';
 import 'package:bitmec/components/list_of_section.dart';
-
-import '../vital_sign/vital_sign_create_screen.dart';
+import 'package:bitmec/screens/screens.dart';
 
 class AppointmentDetailScreen extends StatefulWidget {
   static const routeName = '/appointment/detail';
@@ -73,7 +72,9 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
           icon: Icon(Icons.chat),
           color: Colors.green,
           label: 'Chat',
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, ChatScreen.routeName);
+          },
         ),
 
         QuickActionIcon(
