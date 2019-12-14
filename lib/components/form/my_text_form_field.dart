@@ -27,7 +27,7 @@ class MyTextFormField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.icon,
-    this.noPadding,
+    this.noPadding = false,
   }) : super(key: key);
 
   @override

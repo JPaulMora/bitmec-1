@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class ListOfSection extends StatelessWidget {
   final String title;
   final List<Widget> children;
+  final VoidCallback onPressedAdd;
 
   ListOfSection({
     Key key,
     @required this.title,
     this.children = const <Widget>[],
+    this.onPressedAdd,
   }) : super(key: key);
 
   @override
@@ -17,10 +19,21 @@ class ListOfSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(this.title, style: TextStyle(
-              fontSize: 30.0,
-              color: Colors.blue
-          )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(this.title, style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.blue,
+              )),
+
+              this.onPressedAdd != null
+                ? IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: this.onPressedAdd)
+                : Container(),
+            ],
+          ),
 
           Column(children: this.children)
         ],

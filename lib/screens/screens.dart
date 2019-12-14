@@ -5,6 +5,7 @@ export 'login_screen.dart';
 
 export 'patient/patient_list_screen.dart';
 export 'patient/patient_detail_screen.dart';
+export 'patient/patient_detail_medical_condition_create_screen.dart';
 export 'patient/patient_edit_screen.dart';
 export 'patient/patient_create_screen.dart';
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../list_of_section.dart';
 
+import 'package:bitmec/screens/screens.dart';
+
 class PatientDetailMedicalHistoryView extends StatefulWidget {
   @override
   _PatientDetailMedicalHistoryViewState createState() =>
@@ -32,6 +34,10 @@ class _MedicalConditionsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListOfSection(
       title: 'Padecimientos',
+      onPressedAdd: () {
+        Navigator.pushNamed(context,
+            PatientDetailMedicalConditionCreateScreen.routeName);
+      },
       children: <Widget>[
         _MedicalConditionCard(),
         _MedicalConditionCard(),
