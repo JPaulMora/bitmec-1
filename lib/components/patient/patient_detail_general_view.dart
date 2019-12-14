@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/components/form/form_components.dart';
 import 'package:bitmec/components/quick_actions_components.dart';
 
 class PatientDetailGeneralView extends StatefulWidget {
@@ -8,6 +11,15 @@ class PatientDetailGeneralView extends StatefulWidget {
 }
 
 class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
+  final _consultationCtrl = TextEditingController();
+  final _consultationNode = FocusNode();
+
+  @override
+  void dispose() {
+    _consultationCtrl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -19,7 +31,8 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
               QuickActionIcon(
                 icon: Icon(Icons.add),
                 color: Colors.yellow,
-                label: 'Agregar Cita',
+                label: 'Agregar Consulta',
+                onTap: () { _createConsultation(context); },
               ),
 
               QuickActionIcon(
@@ -37,6 +50,40 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
           ),
           _buildGeneralInformation(context),
           _ConsultationsSection(),
+        ],
+      ),
+    );
+  }
+  
+  void _createConsultation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Agregar Consulta'),
+        content: MyTextFormField(
+          noPadding: true,
+          label: 'Nombre',
+          ctrl: _consultationCtrl,
+          node: _consultationNode,
+          isEnabled: () => true,
+          submitted: (_) {},
+          validator: (value) => value.trim().isEmpty
+              ? 'El valor es requerido' : null,
+        ),
+        actions: <Widget>[
+          FlatButton(
+            splashColor: Colors.black12,
+            child: Text('Agregar'),
+            onPressed: () { Navigator.pop(context); },
+          ),
+          RaisedButton(
+            color: Colors.redAccent,
+            child: Text('Cancelar'),
+            onPressed: () {
+              _consultationCtrl.text = '';
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );

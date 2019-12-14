@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/my_drawer.dart';
 import 'package:bitmec/components/patient/patient_components.dart';
 
 import 'package:bitmec/screens/patient/patient_edit_screen.dart';
@@ -65,18 +64,18 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             width: 200.0,
             height: 200.0,
             decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage("https://images.pexels.com/photos/235805/pexels-photo-235805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
-                )
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage("https://images.pexels.com/photos/235805/pexels-photo-235805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
+              )
             ),
           ),
         ),
         Container(
           margin: EdgeInsets.only(bottom: 10.0),
           child: Text('Nombre Apellido', style: TextStyle(
-              fontSize: 30.0
+            fontSize: 30.0
           )),
         ),
       ],

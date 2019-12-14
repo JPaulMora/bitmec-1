@@ -12,6 +12,7 @@ class MyTextFormField extends StatefulWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final Icon icon;
+  final bool noPadding;
 
   MyTextFormField({
     Key key,
@@ -26,6 +27,7 @@ class MyTextFormField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.icon,
+    this.noPadding,
   }) : super(key: key);
 
   @override
@@ -44,9 +46,9 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15.0,
-        vertical: 10.0,
+      padding: EdgeInsets.symmetric(
+        horizontal: widget.noPadding ? 0.0 : 15.0,
+        vertical: widget.noPadding ? 0.0 : 10.0,
       ),
       child: TextFormField(
         controller: widget.ctrl,
