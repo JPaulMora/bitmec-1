@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:bitmec/components/form/form_components.dart';
 import 'package:bitmec/components/quick_actions_components.dart';
 
+import 'package:bitmec/screens/screens.dart';
+
 class PatientDetailGeneralView extends StatefulWidget {
   @override
   _PatientDetailGeneralViewState createState() => _PatientDetailGeneralViewState();
@@ -171,36 +173,41 @@ class _ConsultationsSection extends StatelessWidget {
 class _ConsultationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Registro', style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                )),
-                Text('Fecha'),
-                Text('Hora'),
-              ],
-            ),
-            Row(
-              textDirection: TextDirection.rtl,
-              children: <Widget>[
-                Text('Estado', style: TextStyle(
-                  color: Colors.blueAccent,
-                ))
-              ],
-            ),
-          ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, AppointmentDetailScreen.routeName);
+      },
+      child: Card(
+        elevation: 3.0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 10.0
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Registro', style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  )),
+                  Text('Fecha'),
+                  Text('Hora'),
+                ],
+              ),
+              Row(
+                textDirection: TextDirection.rtl,
+                children: <Widget>[
+                  Text('Estado', style: TextStyle(
+                    color: Colors.blueAccent,
+                  ))
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
