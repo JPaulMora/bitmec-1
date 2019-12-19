@@ -23,6 +23,10 @@ class _PatientDetailMedicalHistoryViewState
           _MedicinesSection(),
           _ReproductiveHealthSection(),
           _ContraceptivesSection(),
+<<<<<<< HEAD
+=======
+          _MedicalTraumaSection(),
+>>>>>>> e7f593c4e477a61206f956918289c3b5978086ad
         ],
       ),
     );
@@ -232,8 +236,34 @@ class _ReproductiveHealthSection extends StatelessWidget {
                         ],
                       ),
                       Padding(padding: const EdgeInsets.symmetric(vertical: 10.0)),
+<<<<<<< HEAD
                       Text('Primer Mestruación: << Fecha >>'),
                       Text('Última Mestruación: << Fecha >>'),
+=======
+                      Text('Menarquia: << Edad >>'),
+                      Text('Última Menstruación: << Fecha >>'),
+                      Text('Menopausia: << Edad >>'),
+                    ],
+                  ),
+
+                  Padding(padding: const EdgeInsets.only(top: 10.0)),
+                  Divider(height: 2.0, color: Colors.grey),
+                  Padding(padding: const EdgeInsets.only(bottom: 10.0)),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('¿Ciclo menstrual regular?'),
+                      Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                      Row(
+                        textDirection: TextDirection.rtl,
+                        children: <Widget>[
+                          Text('Si', style: TextStyle(
+                            color: Colors.blueAccent,
+                          ))
+                        ],
+                      )
+>>>>>>> e7f593c4e477a61206f956918289c3b5978086ad
                     ],
                   ),
 
@@ -337,3 +367,72 @@ class _ContraceptiveCard extends StatelessWidget {
     );
   }
 }
+<<<<<<< HEAD
+=======
+
+class _MedicalTraumaSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListOfSection(
+      title: 'Traumas',
+      onPressedAdd: () {
+        Navigator.pushNamed(context,
+            PatientDetailMedicalTraumaCreateScreen.routeName);
+      },
+      children: <Widget>[
+        _MedicalTraumaCard(),
+      ],
+    );
+  }
+}
+
+class _MedicalTraumaCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 10.0
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Fractura', style: TextStyle(fontSize: 24.0)),
+
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                Text('Localización:', style: TextStyle(
+                    fontWeight: FontWeight.bold
+                )),
+                Text('Rodilla Derecha'),
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                Text('Tratamiento:', style: TextStyle(
+                    fontWeight: FontWeight.bold
+                )),
+                Text('Yeso'),
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+
+                Text('Traumatólogo: Dr. Salinas')
+              ],
+            ),
+
+            Row(
+              textDirection: TextDirection.rtl,
+              children: <Widget>[
+                Text('Fecha', style: TextStyle(
+                  color: Colors.blueAccent,
+                ))
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+>>>>>>> e7f593c4e477a61206f956918289c3b5978086ad
