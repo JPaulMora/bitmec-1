@@ -12,6 +12,8 @@ class MyRoutes {
 
     // Patient Routes
     PatientListScreen.routeName: (context) => PatientListScreen(),
+    PatientEditScreen.routeName: (context) => PatientEditScreen(),
+    PatientCreateScreen.routeName: (context) => PatientCreateScreen(),
 
     PatientDetailScreen.routeName: (context) => PatientDetailScreen(),
     PatientDetailMedicalConditionCreateScreen.routeName: (context) =>
@@ -20,9 +22,8 @@ class MyRoutes {
         PatientDetailMedicalTraumaCreateScreen(),
     PatientDetailFamilyHistoryCreateScreen.routeName: (context) =>
       PatientDetailFamilyHistoryCreateScreen(),
-
-    PatientEditScreen.routeName: (context) => PatientEditScreen(),
-    PatientCreateScreen.routeName: (context) => PatientCreateScreen(),
+    PatientDetailHabitCreateScreen.routeName: (context) =>
+      PatientDetailHabitCreateScreen(),
 
     // Appointment Routes
     AppointmentDetailScreen.routeName: (context) => AppointmentDetailScreen(),

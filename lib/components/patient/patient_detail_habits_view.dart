@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../list_of_section.dart';
 
+import 'package:bitmec/screens/screens.dart';
+
 class PatientDetailHabitsView extends StatefulWidget {
   @override
   _PatientDetailHabitsViewState createState() =>
@@ -15,6 +17,10 @@ class _PatientDetailHabitsViewState
     return SingleChildScrollView(
       child: ListOfSection(
         title: 'Hábitos',
+        onPressedAdd: () {
+          Navigator.pushNamed(context,
+              PatientDetailHabitCreateScreen.routeName);
+        },
         children: <Widget>[
           _HabitCard(),
           _HabitCard(),
