@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/screens/screens.dart';
+
 import '../list_of_section.dart';
 
 class PatientDetailFamilyHistoryView extends StatefulWidget {
@@ -15,6 +17,10 @@ class _PatientDetailFamilyHistoryViewState
     return SingleChildScrollView(
       child: ListOfSection(
         title: 'Familia',
+        onPressedAdd: () {
+          Navigator.pushNamed(context,
+              PatientDetailFamilyHistoryCreateScreen.routeName);
+        },
         children: <Widget>[
           _FamilyCard(),
           _FamilyCard(),

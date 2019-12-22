@@ -18,6 +18,8 @@ class MyRoutes {
         PatientDetailMedicalConditionCreateScreen(),
     PatientDetailMedicalTraumaCreateScreen.routeName: (context) =>
         PatientDetailMedicalTraumaCreateScreen(),
+    PatientDetailFamilyHistoryCreateScreen.routeName: (context) =>
+      PatientDetailFamilyHistoryCreateScreen(),
 
     PatientEditScreen.routeName: (context) => PatientEditScreen(),
     PatientCreateScreen.routeName: (context) => PatientCreateScreen(),

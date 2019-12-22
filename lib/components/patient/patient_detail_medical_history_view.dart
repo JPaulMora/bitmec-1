@@ -23,10 +23,7 @@ class _PatientDetailMedicalHistoryViewState
           _MedicinesSection(),
           _ReproductiveHealthSection(),
           _ContraceptivesSection(),
-<<<<<<< HEAD
-=======
           _MedicalTraumaSection(),
->>>>>>> e7f593c4e477a61206f956918289c3b5978086ad
         ],
       ),
     );
@@ -236,10 +233,8 @@ class _ReproductiveHealthSection extends StatelessWidget {
                         ],
                       ),
                       Padding(padding: const EdgeInsets.symmetric(vertical: 10.0)),
-<<<<<<< HEAD
                       Text('Primer Mestruación: << Fecha >>'),
                       Text('Última Mestruación: << Fecha >>'),
-=======
                       Text('Menarquia: << Edad >>'),
                       Text('Última Menstruación: << Fecha >>'),
                       Text('Menopausia: << Edad >>'),
@@ -263,7 +258,6 @@ class _ReproductiveHealthSection extends StatelessWidget {
                           ))
                         ],
                       )
->>>>>>> e7f593c4e477a61206f956918289c3b5978086ad
                     ],
                   ),
 
@@ -367,8 +361,6 @@ class _ContraceptiveCard extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-=======
 
 class _MedicalTraumaSection extends StatelessWidget {
   @override
@@ -435,4 +427,3 @@ class _MedicalTraumaCard extends StatelessWidget {
     );
   }
 }
->>>>>>> e7f593c4e477a61206f956918289c3b5978086ad
