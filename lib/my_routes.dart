@@ -1,5 +1,6 @@
 import 'package:bitmec/screens/screens.dart';
 
+
 class MyRoutes {
   static String initialRoute() {
     return LoginScreen.routeName;
@@ -18,6 +19,14 @@ class MyRoutes {
         PatientDetailMedicalConditionCreateScreen(),
     PatientDetailMedicalTraumaCreateScreen.routeName: (context) =>
         PatientDetailMedicalTraumaCreateScreen(),
+    PatientDetailMedicalAlergiesCreateScreen.routeName: (context) =>
+        PatientDetailMedicalAlergiesCreateScreen(),
+    PatientDetailContraceptivesCreateScreen.routeName: (context) =>
+        PatientDetailContraceptivesCreateScreen(),
+    PatientDetailMedicineCreateScreen.routeName: (context) =>
+        PatientDetailMedicineCreateScreen(),
+    PatientDetailSurgeriesCreateScreen.routeName: (context) =>
+        PatientDetailSurgeriesCreateScreen(),
     PatientDetailFamilyHistoryCreateScreen.routeName: (context) =>
       PatientDetailFamilyHistoryCreateScreen(),
 

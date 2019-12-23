@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:bitmec/components/my_app_bar.dart';
 import 'package:bitmec/components/form/form_components.dart';
 
-class PatientDetailMedicalTraumaCreateScreen extends StatefulWidget {
-  static const routeName = '/patient/detail/trauma_condition/create';
+class PatientDetailContraceptivesCreateScreen extends StatefulWidget {
+  static const routeName = '/patient/detail/contraceptives/create';
 
   @override
-  _PatientDetailMedicalTraumaCreateScreenState createState() =>
-      _PatientDetailMedicalTraumaCreateScreenState();
+  _PatientDetailContraceptivesCreateScreenState createState() =>
+      _PatientDetailContraceptivesCreateScreenState();
 }
 
-class _PatientDetailMedicalTraumaCreateScreenState
-    extends State<PatientDetailMedicalTraumaCreateScreen> {
+class _PatientDetailContraceptivesCreateScreenState
+    extends State<PatientDetailContraceptivesCreateScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _conditionCtrl = TextEditingController();
@@ -21,14 +21,13 @@ class _PatientDetailMedicalTraumaCreateScreenState
   final _dateCtrl = TextEditingController();
   final _dateNode = FocusNode();
 
+  final _endDateCtrl = TextEditingController();
+  final _endDateNode = FocusNode();
+
   final _byCtrl = TextEditingController();
   final _byNode = FocusNode();
 
-  final _locationCtrl = TextEditingController();
-  final _locationNode = FocusNode();
 
-  final _treatmentCtrl = TextEditingController();
-  final _treatmentNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +53,9 @@ class _PatientDetailMedicalTraumaCreateScreenState
         child: Column(
           children: <Widget>[
             _buildConditionInput(context),
-            _buildLocationInput(context),
-            _buildTreatmentInput(context),
             _buildByInput(context),
             _buildDateInput(context),
+            _buildEndDateInput(context),
             MySubmitButton(
               label: 'Guardar',
               onPressed: () {},
@@ -70,7 +68,7 @@ class _PatientDetailMedicalTraumaCreateScreenState
 
   Widget _buildConditionInput(BuildContext context) {
     return MyTextFormField(
-      label: 'Trauma',
+      label: 'Método',
       ctrl: _conditionCtrl,
       node: _conditionNode,
       isEnabled: () => true,
@@ -80,7 +78,7 @@ class _PatientDetailMedicalTraumaCreateScreenState
       },
       validator: (value) {
         if (value.trim().isEmpty) {
-          return 'El trauma es requerido';
+          return 'El método anticonceptivo es requerido';
         }
 
         return null;
@@ -90,7 +88,7 @@ class _PatientDetailMedicalTraumaCreateScreenState
 
   Widget _buildDateInput(BuildContext context) {
     return MyTextFormField(
-      label: 'Fecha de Diagnostico',
+      label: 'Fecha Inicio',
       ctrl: _dateCtrl,
       node: _dateNode,
       isEnabled: () => true,
@@ -100,7 +98,7 @@ class _PatientDetailMedicalTraumaCreateScreenState
       },
       validator: (value) {
         if (value.trim().isEmpty) {
-          return 'La fecha es requerida';
+          return 'La fecha de inicio es requerida';
         }
 
         return null;
@@ -110,7 +108,7 @@ class _PatientDetailMedicalTraumaCreateScreenState
 
   Widget _buildByInput(BuildContext context) {
     return MyTextFormField(
-      label: 'Diagnosticado por',
+      label: 'Recetado por',
       ctrl: _byCtrl,
       node: _byNode,
       isEnabled: () => true,
@@ -127,33 +125,14 @@ class _PatientDetailMedicalTraumaCreateScreenState
     );
   }
 
-  Widget _buildLocationInput(BuildContext context) {
+  Widget _buildEndDateInput(BuildContext context) {
     return MyTextFormField(
-      label: 'Localización',
-      ctrl: _locationCtrl,
-      node: _locationNode,
+      label: 'Fecha Fin',
+      ctrl: _endDateCtrl,
+      node: _endDateNode,
       isEnabled: () => true,
       submitted: (_) {
-        _locationNode.unfocus();
-      },
-      validator: (value) {
-        if (value.trim().isEmpty) {
-          return 'Este campo es requerido';
-        }
-
-        return null;
-      },
-    );
-  }
-
-  Widget _buildTreatmentInput(BuildContext context) {
-    return MyTextFormField(
-      label: 'Tratamiento',
-      ctrl: _treatmentCtrl,
-      node: _treatmentNode,
-      isEnabled: () => true,
-      submitted: (_) {
-        _treatmentNode.unfocus();
+        _endDateNode.unfocus();
       },
       validator: (value) {
         if (value.trim().isEmpty) {

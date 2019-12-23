@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:bitmec/components/my_app_bar.dart';
 import 'package:bitmec/components/form/form_components.dart';
 
-class PatientDetailMedicalTraumaCreateScreen extends StatefulWidget {
-  static const routeName = '/patient/detail/trauma_condition/create';
+class PatientDetailMedicalAlergiesCreateScreen extends StatefulWidget {
+  static const routeName = '/patient/detail/alergies_condition/create';
 
   @override
-  _PatientDetailMedicalTraumaCreateScreenState createState() =>
-      _PatientDetailMedicalTraumaCreateScreenState();
+  _PatientDetailMedicalAlergiesCreateScreenState createState() =>
+      _PatientDetailMedicalAlergiesCreateScreenState();
 }
 
-class _PatientDetailMedicalTraumaCreateScreenState
-    extends State<PatientDetailMedicalTraumaCreateScreen> {
+class _PatientDetailMedicalAlergiesCreateScreenState
+    extends State<PatientDetailMedicalAlergiesCreateScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _conditionCtrl = TextEditingController();
@@ -24,11 +24,14 @@ class _PatientDetailMedicalTraumaCreateScreenState
   final _byCtrl = TextEditingController();
   final _byNode = FocusNode();
 
-  final _locationCtrl = TextEditingController();
-  final _locationNode = FocusNode();
+  final _MedicationCtrl = TextEditingController();
+  final _MedicationNode = FocusNode();
 
-  final _treatmentCtrl = TextEditingController();
-  final _treatmentNode = FocusNode();
+  final _foodCtrl = TextEditingController();
+  final _foodNode = FocusNode();
+
+  final _reactionCtrl = TextEditingController();
+  final _reactionNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +57,9 @@ class _PatientDetailMedicalTraumaCreateScreenState
         child: Column(
           children: <Widget>[
             _buildConditionInput(context),
-            _buildLocationInput(context),
-            _buildTreatmentInput(context),
+            _buildMedicationInput(context),
+            _buildFoodInput(context),
+            _buildReactionInput(context),
             _buildByInput(context),
             _buildDateInput(context),
             MySubmitButton(
@@ -70,7 +74,7 @@ class _PatientDetailMedicalTraumaCreateScreenState
 
   Widget _buildConditionInput(BuildContext context) {
     return MyTextFormField(
-      label: 'Trauma',
+      label: 'Alergia',
       ctrl: _conditionCtrl,
       node: _conditionNode,
       isEnabled: () => true,
@@ -80,7 +84,7 @@ class _PatientDetailMedicalTraumaCreateScreenState
       },
       validator: (value) {
         if (value.trim().isEmpty) {
-          return 'El trauma es requerido';
+          return 'El tipo de alergia es requerida';
         }
 
         return null;
@@ -127,14 +131,14 @@ class _PatientDetailMedicalTraumaCreateScreenState
     );
   }
 
-  Widget _buildLocationInput(BuildContext context) {
-    return MyTextFormField(
-      label: 'Localización',
-      ctrl: _locationCtrl,
-      node: _locationNode,
+  Widget _buildMedicationInput(BuildContext context) {
+    return MyTextAreaFormField(
+      label: 'Medicamentos',
+      ctrl: _MedicationCtrl,
+      node: _MedicationNode,
       isEnabled: () => true,
       submitted: (_) {
-        _locationNode.unfocus();
+        _MedicationNode.unfocus();
       },
       validator: (value) {
         if (value.trim().isEmpty) {
@@ -146,14 +150,33 @@ class _PatientDetailMedicalTraumaCreateScreenState
     );
   }
 
-  Widget _buildTreatmentInput(BuildContext context) {
-    return MyTextFormField(
-      label: 'Tratamiento',
-      ctrl: _treatmentCtrl,
-      node: _treatmentNode,
+  Widget _buildFoodInput(BuildContext context) {
+    return MyTextAreaFormField(
+      label: 'Alimentos',
+      ctrl: _foodCtrl,
+      node: _foodNode,
       isEnabled: () => true,
       submitted: (_) {
-        _treatmentNode.unfocus();
+        _foodNode.unfocus();
+      },
+      validator: (value) {
+        if (value.trim().isEmpty) {
+          return 'Este campo es requerido';
+        }
+
+        return null;
+      },
+    );
+  }
+
+  Widget _buildReactionInput(BuildContext context) {
+    return MyTextFormField(
+      label: 'Reacción',
+      ctrl: _reactionCtrl,
+      node: _reactionNode,
+      isEnabled: () => true,
+      submitted: (_) {
+        _reactionNode.unfocus();
       },
       validator: (value) {
         if (value.trim().isEmpty) {

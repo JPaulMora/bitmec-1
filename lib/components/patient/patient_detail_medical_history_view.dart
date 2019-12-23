@@ -1,5 +1,7 @@
+import 'package:bitmec/screens/patient/patient_detail_surgeries_create_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../screens/screens.dart';
 import '../list_of_section.dart';
 
 import 'package:bitmec/screens/screens.dart';
@@ -24,6 +26,7 @@ class _PatientDetailMedicalHistoryViewState
           _ReproductiveHealthSection(),
           _ContraceptivesSection(),
           _MedicalTraumaSection(),
+          _AlergiesSection(),
         ],
       ),
     );
@@ -93,6 +96,10 @@ class _MedicalSurgeriesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListOfSection(
       title: 'Cirugias',
+      onPressedAdd: () {
+        Navigator.pushNamed(context,
+            PatientDetailSurgeriesCreateScreen.routeName);
+      },
       children: <Widget>[
         _MedicalSurgeryCard(),
       ],
@@ -146,6 +153,10 @@ class _MedicinesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListOfSection(
       title: 'Medicamentos',
+      onPressedAdd: () {
+        Navigator.pushNamed(context,
+            PatientDetailMedicineCreateScreen.routeName);
+      },
       children: <Widget>[
         _MedicineCard(),
         _MedicineCard(),
@@ -317,6 +328,10 @@ class _ContraceptivesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListOfSection(
       title: 'Anticonceptivos',
+      onPressedAdd: () {
+        Navigator.pushNamed(context,
+            PatientDetailContraceptivesCreateScreen.routeName);
+      },
       children: <Widget>[
         _ContraceptiveCard(),
         _ContraceptiveCard(),
@@ -410,6 +425,77 @@ class _MedicalTraumaCard extends StatelessWidget {
                 Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
 
                 Text('Traumatólogo: Dr. Salinas')
+              ],
+            ),
+
+            Row(
+              textDirection: TextDirection.rtl,
+              children: <Widget>[
+                Text('Fecha', style: TextStyle(
+                  color: Colors.blueAccent,
+                ))
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AlergiesSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListOfSection(
+      title: 'Alergias',
+      onPressedAdd: () {
+        Navigator.pushNamed(context,
+            PatientDetailMedicalAlergiesCreateScreen.routeName);
+      },
+      children: <Widget>[
+        _AlergiesCard(),
+      ],
+    );
+  }
+}
+
+class _AlergiesCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 10.0
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Gluten', style: TextStyle(fontSize: 24.0)),
+
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                Text('Medicamentos:', style: TextStyle(
+                    fontWeight: FontWeight.bold
+                )),
+                Text('Loratadina'),
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                Text('Alimentos:', style: TextStyle(
+                    fontWeight: FontWeight.bold
+                )),
+                Text('Pan'),
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                Text('Reacción:', style: TextStyle(
+                    fontWeight: FontWeight.bold
+                )),
+                Text('Ronchas en la piel'),
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+
+                Text('Doctor: Dr. Salinas')
               ],
             ),
 
