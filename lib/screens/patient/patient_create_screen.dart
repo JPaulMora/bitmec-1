@@ -255,11 +255,13 @@ class _PatientCreateScreenState extends State<PatientCreateScreen> {
       value: _departmentValue,
       items: [
         DropdownMenuItem(
-            value: -1,
-            child: Text('Selecciona un género', style: TextStyle(
-              color: Colors.grey,
-            ))
+          value: -1,
+          child: Text(
+            'Selecciona un género',
+            style: TextStyle(color: Colors.grey),
+          )
         ),
+
         DropdownMenuItem(value: 1, child: Text('Alta Verapaz')),
         DropdownMenuItem(value: 2, child: Text('Baja Verapaz')),
         DropdownMenuItem(value: 3, child: Text('Chimaltenango')),

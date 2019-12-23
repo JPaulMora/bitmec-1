@@ -12,6 +12,7 @@ export 'patient/patient_detail_medical_condition_create_screen.dart';
 export 'patient/patient_detail_medical_trauma_create_screen.dart';
 export 'patient/patient_detail_family_history_create_screen.dart';
 export 'patient/patient_detail_habit_create_screen.dart';
+export 'patient/patient_detail_dependent_create_screen.dart';
 
 export 'appointment/appointment_detail_screen.dart';
 
