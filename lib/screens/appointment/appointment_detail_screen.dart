@@ -65,7 +65,9 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
           icon: Icon(Icons.assignment_ind),
           color: Colors.purple,
           label: 'Sintomas',
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, SymptomCreateScreen.routeName);
+          },
         ),
 
         QuickActionIcon(

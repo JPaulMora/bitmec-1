@@ -18,4 +18,6 @@ export 'appointment/appointment_detail_screen.dart';
 
 export 'vital_sign/vital_sign_create_screen.dart';
 
+export 'symptom/symptom_create_screen.dart';
+
 export 'chat_screen.dart';

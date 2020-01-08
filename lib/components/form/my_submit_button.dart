@@ -6,7 +6,7 @@ class MySubmitButton extends StatefulWidget {
 
   MySubmitButton({
     Key key,
-    @required this.label,
+    this.label = 'Guardar',
     @required this.onPressed,
   }) : super(key: key);
 

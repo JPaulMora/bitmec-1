@@ -32,5 +32,8 @@ class MyRoutes {
 
     // Vital Sign Routes
     VitalSignCreateScreen.routeName: (context) => VitalSignCreateScreen(),
+
+    // Symptom Routes
+    SymptomCreateScreen.routeName: (context) => SymptomCreateScreen(),
   };
 }
