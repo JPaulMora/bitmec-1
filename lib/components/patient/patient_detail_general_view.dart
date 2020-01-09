@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:bitmec/components/form/form_components.dart';
 import 'package:bitmec/components/quick_actions_components.dart';
 
-import 'package:bitmec/screens/screens.dart';
+import 'package:bitmec/screens.dart';
 
 class PatientDetailGeneralView extends StatefulWidget {
   @override

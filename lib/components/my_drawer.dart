@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/screens/screens.dart';
+import 'package:bitmec/screens.dart';
 
 class MyDrawer extends StatelessWidget {
   @override

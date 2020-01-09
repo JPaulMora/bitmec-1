@@ -1,4 +1,4 @@
-import 'package:bitmec/screens/screens.dart';
+import 'package:bitmec/screens.dart';
 
 class MyRoutes {
   static String initialRoute() {

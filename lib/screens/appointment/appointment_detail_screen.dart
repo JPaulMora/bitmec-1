@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:bitmec/components/my_app_bar.dart';
 import 'package:bitmec/components/quick_actions_components.dart';
 import 'package:bitmec/components/list_of_section.dart';
-import 'package:bitmec/screens/screens.dart';
+import 'package:bitmec/screens.dart';
 
 class AppointmentDetailScreen extends StatefulWidget {
   static const routeName = '/appointment/detail';

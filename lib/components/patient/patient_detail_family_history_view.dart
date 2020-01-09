@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/screens/screens.dart';
+import 'package:bitmec/screens.dart';
 
 import '../list_of_section.dart';
 
