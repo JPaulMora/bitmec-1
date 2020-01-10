@@ -12,13 +12,47 @@ class PatientProvider with ChangeNotifier {
 
   bool _dataLoaded = false;
   bool get dataLoaded => _dataLoaded;
+  set dataLoaded(bool value) {
+    _dataLoaded = value;
+    notifyListeners();
+  }
+
+  Patient _object;
+  Patient get object => _object;
+
+  bool _objectLoaded = false;
+  bool get objectLoaded => _objectLoaded;
+  set objectLoaded(bool value) {
+    _objectLoaded = value;
+    notifyListeners();
+  }
 
   static PatientProvider of(BuildContext context) => Provider.of(context);
 
   void fetchAll([Function(List<Patient>) callback]) {
     PatientService.fetchAll().then((response) {
       _data = response;
+
+      _data.sort((a, b) {
+        final aName = '${a.firstName} ${a.lastName}'.toLowerCase();
+        final bName = '${b.firstName} ${b.lastName}'.toLowerCase();
+
+        return aName.compareTo(bName);
+      });
+
       _dataLoaded = true;
+      notifyListeners();
+
+      if (callback != null) {
+        callback(response);
+      }
+    });
+  }
+
+  void fetchById(int id, [Function(Patient) callback]) {
+    PatientService.fetchById(id).then((response) {
+      _object = response;
+      _objectLoaded = true;
       notifyListeners();
 
       if (callback != null) {

@@ -18,4 +18,15 @@ class PatientService {
 
     return body.map((p) => Patient.fromJson(p)).toList();
   }
+
+  static Future<Patient> fetchById(int id) async {
+    final response = await http.get('$url$id');
+
+    if (response.statusCode != 200) {
+      throw 'StatusCode is not 200 in PatientServive.fetchById method';
+    }
+
+    final body = jsonDecode(response.body);
+    return Patient.fromJson(body);
+  }
 }

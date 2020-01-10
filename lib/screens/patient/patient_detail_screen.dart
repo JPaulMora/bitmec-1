@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/patient/patient_components.dart';
-
-import 'package:bitmec/screens/patient/patient_edit_screen.dart';
+import 'package:bitmec/components.dart';
+import 'package:bitmec/screens.dart';
 
 class PatientDetailScreen extends StatefulWidget {
   static const routeName = '/patient/detail';
@@ -17,12 +15,10 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: _buildAppBar(context),
-        body: _buildBody(context),
-      ),
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: _buildAppBar(context),
+      body: _buildBody(context),
     );
   }
 
@@ -44,7 +40,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-      return DefaultTabController(
+    return SafeArea(
+      child: DefaultTabController(
         length: 5,
         child: Column(
           children: <Widget>[
@@ -53,7 +50,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             _buildContent(context),
           ],
         ),
-      );
+      ),
+    );
   }
 
   Widget _buildTopHeader(BuildContext context) {

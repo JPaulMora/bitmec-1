@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/screens/patient/patient_create_screen.dart';
-
+import 'package:bitmec/screens.dart';
 import 'package:bitmec/providers.dart';
-
-import 'package:bitmec/components/my_drawer.dart';
-import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/patient/patient_components.dart';
+import 'package:bitmec/components.dart';
 
 class PatientListScreen extends StatefulWidget {
   static const routeName = '/patient/list';
@@ -36,9 +32,7 @@ class _PatientListScreenState extends State<PatientListScreen> {
       key: _scaffoldKey,
       appBar: _buildAppBar(context),
       drawer: MyDrawer(),
-      body: SafeArea(
-        child: _buildBody(context),
-      ),
+      body: _buildBody(context),
     );
   }
 
@@ -59,30 +53,47 @@ class _PatientListScreenState extends State<PatientListScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-    if (_provider.dataLoaded == false) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
+    return SafeArea(
+      child: RefreshIndicator(
+        onRefresh: onRefresh,
+        child: Builder(builder: (context) {
+          if (_provider.dataLoaded == false) {
+            return Center(child: CircularProgressIndicator());
+          }
 
-    if (_provider.data.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(Icons.person, size: 100.0),
+          if (_provider.data.isEmpty) {
+            return ListView(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Icon(Icons.person, size: 100.0),
 
-            Text('Sin Registros Disponibles', style: TextStyle(
-                fontSize: 25.0
-            )),
+                    Text('Sin Registros Disponibles', style: TextStyle(
+                        fontSize: 25.0
+                    )),
 
-            Text('Intenta recarga esta pantalla nuevamente'),
-          ],
-        ),
-      );
-    }
+                    Text('Intenta recarga esta pantalla nuevamente'),
+                  ],
+                ),
+              ],
+            );
+          }
 
-    return _buildBodyList(context);
+          return _buildBodyList(context);
+        }),
+      ),
+    );
+  }
+
+  Future<void> onRefresh() async {
+    await Future.delayed(Duration(seconds: 1));
+
+    setState(() {
+      _provider.dataLoaded = false;
+      _provider.fetchAll();
+    });
+
+    return;
   }
 
   Widget _buildBodyList(BuildContext context) {

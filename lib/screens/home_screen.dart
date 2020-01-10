@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/components/my_drawer.dart';
-import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/appointment/appointment_components.dart';
+import 'package:bitmec/components.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/';

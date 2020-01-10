@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/components/form/form_components.dart';
-import 'package:bitmec/screens/home_screen.dart';
+import 'package:bitmec/components.dart';
+import 'package:bitmec/screens.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';

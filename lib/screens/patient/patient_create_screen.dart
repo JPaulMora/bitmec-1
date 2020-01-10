@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/components/form/form_components.dart';
+import 'package:bitmec/components.dart';
 
 class PatientCreateScreen extends StatefulWidget {
   static const routeName = '/patient/create';

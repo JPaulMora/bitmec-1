@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/chat/chat_components.dart';
+import 'package:bitmec/components.dart';
 
 class ChatScreen extends StatefulWidget {
   static const routeName = '/chat';

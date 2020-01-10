@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/form/form_components.dart';
+import 'package:bitmec/components.dart';
 
 class PatientDetailHabitCreateScreen extends StatefulWidget {
   static const routeName = '/patient/detail/habit/create';

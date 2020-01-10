@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/form/form_components.dart';
+import 'package:bitmec/components.dart';
 
 class SymptomCreateScreen extends StatefulWidget {
   static const routeName = '/symptom/create';
