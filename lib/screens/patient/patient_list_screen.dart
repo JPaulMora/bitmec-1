@@ -85,6 +85,7 @@ class _PatientListScreenState extends State<PatientListScreen> {
     );
   }
 
+  // FixMe: fix on refresh, Not refresh!
   Future<void> onRefresh() async {
     await Future.delayed(Duration(seconds: 1));
 

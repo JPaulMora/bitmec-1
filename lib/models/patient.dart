@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'entity.dart';
+import 'consultation.dart';
 
 part 'patient.g.dart';
 
@@ -21,6 +22,7 @@ class Patient {
   bool alive;
   bool active;
   Entity entity;
+  List<Consultation> consultations;
 
   Patient({
     this.id,
@@ -38,6 +40,7 @@ class Patient {
     this.alive,
     this.active,
     this.entity,
+    this.consultations,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) =>

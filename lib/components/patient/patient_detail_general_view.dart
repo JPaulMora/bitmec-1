@@ -1,14 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/components.dart';
 import 'package:bitmec/screens.dart';
+import 'package:bitmec/components.dart';
+import 'package:bitmec/providers.dart';
+import 'package:bitmec/models.dart';
 
 class PatientDetailGeneralView extends StatefulWidget {
   @override
-  _PatientDetailGeneralViewState createState() => _PatientDetailGeneralViewState();
+  _PatientDetailGeneralViewState createState() =>
+      _PatientDetailGeneralViewState();
 }
 
 class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
+  PatientProvider _provider;
+  
   final _consultationCtrl = TextEditingController();
   final _consultationNode = FocusNode();
 
@@ -20,36 +26,46 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
 
   @override
   Widget build(BuildContext context) {
+    if (_provider == null) {
+      setState(() {
+        _provider = PatientProvider.of(context);
+      });
+    }
+    
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          QuickActionsSection(
-            children: <QuickActionIcon>[
-              QuickActionIcon(
-                icon: Icon(Icons.add),
-                color: Colors.yellow,
-                label: 'Agregar Consulta',
-                onTap: () { _createConsultation(context); },
-              ),
-
-              QuickActionIcon(
-                icon: Icon(Icons.calendar_today),
-                color: Colors.blue,
-                label: 'Citas',
-              ),
-
-              QuickActionIcon(
-                icon: Icon(Icons.monetization_on),
-                color: Colors.green,
-                label: 'Créditos',
-              ),
-            ],
-          ),
+          _buildQuickActions(context),
           _buildGeneralInformation(context),
-          _ConsultationsSection(),
+          _ConsultationsSection(provider: _provider),
         ],
       ),
+    );
+  }
+  
+  Widget _buildQuickActions(BuildContext context) {
+    return QuickActionsSection(
+      children: <QuickActionIcon>[
+        QuickActionIcon(
+          icon: Icon(Icons.add),
+          color: Colors.yellow,
+          label: 'Agregar Consulta',
+          onTap: () { _createConsultation(context); },
+        ),
+
+        QuickActionIcon(
+          icon: Icon(Icons.calendar_today),
+          color: Colors.blue,
+          label: 'Citas',
+        ),
+
+        QuickActionIcon(
+          icon: Icon(Icons.monetization_on),
+          color: Colors.green,
+          label: 'Créditos',
+        ),
+      ],
     );
   }
   
@@ -97,6 +113,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
             fontSize: 30.0,
             color: Colors.blue
           )),
+
           Card(
             elevation: 3.0,
             child: Padding(
@@ -104,6 +121,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
                 horizontal: 10.0,
                 vertical: 10.0
               ),
+
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,16 +129,24 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Nombres', style: TextStyle(fontSize: 25.0)),
-                      Text('Apellidos', style: TextStyle(fontSize: 25.0)),
-                      Text('CUI'),
-                      Text('Edad'),
+                      Text(_provider.object.firstName,
+                        style: TextStyle(fontSize: 25.0),
+                      ),
+
+                      Text(_provider.object.lastName,
+                        style: TextStyle(fontSize: 25.0),
+                      ),
+
+                      Text('Cui: ${_provider.object.governmentId}'),
+
+                      Text('Edad: ${_provider.object.yearsOld} años'),
                     ],
                   ),
+
                   Row(
                     textDirection: TextDirection.rtl,
                     children: <Widget>[
-                      Text('Género')
+                      Text(_provider.object.gender ? 'Masculino' : 'Femenino')
                     ],
                   ),
                 ],
@@ -134,6 +160,13 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
 }
 
 class _ConsultationsSection extends StatelessWidget {
+  final PatientProvider provider;
+
+  _ConsultationsSection({
+    Key key,
+    this.provider,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -142,44 +175,51 @@ class _ConsultationsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('Consultas', style: TextStyle(
-              fontSize: 30.0,
-              color: Colors.blue
+            fontSize: 30.0,
+            color: Colors.blue,
           )),
-
-          Column(
-            children: <Widget>[
-              _ConsultationCard(),
-              _ConsultationCard(),
-              _ConsultationCard(),
-              _ConsultationCard(),
-              _ConsultationCard(),
-              _ConsultationCard(),
-              _ConsultationCard(),
-              _ConsultationCard(),
-              _ConsultationCard(),
-              _ConsultationCard(),
-            ],
-          )
+          _buildList(context),
         ],
       ),
+    );
+  }
+
+  Widget _buildList(BuildContext context) {
+    if (provider.object.consultations.isEmpty) {
+      return Text('Aún no hay consultas agregadas');
+    }
+
+    return Column(
+      children: provider.object.consultations.map((c) =>
+          _ConsultationCard(consultation: c)
+      ).toList(),
     );
   }
 }
 
 class _ConsultationCard extends StatelessWidget {
+  final Consultation consultation;
+
+  _ConsultationCard({
+    Key key,
+    this.consultation,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, AppointmentDetailScreen.routeName);
+        // TODO: redirect to appointment detail screen
       },
+
       child: Card(
         elevation: 3.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 10.0
+            horizontal: 10.0,
+            vertical: 10.0,
           ),
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,19 +227,23 @@ class _ConsultationCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Registro', style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  )),
-                  Text('Fecha'),
-                  Text('Hora'),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Text(consultation.name, style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    )),
+                  ),
+
+                  Text(consultation.formattedDate()),
                 ],
               ),
+
               Row(
                 textDirection: TextDirection.rtl,
                 children: <Widget>[
-                  Text('Estado', style: TextStyle(
-                    color: Colors.blueAccent,
-                  ))
+                  Text(consultation.active ? 'Activo' : 'No Activo'),
                 ],
               ),
             ],

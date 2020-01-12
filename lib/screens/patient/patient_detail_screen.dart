@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:bitmec/components.dart';
 import 'package:bitmec/screens.dart';
+import 'package:bitmec/providers.dart';
 
 class PatientDetailScreen extends StatefulWidget {
   static const routeName = '/patient/detail';
@@ -13,8 +14,25 @@ class PatientDetailScreen extends StatefulWidget {
 class _PatientDetailScreenState extends State<PatientDetailScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  PatientProvider _provider;
+
+  @override
+  void dispose() {
+    _provider.removeObject();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_provider == null) {
+      Map<String, dynamic> args = ModalRoute.of(context).settings.arguments;
+
+      setState(() {
+        _provider = PatientProvider.of(context);
+        _provider.fetchById(args['id']);
+      });
+    }
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: _buildAppBar(context),
@@ -41,16 +59,22 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   Widget _buildBody(BuildContext context) {
     return SafeArea(
-      child: DefaultTabController(
-        length: 5,
-        child: Column(
-          children: <Widget>[
-            _buildTopHeader(context),
-            _buildTabBar(context),
-            _buildContent(context),
-          ],
-        ),
-      ),
+      child: Builder(builder: (context) {
+        if (_provider.objectLoaded == false) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        return DefaultTabController(
+          length: 5,
+          child: Column(
+            children: <Widget>[
+              _buildTopHeader(context),
+              _buildTabBar(context),
+              _buildContent(context),
+            ],
+          ),
+        );
+      }),
     );
   }
 
@@ -65,16 +89,17 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage("https://images.pexels.com/photos/235805/pexels-photo-235805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
+                image: NetworkImage(_provider.object.profilePicture),
               )
             ),
           ),
         ),
+
         Container(
           margin: EdgeInsets.only(bottom: 10.0),
-          child: Text('Nombre Apellido', style: TextStyle(
-            fontSize: 30.0
-          )),
+          child: Text(_provider.object.firstName,
+            style: TextStyle(fontSize: 30.0),
+          ),
         ),
       ],
     );

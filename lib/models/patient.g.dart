@@ -25,6 +25,10 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
     entity: json['entity'] == null
         ? null
         : Entity.fromJson(json['entity'] as Map<String, dynamic>),
+    consultations: (json['consultations'] as List)
+        ?.map((e) =>
+            e == null ? null : Consultation.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -44,4 +48,6 @@ Map<String, dynamic> _$PatientToJson(Patient instance) => <String, dynamic>{
       'alive': instance.alive,
       'active': instance.active,
       'entity': instance.entity?.toJson(),
+      'consultations':
+          instance.consultations?.map((e) => e?.toJson())?.toList(),
     };
