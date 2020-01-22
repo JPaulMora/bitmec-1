@@ -29,6 +29,27 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : Consultation.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    historicalConditions: (json['historical_conditions'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MedicalCondition.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    historicalOperations: (json['historical_operations'] as List)
+        ?.map((e) =>
+            e == null ? null : Surgery.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    historicalPrescriptions: (json['historical_prescriptions'] as List)
+        ?.map((e) =>
+            e == null ? null : Prescription.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    reproductiveHistory: (json['reproductive_history'] as List)
+        ?.map((e) => e == null
+            ? null
+            : ReproductiveHistory.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    birthControls: (json['birth_control'] as List)
+        ?.map((e) => e == null ? null : BirthControl.fromJson(e))
+        ?.toList(),
   );
 }
 
@@ -50,4 +71,14 @@ Map<String, dynamic> _$PatientToJson(Patient instance) => <String, dynamic>{
       'entity': instance.entity?.toJson(),
       'consultations':
           instance.consultations?.map((e) => e?.toJson())?.toList(),
+      'historical_conditions':
+          instance.historicalConditions?.map((e) => e?.toJson())?.toList(),
+      'historical_operations':
+          instance.historicalOperations?.map((e) => e?.toJson())?.toList(),
+      'historical_prescriptions':
+          instance.historicalPrescriptions?.map((e) => e?.toJson())?.toList(),
+      'reproductive_history':
+          instance.reproductiveHistory?.map((e) => e?.toJson())?.toList(),
+      'birth_control':
+          instance.birthControls?.map((e) => e?.toJson())?.toList(),
     };

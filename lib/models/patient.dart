@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'entity.dart';
-import 'consultation.dart';
+import 'package:bitmec/models.dart';
 
 part 'patient.g.dart';
 
@@ -23,6 +22,11 @@ class Patient {
   bool active;
   Entity entity;
   List<Consultation> consultations;
+  @JsonKey(name: 'historical_conditions') List<MedicalCondition> historicalConditions;
+  @JsonKey(name: 'historical_operations') List<Surgery> historicalOperations;
+  @JsonKey(name: 'historical_prescriptions') List<Prescription> historicalPrescriptions;
+  @JsonKey(name: 'reproductive_history') List<ReproductiveHistory> reproductiveHistory;
+  @JsonKey(name: 'birth_control') List<BirthControl> birthControls;
 
   Patient({
     this.id,
@@ -41,6 +45,11 @@ class Patient {
     this.active,
     this.entity,
     this.consultations,
+    this.historicalConditions,
+    this.historicalOperations,
+    this.historicalPrescriptions,
+    this.reproductiveHistory,
+    this.birthControls,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) =>

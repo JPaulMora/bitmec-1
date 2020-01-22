@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
@@ -191,7 +190,7 @@ class _ConsultationsSection extends StatelessWidget {
 
     return Column(
       children: provider.object.consultations.map((c) =>
-          _ConsultationCard(consultation: c)
+        _ConsultationCard(consultation: c)
       ).toList(),
     );
   }
