@@ -9,3 +9,4 @@ export 'models/surgery.dart';
 export 'models/prescription.dart';
 export 'models/reproductive_history.dart';
 export 'models/birth_control.dart';
+export 'models/family_member_condition.dart';

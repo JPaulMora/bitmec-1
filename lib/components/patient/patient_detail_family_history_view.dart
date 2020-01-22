@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/screens.dart';
-
-import '../list_of_section.dart';
+import 'package:bitmec/components.dart';
+import 'package:bitmec/models.dart';
+import 'package:bitmec/providers.dart';
 
 class PatientDetailFamilyHistoryView extends StatefulWidget {
   @override
@@ -12,35 +13,57 @@ class PatientDetailFamilyHistoryView extends StatefulWidget {
 
 class _PatientDetailFamilyHistoryViewState
     extends State<PatientDetailFamilyHistoryView> {
+  PatientProvider _provider;
+
   @override
   Widget build(BuildContext context) {
+    if (_provider == null) {
+      setState(() {
+        _provider = PatientProvider.of(context);
+      });
+    }
+
     return SingleChildScrollView(
       child: ListOfSection(
         title: 'Familia',
         onPressedAdd: () {
-          Navigator.pushNamed(context,
-              PatientDetailFamilyHistoryCreateScreen.routeName);
+          Navigator.pushNamed(
+            context,
+            PatientDetailFamilyHistoryCreateScreen.routeName
+          );
         },
-        children: <Widget>[
-          _FamilyCard(),
-          _FamilyCard(),
-          _FamilyCard(),
-        ],
+
+        children: _buildList(context),
       ),
     );
+  }
+
+  List<Widget> _buildList(context) {
+    if (_provider.object.familyMembers.isEmpty) {
+      return [Text('NO hay familiares agregados')];
+    }
+
+    return _provider.object.familyMembers.map(
+      (m) => _FamilyCard(member: m),
+    ).toList();
   }
 }
 
 class _FamilyCard extends StatelessWidget {
+  final FamilyMemberCondition member;
+
+  _FamilyCard({this.member});
+
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 3.0,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0
+          horizontal: 10.0,
+          vertical: 10.0,
         ),
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,21 +71,19 @@ class _FamilyCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Tipo De Parentesco', style: TextStyle(fontSize: 24.0)),
-                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
-                Text('condición'),
-                Text('Descripción de la condición', style: TextStyle(
-                  fontWeight: FontWeight.bold
+                Text(member.relative, style: TextStyle(
+                  color: Colors.blueAccent,
+                  fontSize: 24.0
                 )),
+                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                Text('Condición: ${member.condition}'),
               ],
             ),
 
             Row(
               textDirection: TextDirection.rtl,
               children: <Widget>[
-                Text('Fecha De Diagnostico', style: TextStyle(
-                  color: Colors.blueAccent,
-                ))
+                FormattedDate(member.dateDiagnosed),
               ],
             ),
           ],

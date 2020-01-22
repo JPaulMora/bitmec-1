@@ -27,6 +27,7 @@ class Patient {
   @JsonKey(name: 'historical_prescriptions') List<Prescription> historicalPrescriptions;
   @JsonKey(name: 'reproductive_history') List<ReproductiveHistory> reproductiveHistory;
   @JsonKey(name: 'birth_control') List<BirthControl> birthControls;
+  @JsonKey(name: 'family_member_conditions') List<FamilyMemberCondition> familyMembers;
 
   Patient({
     this.id,
@@ -50,6 +51,7 @@ class Patient {
     this.historicalPrescriptions,
     this.reproductiveHistory,
     this.birthControls,
+    this.familyMembers,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) =>

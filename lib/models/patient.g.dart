@@ -50,6 +50,9 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
     birthControls: (json['birth_control'] as List)
         ?.map((e) => e == null ? null : BirthControl.fromJson(e))
         ?.toList(),
+    familyMembers: (json['family_member_conditions'] as List)
+        ?.map((e) => e == null ? null : FamilyMemberCondition.fromJson(e))
+        ?.toList(),
   );
 }
 
@@ -81,4 +84,6 @@ Map<String, dynamic> _$PatientToJson(Patient instance) => <String, dynamic>{
           instance.reproductiveHistory?.map((e) => e?.toJson())?.toList(),
       'birth_control':
           instance.birthControls?.map((e) => e?.toJson())?.toList(),
+      'family_member_conditions':
+          instance.familyMembers?.map((e) => e?.toJson())?.toList(),
     };

@@ -4,6 +4,7 @@ export 'components/list_of_section.dart';
 export 'components/my_app_bar.dart';
 export 'components/my_drawer.dart';
 export 'components/quick_actions_components.dart';
+export 'components/formatted_date.dart';
 
 export 'components/appointment/appointment_card.dart';
 export 'components/appointment/appointment_list_view.dart';
