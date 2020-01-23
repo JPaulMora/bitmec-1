@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class FormattedDate extends StatelessWidget {
   final String text;
+  final String prefix;
   final TextStyle style;
 
-  FormattedDate(this.text, {this.style});
+  FormattedDate(this.text, {this.prefix, this.style});
 
   @override
   Widget build(BuildContext context) {
-    return Text(_formatted, style: style);
+    return Text('$prefix$_formatted', style: style);
   }
 
   String get _formatted {

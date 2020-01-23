@@ -1,3 +1,4 @@
+import 'package:bitmec/components.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:bitmec/models.dart';
@@ -28,6 +29,7 @@ class Patient {
   @JsonKey(name: 'reproductive_history') List<ReproductiveHistory> reproductiveHistory;
   @JsonKey(name: 'birth_control') List<BirthControl> birthControls;
   @JsonKey(name: 'family_member_conditions') List<FamilyMemberCondition> familyMembers;
+  List<Habit> habits;
 
   Patient({
     this.id,
@@ -52,6 +54,7 @@ class Patient {
     this.reproductiveHistory,
     this.birthControls,
     this.familyMembers,
+    this.habits,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) =>
