@@ -13,6 +13,7 @@ class PatientDetailGeneralView extends StatefulWidget {
 
 class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
   PatientProvider _provider;
+  ConsultationProvider _consultationProvider;
   
   final _consultationCtrl = TextEditingController();
   final _consultationNode = FocusNode();
@@ -28,6 +29,12 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
     if (_provider == null) {
       setState(() {
         _provider = PatientProvider.of(context);
+      });
+    }
+
+    if (_consultationProvider == null) {
+      setState(() {
+        _consultationProvider = ConsultationProvider.of(context);
       });
     }
     
@@ -49,7 +56,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
         QuickActionIcon(
           icon: Icon(Icons.add),
           color: Colors.yellow,
-          label: 'Agregar Consulta',
+          label: 'Nueva Consulta',
           onTap: () { _createConsultation(context); },
         ),
 
@@ -83,12 +90,26 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
           validator: (value) => value.trim().isEmpty
               ? 'El valor es requerido' : null,
         ),
+
         actions: <Widget>[
           FlatButton(
             splashColor: Colors.black12,
             child: Text('Agregar'),
-            onPressed: () { Navigator.pop(context); },
+            onPressed: () {
+              final consultation = Consultation(
+                name: _consultationCtrl.text,
+                active: true,
+                patient: _provider.object.id,
+              );
+
+              _consultationProvider.create(consultation, (c) {
+                _consultationCtrl.text = '';
+                _provider.addConsultation(c);
+                Navigator.pop(context);
+              });
+            },
           ),
+
           RaisedButton(
             color: Colors.redAccent,
             child: Text('Cancelar'),

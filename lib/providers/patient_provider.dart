@@ -65,4 +65,9 @@ class PatientProvider with ChangeNotifier {
       }
     });
   }
+
+  void addConsultation(Consultation consultation) {
+    object.consultations.add(consultation);
+    notifyListeners();
+  }
 }

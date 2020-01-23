@@ -17,6 +17,7 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => PatientProvider()),
+      ChangeNotifierProvider(create: (context) => ConsultationProvider()),
     ],
     child: MyApp(),
   ));

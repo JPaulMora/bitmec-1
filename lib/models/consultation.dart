@@ -18,10 +18,9 @@ class Consultation {
     this.timestamp,
   });
 
-  factory Consultation.fromJson(Map<String, dynamic> json) =>
-      _$ConsultationFromJson(json);
+  factory Consultation.fromJson(json) => _$ConsultationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ConsultationToJson(this);
+  Map toJson() => _$ConsultationToJson(this);
 
   String formattedDate() {
     final date = DateTime.parse(timestamp);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../list_of_section.dart';
-
 import 'package:bitmec/screens.dart';
+import 'package:bitmec/components.dart';
+import 'package:bitmec/providers.dart';
 
 class PatientDetailDependentsView extends StatefulWidget {
   @override
@@ -18,13 +18,14 @@ class _PatientDetailDependentsViewState
       child: ListOfSection(
         title: 'Dependientes',
         onPressedAdd: () {
-          Navigator.pushNamed(context,
-              PatientDetailDependentCreateScreen.routeName);
+          Navigator.pushNamed(
+            context,
+            PatientDetailDependentCreateScreen.routeName,
+          );
         },
+
         children: <Widget>[
-          _DependentCard(),
-          _DependentCard(),
-          _DependentCard(),
+          Text('No hay dependientes registrados!'),
         ],
       ),
     );
