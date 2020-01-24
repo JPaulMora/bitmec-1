@@ -54,6 +54,11 @@ class ConsultationProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void removeVitalSign(int id) {
+    _object.vitalSigns.removeWhere((e) => id == e.id);
+    notifyListeners();
+  }
+
   void addSymptom(Symptom symptom) {
     _object.symptoms.add(symptom);
     notifyListeners();

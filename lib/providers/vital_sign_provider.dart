@@ -22,4 +22,12 @@ class VitalSignProvider with ChangeNotifier {
       }
     });
   }
+
+  void remove(int id, [Function(int) callback]) {
+    VitalSignService.remove(id).then((_) {
+      if (callback != null) {
+        callback(id);
+      }
+    });
+  }
 }

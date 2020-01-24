@@ -35,4 +35,13 @@ class VitalSignService {
     final body = jsonDecode(response.body);
     return VitalSign.fromJson(body);
   }
+
+  static Future<void> remove(int id) async {
+    final response = await http.delete('$url$id/');
+
+    if (response.statusCode != 204) {
+      print(response.body);
+      throw 'StatusCode is not 204 in VitalSignService.remove method';
+    }
+  }
 }

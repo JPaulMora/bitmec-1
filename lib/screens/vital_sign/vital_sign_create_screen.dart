@@ -82,7 +82,50 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
       title: 'Crear',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
+      actions: _arguments['method'] != 'update' ? null
+        : <Widget>[
+          IconButton(
+            icon: Icon(Icons.delete),
+            tooltip: 'Eliminar',
+            onPressed: () { _confirmDelete(context); },
+          )
+        ]
     );
+  }
+
+  void _confirmDelete(context) async {
+    bool response = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Confirmar'),
+        content: Text('¿Estas seguro de querer eliminar este dato?'),
+        actions: <Widget>[
+          FlatButton(
+            splashColor: Colors.black12,
+            child: Text('Aceptar'),
+            onPressed: () {
+              final vitalSign = _arguments['vitalSign'];
+              _provider.remove(vitalSign.id, (id) {
+                _consultationProvider.removeVitalSign(id);
+                Navigator.pop(context, true);
+              });
+            },
+          ),
+
+          RaisedButton(
+            color: Colors.redAccent,
+            child: Text('Cancelar'),
+            onPressed: () {
+              Navigator.pop(context, false);
+            },
+          )
+        ],
+      )
+    );
+
+    if (response == true) {
+      Navigator.pop(context);
+    }
   }
 
   Widget _buildBody(BuildContext context) {

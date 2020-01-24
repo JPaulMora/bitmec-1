@@ -300,8 +300,6 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
       onPressed: () {
         if (_symptomSelected != null && _bodyPartSelected != null) {
           Map args = ModalRoute.of(context).settings.arguments;
-          final day = _date.day.toString().padLeft(2, '0');
-          final month = _date.month.toString().padLeft(2, '0');
 
           final symptom = Symptom(
             type: _symptomSelected,
