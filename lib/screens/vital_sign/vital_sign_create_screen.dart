@@ -130,7 +130,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
       switch (_arguments['method']) {
         case 'create':
           _provider.create(vitalSign, (response) {
-            _consultationProvider.addVitalSign(vitalSign);
+            _consultationProvider.addVitalSign(response);
             Navigator.pop(context);
           });
           break;
@@ -138,7 +138,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
         case 'update':
           vitalSign.id = (_arguments['vitalSign'] as VitalSign).id;
           _provider.update(vitalSign, (response) {
-            _consultationProvider.updateVitalSign(vitalSign);
+            _consultationProvider.updateVitalSign(response);
             Navigator.pop(context);
           });
           break;

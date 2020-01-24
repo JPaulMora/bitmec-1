@@ -11,6 +11,7 @@ class Symptom {
   String onset;
   String reported;
   String timestamp;
+  int consultation;
 
   Symptom({
     this.id,
@@ -20,6 +21,7 @@ class Symptom {
     this.onset,
     this.reported,
     this.timestamp,
+    this.consultation
   });
 
   factory Symptom.fromJson(json) => _$SymptomFromJson(json);

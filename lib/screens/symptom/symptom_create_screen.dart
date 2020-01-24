@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:bitmec/components.dart';
+import 'package:bitmec/models.dart';
+import 'package:bitmec/providers.dart';
 
 class SymptomCreateScreen extends StatefulWidget {
   static const routeName = '/symptom/create';
@@ -13,6 +17,9 @@ class SymptomCreateScreen extends StatefulWidget {
 
 class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  SymptomProvider _provider;
+  ConsultationProvider _consultationProvider;
 
   int _sectionSelected = 0;
   final _sectionsLen = 3;
@@ -34,25 +41,28 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
   bool _sideSelected = true;
 
   double _magnitude = 0.0;
-  final _dateCtrl = TextEditingController();
-  final _dateNode = FocusNode();
-
-  @override
-  void dispose() {
-    _dateCtrl.dispose();
-    super.dispose();
-  }
+  DateTime _date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        body: _buildBody(context),
-        backgroundColor: Colors.white,
-        floatingActionButton: _sectionSelected == _sectionsLen - 1
-          ? null : _buildFloatingActionButton(context),
-      ),
+    if (_provider == null) {
+      setState(() {
+        _provider = SymptomProvider.of(context);
+      });
+    }
+
+    if (_consultationProvider == null) {
+      setState(() {
+        _consultationProvider = ConsultationProvider.of(context);
+      });
+    }
+
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      body: _buildBody(context),
+      backgroundColor: Colors.white,
+      floatingActionButton: _sectionSelected == _sectionsLen - 1
+        ? null : _buildFloatingActionButton(context),
     );
   }
 
@@ -79,20 +89,22 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _onWillPop,
-      child: SingleChildScrollView(
-        child: Builder(builder: (context) {
-          switch (_sectionSelected) {
-            case 0: return _buildSymptomSection(context);
-            case 1: return _buildSelectBodyPartSection(context);
-            case 2: return _buildDetailSection(context);
+    return SafeArea(
+      child: WillPopScope(
+        onWillPop: _onWillPop,
+        child: SingleChildScrollView(
+          child: Builder(builder: (context) {
+            switch (_sectionSelected) {
+              case 0: return _buildSymptomSection(context);
+              case 1: return _buildSelectBodyPartSection(context);
+              case 2: return _buildDetailSection(context);
 
-            default: return Container(
-              child: Text('This section not exists'),
-            );
-          }
-        }),
+              default: return Container(
+                child: Text('This section not exists'),
+              );
+            }
+          }),
+        ),
       ),
     );
   }
@@ -207,6 +219,24 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
         children: <Widget>[
           _buildMySlider(context),
           _buildDateInput(context),
+
+          Builder(builder: (context) {
+            var message = '';
+
+            if (_symptomSelected == null) {
+              message += 'Debes de seleccionar un síntoma\n';
+            }
+
+            if (_bodyPartSelected == null) {
+              message += 'Debes de seleccionar una parte del cuerpo';
+            }
+
+            return Text(message, style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.red,
+            ));
+          }),
+
           _buildSubmitButton(context)
         ],
       ),
@@ -255,21 +285,12 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
   }
 
   Widget _buildDateInput(BuildContext context) {
-    return MyTextFormField(
-      icon: Icon(Icons.date_range),
-      label: 'Fecha de Inicio',
-      ctrl: _dateCtrl,
-      node: _dateNode,
-      isEnabled: () => true,
-      submitted: (_) {
-        _dateNode.unfocus();
-      },
-      validator: (value) {
-        if (value.trim().isEmpty) {
-          return 'La fecha es requerida';
-        }
-
-        return null;
+    return MyDateTimePicker(
+      dateTime: _date,
+      onChange: (date) {
+        setState(() {
+          _date = date;
+        });
       },
     );
   }
@@ -277,7 +298,24 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
   Widget _buildSubmitButton(BuildContext context) {
     return MySubmitButton(
       onPressed: () {
-        Navigator.pop(context);
+        if (_symptomSelected != null && _bodyPartSelected != null) {
+          Map args = ModalRoute.of(context).settings.arguments;
+          final day = _date.day.toString().padLeft(2, '0');
+          final month = _date.month.toString().padLeft(2, '0');
+
+          final symptom = Symptom(
+            type: _symptomSelected,
+            location: _bodyPartSelected,
+            severity: _magnitude.toInt(),
+            onset: DateFormat('yyyy-MM-dd').format(_date),
+            consultation: args['consultationId'],
+          );
+
+          _provider.create(symptom, (response) {
+            _consultationProvider.addSymptom(response);
+            Navigator.pop(context);
+          });
+        }
       },
     );
   }

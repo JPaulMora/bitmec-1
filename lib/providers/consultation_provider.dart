@@ -53,4 +53,9 @@ class ConsultationProvider with ChangeNotifier {
     _object.vitalSigns[index] = vitalSign;
     notifyListeners();
   }
+
+  void addSymptom(Symptom symptom) {
+    _object.symptoms.add(symptom);
+    notifyListeners();
+  }
 }

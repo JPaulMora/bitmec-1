@@ -98,7 +98,11 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
           color: Colors.purple,
           label: 'Sintomas',
           onTap: () {
-            Navigator.pushNamed(context, SymptomCreateScreen.routeName);
+            Navigator.pushNamed(
+              context,
+              SymptomCreateScreen.routeName,
+              arguments: {'consultationId': _provider.object.id},
+            );
           },
         ),
 

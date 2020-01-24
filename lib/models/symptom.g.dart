@@ -15,6 +15,7 @@ Symptom _$SymptomFromJson(Map<String, dynamic> json) {
     onset: json['onset'] as String,
     reported: json['reported'] as String,
     timestamp: json['timestamp'] as String,
+    consultation: json['consultation'] as int,
   );
 }
 
@@ -26,4 +27,5 @@ Map<String, dynamic> _$SymptomToJson(Symptom instance) => <String, dynamic>{
       'onset': instance.onset,
       'reported': instance.reported,
       'timestamp': instance.timestamp,
+      'consultation': instance.consultation,
     };

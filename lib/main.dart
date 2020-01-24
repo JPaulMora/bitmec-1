@@ -15,11 +15,12 @@ void main() async {
   ]);
 
   runApp(MultiProvider(
+    child: MyApp(),
     providers: [
       ChangeNotifierProvider(create: (context) => PatientProvider()),
       ChangeNotifierProvider(create: (context) => ConsultationProvider()),
       ChangeNotifierProvider(create: (context) => VitalSignProvider()),
+      ChangeNotifierProvider(create: (context) => SymptomProvider()),
     ],
-    child: MyApp(),
   ));
 }
