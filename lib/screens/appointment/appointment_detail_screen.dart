@@ -109,6 +109,7 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
           },
         ),
 
+        // TODO: implement chat view
         QuickActionIcon(
           icon: Icon(Icons.chat),
           color: Colors.green,

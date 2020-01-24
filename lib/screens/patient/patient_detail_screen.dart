@@ -129,7 +129,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       child: TabBarView(
         children: <Widget>[
           PatientDetailGeneralView(),
-          PatientDetailMedicalHistoryView(),
+          MedicalHistoryView(),
           PatientDetailFamilyHistoryView(),
           PatientDetailHabitsView(),
           PatientDetailDependentsView(),

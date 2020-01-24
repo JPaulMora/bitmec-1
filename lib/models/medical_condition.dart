@@ -10,24 +10,19 @@ class MedicalCondition {
   String condition;
   @JsonKey(name: 'diagnosis_date') String diagnosisDate;
   @JsonKey(name: 'diagnosing_doctor') String diagnosingDoctor;
-  List<Image> images;
+  @JsonKey(defaultValue: []) List<Image> images;
+  int patient;
 
   MedicalCondition({
     this.id,
     this.condition,
     this.diagnosisDate,
     this.diagnosingDoctor,
-    this.images,
+    this.patient,
   });
-
 
   factory MedicalCondition.fromJson(Map<String, dynamic> json) =>
       _$MedicalConditionFromJson(json);
 
   Map<String, dynamic> toJson() => _$MedicalConditionToJson(this);
-
-  String formattedDate() {
-    final date = DateTime.parse(diagnosisDate);
-    return '${date.day}/${date.month}/${date.year}';
-  }
 }

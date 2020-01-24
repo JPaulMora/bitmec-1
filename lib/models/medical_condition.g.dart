@@ -12,11 +12,12 @@ MedicalCondition _$MedicalConditionFromJson(Map<String, dynamic> json) {
     condition: json['condition'] as String,
     diagnosisDate: json['diagnosis_date'] as String,
     diagnosingDoctor: json['diagnosing_doctor'] as String,
-    images: (json['images'] as List)
-        ?.map(
-            (e) => e == null ? null : Image.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
+    patient: json['patient'] as int,
+  )..images = (json['images'] as List)
+          ?.map((e) =>
+              e == null ? null : Image.fromJson(e as Map<String, dynamic>))
+          ?.toList() ??
+      [];
 }
 
 Map<String, dynamic> _$MedicalConditionToJson(MedicalCondition instance) =>
@@ -26,4 +27,5 @@ Map<String, dynamic> _$MedicalConditionToJson(MedicalCondition instance) =>
       'diagnosis_date': instance.diagnosisDate,
       'diagnosing_doctor': instance.diagnosingDoctor,
       'images': instance.images,
+      'patient': instance.patient,
     };

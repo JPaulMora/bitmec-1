@@ -21,4 +21,6 @@ export 'components/patient/patient_detail_dependents_view.dart';
 export 'components/patient/patient_detail_family_history_view.dart';
 export 'components/patient/patient_detail_general_view.dart';
 export 'components/patient/patient_detail_habits_view.dart';
-export 'components/patient/patient_detail_medical_history_view.dart';
+
+export 'components/medical_history/medical_condition_section.dart';
+export 'components/medical_history/medical_history_view.dart';

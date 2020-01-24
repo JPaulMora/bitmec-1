@@ -70,4 +70,20 @@ class PatientProvider with ChangeNotifier {
     object.consultations.add(consultation);
     notifyListeners();
   }
+
+  void addMedicalCondition(MedicalCondition condition) {
+    _object.historicalConditions.add(condition);
+    notifyListeners();
+  }
+
+  void updateMedicalCondition(MedicalCondition condition) {
+    final i = _object.historicalConditions.indexWhere((e) => condition.id == e.id);
+    _object.historicalConditions[i] = condition;
+    notifyListeners();
+  }
+
+  void removeMedicalCondition(int id) {
+    _object.historicalConditions.removeWhere((e) => id == e.id);
+    notifyListeners();
+  }
 }

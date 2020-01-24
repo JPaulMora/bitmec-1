@@ -61,6 +61,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
           onTap: () { _createConsultation(context); },
         ),
 
+        // TODO: implements appointments view
         QuickActionIcon(
           icon: Icon(Icons.calendar_today),
           color: Colors.blue,
