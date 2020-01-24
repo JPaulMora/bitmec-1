@@ -63,4 +63,15 @@ class ConsultationProvider with ChangeNotifier {
     _object.symptoms.add(symptom);
     notifyListeners();
   }
+
+  void updateSymptom(Symptom symptom) {
+    final i = _object.symptoms.indexWhere((e) => symptom.id == e.id);
+    _object.symptoms[i] = symptom;
+    notifyListeners();
+  }
+
+  void removeSymptom(int id) {
+    _object.symptoms.removeWhere((e) => id == e.id);
+    notifyListeners();
+  }
 }

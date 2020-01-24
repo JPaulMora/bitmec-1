@@ -156,8 +156,6 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
 
   void onCreateVitalSign(BuildContext context) {
     if (_formKey.currentState.validate()) {
-      Map args = ModalRoute.of(context).settings.arguments;
-
       final vitalSign = VitalSign(
         weight: double.parse(_weightCtrl.text),
         height: double.parse(_heightCtrl.text),
@@ -167,7 +165,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
         temperature: double.parse(_temperatureCtrl.text),
         glucose: double.parse(_glucoseCtrl.text),
         oxygen: double.parse(_oxygenCtrl.text),
-        consultation: args['consultationId'],
+        consultation: _arguments['consultationId'],
       );
 
       switch (_arguments['method']) {

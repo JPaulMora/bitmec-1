@@ -17,17 +17,15 @@ class VitalSignProvider with ChangeNotifier {
 
   void update(VitalSign vitalSign, [Function(VitalSign) callback]) {
     VitalSignService.update(vitalSign).then((response) {
-      if (callback != null) {
+      if (callback != null)
         callback(response);
-      }
     });
   }
 
   void remove(int id, [Function(int) callback]) {
     VitalSignService.remove(id).then((_) {
-      if (callback != null) {
+      if (callback != null)
         callback(id);
-      }
     });
   }
 }

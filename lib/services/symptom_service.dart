@@ -21,4 +21,26 @@ class SymptomService {
     final body = jsonDecode(response.body);
     return Symptom.fromJson(body);
   }
+
+  static Future<Symptom> update(Symptom symptom) async {
+    final response = await http.patch('$url${symptom.id}/',
+      body: jsonEncode(symptom.toJson()),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode != 200) {
+      throw response.body;
+    }
+
+    final body = jsonDecode(response.body);
+    return Symptom.fromJson(body);
+  }
+
+  static Future<void> remove(int id) async {
+    final response = await http.delete('$url$id/');
+
+    if (response.statusCode != 204) {
+      throw response.body;
+    }
+  }
 }

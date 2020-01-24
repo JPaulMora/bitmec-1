@@ -18,6 +18,7 @@ class SymptomCreateScreen extends StatefulWidget {
 class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  Map _arguments;
   SymptomProvider _provider;
   ConsultationProvider _consultationProvider;
 
@@ -45,6 +46,20 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_arguments == null) {
+      setState(() {
+        _arguments = ModalRoute.of(context).settings.arguments;
+
+        if (_arguments['method'] == 'update') {
+          Symptom symptom = _arguments['symptom'];
+          _symptomSelected = symptom.type;
+          _bodyPartSelected = symptom.location;
+          _magnitude = symptom.severity.toDouble();
+          _date = DateTime.parse(symptom.onset);
+        }
+      });
+    }
+
     if (_provider == null) {
       setState(() {
         _provider = SymptomProvider.of(context);
@@ -71,7 +86,50 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
       title: 'Create',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
+      actions: _arguments['method'] != 'update' ? null
+        : <Widget>[
+          IconButton(
+            icon: Icon(Icons.delete),
+            tooltip: 'Eliminar',
+            onPressed: () { _confirmDelete(context); },
+          )
+      ],
     );
+  }
+
+  void _confirmDelete(context) async {
+    bool response = await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Confirmar'),
+          content: Text('¿Estas seguro de querer eliminar este dato?'),
+          actions: <Widget>[
+            FlatButton(
+              splashColor: Colors.black12,
+              child: Text('Aceptar'),
+              onPressed: () {
+                Symptom symptom = _arguments['symptom'];
+                _provider.remove(symptom.id, (id) {
+                  _consultationProvider.removeSymptom(id);
+                  Navigator.pop(context, true);
+                });
+              },
+            ),
+
+            RaisedButton(
+              color: Colors.redAccent,
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+            )
+          ],
+        )
+    );
+
+    if (response == true) {
+      Navigator.pop(context);
+    }
   }
 
   Widget _buildFloatingActionButton(BuildContext context) {
@@ -237,10 +295,42 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
             ));
           }),
 
-          _buildSubmitButton(context)
+          MySubmitButton(onPressed: () { _onCreateSymptom(context); }),
         ],
       ),
     );
+  }
+
+  void _onCreateSymptom(context) {
+    if (_symptomSelected != null && _bodyPartSelected != null) {
+      final symptom = Symptom(
+        type: _symptomSelected,
+        location: _bodyPartSelected,
+        severity: _magnitude.toInt(),
+        onset: DateFormat('yyyy-MM-dd').format(_date),
+        consultation: _arguments['consultationId'],
+      );
+
+      switch (_arguments['method']) {
+        case 'create':
+          _provider.create(symptom, (response) {
+            _consultationProvider.addSymptom(response);
+            Navigator.pop(context);
+          });
+          break;
+
+        case 'update':
+          symptom.id = (_arguments['symptom'] as Symptom).id;
+          _provider.update(symptom, (response) {
+            _consultationProvider.updateSymptom(response);
+            Navigator.pop(context);
+          });
+          break;
+
+        default:
+          throw 'Not method selected on SymptomCreateScreen';
+      }
+    }
   }
 
   Widget _buildMySlider(BuildContext context) {
@@ -291,29 +381,6 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
         setState(() {
           _date = date;
         });
-      },
-    );
-  }
-
-  Widget _buildSubmitButton(BuildContext context) {
-    return MySubmitButton(
-      onPressed: () {
-        if (_symptomSelected != null && _bodyPartSelected != null) {
-          Map args = ModalRoute.of(context).settings.arguments;
-
-          final symptom = Symptom(
-            type: _symptomSelected,
-            location: _bodyPartSelected,
-            severity: _magnitude.toInt(),
-            onset: DateFormat('yyyy-MM-dd').format(_date),
-            consultation: args['consultationId'],
-          );
-
-          _provider.create(symptom, (response) {
-            _consultationProvider.addSymptom(response);
-            Navigator.pop(context);
-          });
-        }
       },
     );
   }

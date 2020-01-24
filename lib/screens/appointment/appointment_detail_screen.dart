@@ -101,7 +101,10 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
             Navigator.pushNamed(
               context,
               SymptomCreateScreen.routeName,
-              arguments: {'consultationId': _provider.object.id},
+              arguments: {
+                'method': 'create',
+                'consultationId': _provider.object.id,
+              },
             );
           },
         ),
@@ -152,7 +155,7 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
       }
 
       return _provider.object.symptoms.map(
-        (s) => _SymptomCard(symptom: s),
+        (s) => _SymptomCard(symptom: s, consultationId: _provider.object.id),
       ).toList();
     }
 
@@ -258,13 +261,28 @@ class _VitalSignCard extends StatelessWidget {
 
 class _SymptomCard extends StatelessWidget {
   final Symptom symptom;
+  final int consultationId;
 
-  _SymptomCard({this.symptom});
+  _SymptomCard({
+    @required this.symptom,
+    @required this.consultationId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          SymptomCreateScreen.routeName,
+          arguments: {
+            'method': 'update',
+            'symptom': symptom,
+            'consultationId': consultationId,
+          }
+        );
+      },
+
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(

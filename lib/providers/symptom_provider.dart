@@ -14,4 +14,18 @@ class SymptomProvider with ChangeNotifier {
         callback(response);
     });
   }
+
+  void update(Symptom symptom, [Function(Symptom) callback]) {
+    SymptomService.update(symptom).then((response) {
+      if (callback != null)
+        callback(response);
+    });
+  }
+
+  void remove(int id, [Function(int) callback]) {
+    SymptomService.remove(id).then((_) {
+      if (callback != null)
+        callback(id);
+    });
+  }
 }
