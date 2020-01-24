@@ -22,10 +22,11 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
     {'id': 1, 'name': 'Ardor'},
     {'id': 2, 'name': 'Cansancio'},
     {'id': 3, 'name': 'Dolor'},
-    {'id': 4, 'name': 'Hormigueo'},
-    {'id': 5, 'name': 'Inflamación'},
-    {'id': 6, 'name': 'Nausea'},
-    {'id': 7, 'name': 'Palpitaciones'},
+    {'id': 4, 'name': 'Dormido'},
+    {'id': 5, 'name': 'Hormigueo'},
+    {'id': 6, 'name': 'Inflamación'},
+    {'id': 7, 'name': 'Nausea'},
+    {'id': 8, 'name': 'Palpitaciones'},
   ];
 
   InAppWebViewController _webViewCtrl;

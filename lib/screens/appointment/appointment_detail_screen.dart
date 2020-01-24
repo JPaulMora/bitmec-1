@@ -35,12 +35,10 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
       });
     }
 
-    return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-        appBar: _buildAppBar(context),
-        body: _buildBody(context),
-      ),
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: _buildAppBar(context),
+      body: _buildBody(context),
     );
   }
 
@@ -53,15 +51,25 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _buildQuickActionsSection(context),
-          _buildVitalSignsSection(context),
-          _buildSymptomsSection(context),
-          _buildLaboratoryOrdersSection(context),
-        ],
+    if (_provider.objectLoaded == false) {
+      return SafeArea(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildQuickActionsSection(context),
+            _buildVitalSignsSection(context),
+            _buildSymptomsSection(context),
+            _buildLaboratoryOrdersSection(context),
+          ],
+        ),
       ),
     );
   }
@@ -124,11 +132,19 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
   }
 
   Widget _buildSymptomsSection(BuildContext context) {
+    List<Widget> _list() {
+      if (_provider.object.symptoms.isEmpty) {
+        return [Text('No hay simtomas agregados')];
+      }
+
+      return _provider.object.symptoms.map(
+        (s) => _SymptomCard(symptom: s),
+      ).toList();
+    }
+
     return ListOfSection(
       title: 'Sintomas',
-      children: <Widget>[
-        _SymptomCard(),
-      ],
+      children: _list(),
     );
   }
 
@@ -202,6 +218,10 @@ class _VitalSignCard extends StatelessWidget {
 }
 
 class _SymptomCard extends StatelessWidget {
+  final Symptom symptom;
+
+  _SymptomCard({this.symptom});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -209,39 +229,44 @@ class _SymptomCard extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 10.0, vertical: 10.0,
+            horizontal: 10.0,
+            vertical: 10.0,
           ),
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text('Ardor', style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.blue,
-              )),
-              Text('09 Diciembre 2019', style: TextStyle(
-                fontSize: 12.0,
-              )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(symptom.formattedType(), style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.blue,
+                  )),
 
-              Padding(padding: const EdgeInsets.only(top: 10.0)),
+                  FormattedDate(symptom.onset),
+                ],
+              ),
 
               Container(
                 color: Colors.black12,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 10.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text('Cabeza', style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      )),
-                      Text('Magnitud: 9')
-                    ],
-                  ),
+                margin: const EdgeInsets.only(top: 5.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 10.0,
+                ),
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(symptom.formattedLocation(), style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    )),
+
+                    Text('Magnitud: ${symptom.severity}')
+                  ],
                 ),
               )
             ],
@@ -251,3 +276,11 @@ class _SymptomCard extends StatelessWidget {
     );
   }
 }
+
+class _LaboratoryOrderCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+

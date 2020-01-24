@@ -11,6 +11,7 @@ class Consultation {
   bool active;
   String timestamp;
   @JsonKey(name: 'vital_signs') List<VitalSign> vitalSigns;
+  List<Symptom> symptoms;
 
   Consultation({
     this.id,
@@ -18,6 +19,8 @@ class Consultation {
     this.patient,
     this.active,
     this.timestamp,
+    this.vitalSigns,
+    this.symptoms,
   });
 
   factory Consultation.fromJson(json) => _$ConsultationFromJson(json);
