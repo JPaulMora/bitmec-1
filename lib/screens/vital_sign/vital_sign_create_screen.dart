@@ -17,6 +17,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
 
   VitalSignProvider _provider;
   ConsultationProvider _consultationProvider;
+  Map _arguments;
 
   final _weightCtrl = TextEditingController();
   final _weightNode = FocusNode();
@@ -49,6 +50,24 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
     if (_consultationProvider == null) {
       setState(() {
         _consultationProvider = ConsultationProvider.of(context);
+      });
+    }
+
+    if (_arguments == null) {
+      setState(() {
+        _arguments = ModalRoute.of(context).settings.arguments;
+
+        if (_arguments['method'] == 'update') {
+          VitalSign vitalSign = _arguments['vitalSign'];
+          _weightCtrl.text = vitalSign.weight.toString();
+          _heightCtrl.text = vitalSign.height.toString();
+          _systolicCtrl.text = vitalSign.systolicPressure.toString();
+          _diastolicCtrl.text = vitalSign.diastolicPressure.toString();
+          _heartRateCtrl.text = vitalSign.heartRate.toString();
+          _temperatureCtrl.text = vitalSign.temperature.toString();
+          _glucoseCtrl.text = vitalSign.glucose.toString();
+          _oxygenCtrl.text = vitalSign.oxygen.toString();
+        }
       });
     }
 
@@ -108,10 +127,25 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
         consultation: args['consultationId'],
       );
 
-      _provider.create(vitalSign, (response) {
-        _consultationProvider.addVitalSign(vitalSign);
-        Navigator.pop(context);
-      });
+      switch (_arguments['method']) {
+        case 'create':
+          _provider.create(vitalSign, (response) {
+            _consultationProvider.addVitalSign(vitalSign);
+            Navigator.pop(context);
+          });
+          break;
+
+        case 'update':
+          vitalSign.id = (_arguments['vitalSign'] as VitalSign).id;
+          _provider.update(vitalSign, (response) {
+            _consultationProvider.updateVitalSign(vitalSign);
+            Navigator.pop(context);
+          });
+          break;
+
+        default:
+          throw 'Not method selected on VitalSignCreateScreen';
+      }
     }
   }
 

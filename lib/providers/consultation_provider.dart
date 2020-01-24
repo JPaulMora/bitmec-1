@@ -47,4 +47,10 @@ class ConsultationProvider with ChangeNotifier {
     _object.vitalSigns.add(vitalSign);
     notifyListeners();
   }
+
+  void updateVitalSign(VitalSign vitalSign) {
+    final index = _object.vitalSigns.indexWhere((e) => vitalSign.id == e.id);
+    _object.vitalSigns[index] = vitalSign;
+    notifyListeners();
+  }
 }

@@ -21,7 +21,6 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
   @override
   void dispose() {
     _provider.removeObject();
-    print('auto dispose');
     super.dispose();
   }
 
@@ -86,7 +85,10 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
             Navigator.pushNamed(
               context,
               VitalSignCreateScreen.routeName,
-              arguments: {'consultationId': _provider.object.id},
+              arguments: {
+                'method': 'create',
+                'consultationId': _provider.object.id,
+              },
             );
           },
         ),
@@ -126,7 +128,10 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
       }
 
       return _provider.object.vitalSigns.map(
-        (vs) => _VitalSignCard(vitalSign: vs),
+        (vs) => _VitalSignCard(
+          vitalSign: vs,
+          consultationId: _provider.object.id,
+        ),
       ).toList();
     }
 
@@ -173,13 +178,28 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
 
 class _VitalSignCard extends StatelessWidget {
   final VitalSign vitalSign;
+  final int consultationId;
 
-  _VitalSignCard({this.vitalSign});
+  _VitalSignCard({
+    this.vitalSign,
+    this.consultationId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          VitalSignCreateScreen.routeName,
+          arguments: {
+            'method': 'update',
+            'vitalSign': vitalSign,
+            'consultationId': consultationId,
+          }
+        );
+      },
+
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(

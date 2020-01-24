@@ -20,4 +20,19 @@ class VitalSignService {
     final body = jsonDecode(response.body);
     return VitalSign.fromJson(body);
   }
+
+  static Future<VitalSign> update(VitalSign vitalSign) async {
+    final response = await http.patch('$url${vitalSign.id}/',
+      body: jsonEncode(vitalSign.toJson()),
+      headers: { 'Content-Type': 'application/json' },
+    );
+
+    if (response.statusCode != 200) {
+      print(response.body);
+      throw 'StatusCode is not 200 in VitalSignService.update method';
+    }
+
+    final body = jsonDecode(response.body);
+    return VitalSign.fromJson(body);
+  }
 }

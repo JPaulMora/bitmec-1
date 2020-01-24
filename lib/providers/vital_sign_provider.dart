@@ -16,4 +16,12 @@ class VitalSignProvider with ChangeNotifier {
       }
     });
   }
+
+  void update(VitalSign vitalSign, [Function(VitalSign) callback]) {
+    VitalSignService.update(vitalSign).then((response) {
+      if (callback != null) {
+        callback(response);
+      }
+    });
+  }
 }
