@@ -25,7 +25,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   @override
   Widget build(BuildContext context) {
     if (_provider == null) {
-      Map<String, dynamic> args = ModalRoute.of(context).settings.arguments;
+      Map args = ModalRoute.of(context).settings.arguments;
 
       setState(() {
         _provider = PatientProvider.of(context);
@@ -83,8 +83,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       children: <Widget>[
         Center(
           child: Container(
-            width: 200.0,
-            height: 200.0,
+            width: 100.0,
+            height: 100.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(

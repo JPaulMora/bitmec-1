@@ -1,14 +1,16 @@
+import 'package:bitmec/models.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'consultation.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Consultation {
   int id;
   String name;
   int patient;
   bool active;
   String timestamp;
+  @JsonKey(name: 'vital_signs') List<VitalSign> vitalSigns;
 
   Consultation({
     this.id,

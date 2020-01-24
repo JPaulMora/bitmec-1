@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
+import 'package:bitmec/screens.dart';
 
 class PatientDetailGeneralView extends StatefulWidget {
   @override
@@ -229,7 +230,11 @@ class _ConsultationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: redirect to appointment detail screen
+        Navigator.pushNamed(
+          context,
+          AppointmentDetailScreen.routeName,
+          arguments: {'id': consultation.id}
+        );
       },
 
       child: Card(

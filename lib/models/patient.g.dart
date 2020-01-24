@@ -26,8 +26,7 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
         ? null
         : Entity.fromJson(json['entity'] as Map<String, dynamic>),
     consultations: (json['consultations'] as List)
-        ?.map((e) =>
-            e == null ? null : Consultation.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => e == null ? null : Consultation.fromJson(e))
         ?.toList(),
     historicalConditions: (json['historical_conditions'] as List)
         ?.map((e) => e == null

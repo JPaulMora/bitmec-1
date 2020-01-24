@@ -1,9 +1,9 @@
+import 'package:bitmec/models.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/components/my_app_bar.dart';
-import 'package:bitmec/components/quick_actions_components.dart';
-import 'package:bitmec/components/list_of_section.dart';
 import 'package:bitmec/screens.dart';
+import 'package:bitmec/components.dart';
+import 'package:bitmec/providers.dart';
 
 class AppointmentDetailScreen extends StatefulWidget {
   static const routeName = '/appointment/detail';
@@ -16,8 +16,25 @@ class AppointmentDetailScreen extends StatefulWidget {
 class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  ConsultationProvider _provider;
+
+  @override
+  void dispose() {
+    _provider.removeObject();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_provider == null) {
+      Map args = ModalRoute.of(context).settings.arguments;
+
+      setState(() {
+        _provider = ConsultationProvider.of(context);
+        _provider.fetchById(args['id']);
+      });
+    }
+
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
@@ -90,11 +107,19 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
   }
 
   Widget _buildVitalSignsSection(BuildContext context) {
+    List<Widget> _list() {
+      if (_provider.object.vitalSigns.isEmpty) {
+        return [Text('No hay signos vitales agregados')];
+      }
+
+      return _provider.object.vitalSigns.map(
+        (vs) => _VitalSignCard(vitalSign: vs),
+      ).toList();
+    }
+
     return ListOfSection(
       title: 'Signos Vitales',
-      children: <Widget>[
-        _VitalSignCard(),
-      ],
+      children: _list(),
     );
   }
 
@@ -116,6 +141,10 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
 }
 
 class _VitalSignCard extends StatelessWidget {
+  final VitalSign vitalSign;
+
+  _VitalSignCard({this.vitalSign});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -129,7 +158,7 @@ class _VitalSignCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text('09 Diciembre 2019 - 7:20 pm', textAlign: TextAlign.end),
+              Text(vitalSign.formattedDate(), textAlign: TextAlign.end),
               Padding(padding: const EdgeInsets.only(top: 10.0)),
               Container(
                 color: Colors.black12,
@@ -137,14 +166,14 @@ class _VitalSignCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Column(
                     children: [
-                      _buildField('Peso', '25 libras'),
-                      _buildField('Altura', '12.0 metros'),
-                      _buildField('Sistólica', '4'),
-                      _buildField('Diastólica', '4'),
-                      _buildField('Frecuencia Cardiaca', '4ppm'),
-                      _buildField('Oxígeneo', '4%'),
-                      _buildField('Temperatura', '4.0 grados'),
-                      _buildField('Glucosa', '4 mg/dl'),
+                      _buildField('Peso', '${vitalSign.weight} libras'),
+                      _buildField('Altura', '${vitalSign.height} metros'),
+                      _buildField('Sistólica', vitalSign.systolicPressure.toString()),
+                      _buildField('Diastólica', vitalSign.diastolicPressure.toString()),
+                      _buildField('Frecuencia Cardiaca', '${vitalSign.heartRate} ppm'),
+                      _buildField('Oxígeneo', '${vitalSign.oxygen}%'),
+                      _buildField('Temperatura', '${vitalSign.temperature} grados'),
+                      _buildField('Glucosa', '${vitalSign.glucose} mg/dl'),
                     ],
                   ),
                 ),

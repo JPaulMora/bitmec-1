@@ -1,0 +1,39 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'vital_sign.g.dart';
+
+@JsonSerializable()
+class VitalSign {
+  int id;
+  double weight;
+  double height;
+  @JsonKey(name: 'systolic_pressure') double systolicPressure;
+  @JsonKey(name: 'diastolic_pressure') double diastolicPressure;
+  @JsonKey(name: 'heart_rate') double heartRate;
+  double temperature;
+  double glucose;
+  double oxygen;
+  String timestamp;
+
+  VitalSign({
+    this.id,
+    this.weight,
+    this.height,
+    this.systolicPressure,
+    this.diastolicPressure,
+    this.heartRate,
+    this.temperature,
+    this.glucose,
+    this.oxygen,
+    this.timestamp
+  });
+
+  factory VitalSign.fromJson(Map json) => _$VitalSignFromJson(json);
+
+  Map toJson() => _$VitalSignToJson(this);
+
+  String formattedDate() {
+    final date = DateTime.parse(timestamp);
+    return '${date.day}/${date.month}/${date.year} - ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
+  }
+}
