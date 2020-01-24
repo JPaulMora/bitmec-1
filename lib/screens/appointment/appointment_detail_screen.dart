@@ -149,9 +149,19 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
   }
 
   Widget _buildLaboratoryOrdersSection(BuildContext context) {
+    List<Widget> _list() {
+      if (_provider.object.labOrders.isEmpty) {
+        return [Text('No hay ordenes de laboratorio registradas')];
+      }
+
+      return _provider.object.labOrders.map(
+        (lo) => _LaboratoryOrderCard(labOrder: lo),
+      ).toList();
+    }
+
     return ListOfSection(
       title: 'Órdenes de Laboratorio',
-      children: <Widget>[],
+      children: _list(),
     );
   }
 }
@@ -278,9 +288,35 @@ class _SymptomCard extends StatelessWidget {
 }
 
 class _LaboratoryOrderCard extends StatelessWidget {
+  final LaboratoryOrder labOrder;
+
+  _LaboratoryOrderCard({this.labOrder});
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 10.0,
+          ),
+
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text(labOrder.labFormat.name, style: TextStyle(
+                color: Colors.blueAccent,
+                fontSize: 20.0,
+              )),
+
+              Text('Ordenado por: ${labOrder.doctor.firstName} ${labOrder.doctor.lastName}'),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
-

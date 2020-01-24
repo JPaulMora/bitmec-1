@@ -13,3 +13,8 @@ export 'models/family_member_condition.dart';
 export 'models/habit.dart';
 export 'models/vital_sign.dart';
 export 'models/symptom.dart';
+export 'models/doctor.dart';
+export 'models/lab_units.dart';
+export 'models/lab_format.dart';
+export 'models/lab_result.dart';
+export 'models/laboratory_order.dart';

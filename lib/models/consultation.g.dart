@@ -20,6 +20,9 @@ Consultation _$ConsultationFromJson(Map<String, dynamic> json) {
     symptoms: (json['symptoms'] as List)
         ?.map((e) => e == null ? null : Symptom.fromJson(e))
         ?.toList(),
+    labOrders: (json['lab_orders'] as List)
+        ?.map((e) => e == null ? null : LaboratoryOrder.fromJson(e))
+        ?.toList(),
   );
 }
 
@@ -32,4 +35,5 @@ Map<String, dynamic> _$ConsultationToJson(Consultation instance) =>
       'timestamp': instance.timestamp,
       'vital_signs': instance.vitalSigns?.map((e) => e?.toJson())?.toList(),
       'symptoms': instance.symptoms?.map((e) => e?.toJson())?.toList(),
+      'lab_orders': instance.labOrders?.map((e) => e?.toJson())?.toList(),
     };
