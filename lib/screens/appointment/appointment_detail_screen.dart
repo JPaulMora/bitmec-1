@@ -21,6 +21,7 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
   @override
   void dispose() {
     _provider.removeObject();
+    print('auto dispose');
     super.dispose();
   }
 
@@ -82,7 +83,11 @@ class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
           color: Colors.red,
           label: 'Signos Vitales',
           onTap: () {
-            Navigator.pushNamed(context, VitalSignCreateScreen.routeName);
+            Navigator.pushNamed(
+              context,
+              VitalSignCreateScreen.routeName,
+              arguments: {'consultationId': _provider.object.id},
+            );
           },
         ),
 
@@ -184,7 +189,7 @@ class _VitalSignCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text(vitalSign.formattedDate(), textAlign: TextAlign.end),
+              FormattedDate(vitalSign.timestamp, textAlign: TextAlign.end),
               Padding(padding: const EdgeInsets.only(top: 10.0)),
               Container(
                 color: Colors.black12,

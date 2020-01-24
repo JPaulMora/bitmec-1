@@ -42,4 +42,9 @@ class ConsultationProvider with ChangeNotifier {
       }
     });
   }
+
+  void addVitalSign(VitalSign vitalSign) {
+    _object.vitalSigns.add(vitalSign);
+    notifyListeners();
+  }
 }

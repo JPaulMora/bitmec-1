@@ -18,6 +18,7 @@ VitalSign _$VitalSignFromJson(Map<String, dynamic> json) {
     glucose: (json['glucose'] as num)?.toDouble(),
     oxygen: (json['oxygen'] as num)?.toDouble(),
     timestamp: json['timestamp'] as String,
+    consultation: json['consultation'] as int,
   );
 }
 
@@ -32,4 +33,5 @@ Map<String, dynamic> _$VitalSignToJson(VitalSign instance) => <String, dynamic>{
       'glucose': instance.glucose,
       'oxygen': instance.oxygen,
       'timestamp': instance.timestamp,
+      'consultation': instance.consultation,
     };

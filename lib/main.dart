@@ -18,6 +18,7 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => PatientProvider()),
       ChangeNotifierProvider(create: (context) => ConsultationProvider()),
+      ChangeNotifierProvider(create: (context) => VitalSignProvider()),
     ],
     child: MyApp(),
   ));

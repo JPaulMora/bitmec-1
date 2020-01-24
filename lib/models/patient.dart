@@ -1,4 +1,3 @@
-import 'package:bitmec/components.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:bitmec/models.dart';

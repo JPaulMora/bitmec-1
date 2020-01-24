@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components.dart';
+import 'package:bitmec/providers.dart';
+import 'package:bitmec/models.dart';
 
 class VitalSignCreateScreen extends StatefulWidget {
   static const routeName = '/vital_sign/create';
@@ -11,6 +13,10 @@ class VitalSignCreateScreen extends StatefulWidget {
 
 class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
+
+  VitalSignProvider _provider;
+  ConsultationProvider _consultationProvider;
 
   final _weightCtrl = TextEditingController();
   final _weightNode = FocusNode();
@@ -34,11 +40,21 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        body: _buildBody(context),
-      ),
+    if (_provider == null) {
+      setState(() {
+        _provider = VitalSignProvider.of(context);
+      });
+    }
+
+    if (_consultationProvider == null) {
+      setState(() {
+        _consultationProvider = ConsultationProvider.of(context);
+      });
+    }
+
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      body: _buildBody(context),
     );
   }
 
@@ -51,26 +67,52 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Form(
-        child: Column(
-          children: <Widget>[
-            _buildPhysicalMeasuresSection(context),
-            _buildCardiovascularMeasuresSection(context),
-            _buildTemperatureSection(context),
-            _buildGlucoseSection(context),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              _buildPhysicalMeasuresSection(context),
+              _buildCardiovascularMeasuresSection(context),
+              _buildTemperatureSection(context),
+              _buildGlucoseSection(context),
 
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: MySubmitButton(
-                label: 'Guardar',
-                onPressed: () {},
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: MySubmitButton(
+                  label: 'Guardar',
+                  onPressed: () { onCreateVitalSign(context); },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void onCreateVitalSign(BuildContext context) {
+    if (_formKey.currentState.validate()) {
+      Map args = ModalRoute.of(context).settings.arguments;
+
+      final vitalSign = VitalSign(
+        weight: double.parse(_weightCtrl.text),
+        height: double.parse(_heightCtrl.text),
+        systolicPressure: double.parse(_systolicCtrl.text),
+        diastolicPressure: double.parse(_diastolicCtrl.text),
+        heartRate: double.parse(_heartRateCtrl.text),
+        temperature: double.parse(_temperatureCtrl.text),
+        glucose: double.parse(_glucoseCtrl.text),
+        oxygen: double.parse(_oxygenCtrl.text),
+        consultation: args['consultationId'],
+      );
+
+      _provider.create(vitalSign, (response) {
+        _consultationProvider.addVitalSign(vitalSign);
+        Navigator.pop(context);
+      });
+    }
   }
 
   Widget _buildPhysicalMeasuresSection(BuildContext context) {
@@ -84,6 +126,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
               padding: const EdgeInsets.fromLTRB(15.0, 20.0, 0, 10.0),
               child: Text('Medidas Físicas'),
             ),
+
             MyTextFormField(
               label: 'Peso',
               ctrl: _weightCtrl,
@@ -103,6 +146,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
                 return null;
               },
             ),
+
             MyTextFormField(
               label: 'Altura',
               ctrl: _heightCtrl,
@@ -112,6 +156,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
               keyboardType: TextInputType.number,
               submitted: (value) {
                 _heightNode.unfocus();
+                FocusScope.of(context).requestFocus(_systolicNode);
               },
               validator: (value) {
                 if (value.trim().isEmpty) {
@@ -204,6 +249,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
               keyboardType: TextInputType.number,
               submitted: (value) {
                 _oxygenNode.unfocus();
+                FocusScope.of(context).requestFocus(_temperatureNode);
               },
               validator: (value) {
                 if (value.trim().isEmpty) {
@@ -239,6 +285,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
               keyboardType: TextInputType.number,
               submitted: (value) {
                 _temperatureNode.unfocus();
+                FocusScope.of(context).requestFocus(_glucoseNode);
               },
               validator: (value) {
                 if (value.trim().isEmpty) {
@@ -266,7 +313,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
               child: Text('Glucosa'),
             ),
             MyTextFormField(
-              label: 'Temperatura',
+              label: 'Glucosa',
               ctrl: _glucoseCtrl,
               node: _glucoseNode,
               icon: Icon(Icons.web),

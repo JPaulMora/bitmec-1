@@ -15,6 +15,9 @@ class VitalSign {
   double oxygen;
   String timestamp;
 
+  // To Post
+  int consultation;
+
   VitalSign({
     this.id,
     this.weight,
@@ -25,15 +28,11 @@ class VitalSign {
     this.temperature,
     this.glucose,
     this.oxygen,
-    this.timestamp
+    this.timestamp,
+    this.consultation,
   });
 
   factory VitalSign.fromJson(Map json) => _$VitalSignFromJson(json);
 
   Map toJson() => _$VitalSignToJson(this);
-
-  String formattedDate() {
-    final date = DateTime.parse(timestamp);
-    return '${date.day}/${date.month}/${date.year} - ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
-  }
 }
