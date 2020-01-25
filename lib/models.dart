@@ -1,6 +1,6 @@
 library models;
 
-export 'models/image.dart';
+export 'models/image_db.dart';
 export 'models/patient.dart';
 export 'models/entity.dart';
 export 'models/consultation.dart';

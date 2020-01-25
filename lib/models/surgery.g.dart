@@ -14,8 +14,8 @@ Surgery _$SurgeryFromJson(Map<String, dynamic> json) {
     operationDate: json['operation_date'] as String,
     operatingDoctor: json['operating_doctor'] as String,
     images: (json['images'] as List)
-        ?.map(
-            (e) => e == null ? null : Image.fromJson(e as Map<String, dynamic>))
+        ?.map((e) =>
+            e == null ? null : ImageDB.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }

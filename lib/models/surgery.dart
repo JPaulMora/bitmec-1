@@ -11,7 +11,7 @@ class Surgery {
   @JsonKey(name: 'historical_condition') int historicalCondition;
   @JsonKey(name: 'operation_date') String operationDate;
   @JsonKey(name: 'operating_doctor') String operatingDoctor;
-  List<Image> images;
+  List<ImageDB> images;
 
   Surgery({
     this.id,

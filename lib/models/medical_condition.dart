@@ -10,7 +10,7 @@ class MedicalCondition {
   String condition;
   @JsonKey(name: 'diagnosis_date') String diagnosisDate;
   @JsonKey(name: 'diagnosing_doctor') String diagnosingDoctor;
-  @JsonKey(defaultValue: []) List<Image> images;
+  @JsonKey(defaultValue: []) List<ImageDB> images;
   int patient;
 
   MedicalCondition({

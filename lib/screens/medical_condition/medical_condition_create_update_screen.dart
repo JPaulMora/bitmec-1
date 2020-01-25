@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:bitmec/providers/image_db_provider.dart';
+import 'package:bitmec/services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
@@ -23,6 +29,7 @@ class _MedicalConditionCreateUpdateScreenState
   Map _arguments;
   MedicalConditionProvider _provider;
   PatientProvider _patientProvider;
+  ImageDBProvider _imageDBProvider;
 
   final _conditionCtrl = TextEditingController();
   final _conditionNode = FocusNode();
@@ -56,6 +63,12 @@ class _MedicalConditionCreateUpdateScreenState
     if (_patientProvider == null) {
       setState(() {
         _patientProvider = PatientProvider.of(context);
+      });
+    }
+
+    if (_imageDBProvider == null) {
+      setState(() {
+        _imageDBProvider = ImageDBProvider.of(context);
       });
     }
 
@@ -127,8 +140,10 @@ class _MedicalConditionCreateUpdateScreenState
               _buildConditionInput(context),
               _buildDateInput(context),
               _buildByInput(context),
-
               MySubmitButton(onPressed: () { _onCreate(context); }),
+
+              _arguments['method'] != 'update' ? Container()
+                : _buildSelectImage(context),
             ],
           ),
         ),
@@ -211,6 +226,97 @@ class _MedicalConditionCreateUpdateScreenState
 
         return null;
       },
+    );
+  }
+
+  Widget _buildSelectImage(context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10.0,
+      ),
+
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text('Imagenes:', style: TextStyle(
+                fontSize: 25.0,
+                color: Colors.blueAccent
+              )),
+
+              DropdownButton<int>(
+                icon: Icon(Icons.camera),
+                iconSize: 25.0,
+                underline: Container(),
+                onChanged: _addImage,
+                items: <DropdownMenuItem<int>>[
+                  DropdownMenuItem(
+                    value: 1,
+                    child: Text('Camára'),
+                  ),
+                  DropdownMenuItem(
+                    value: 2,
+                    child: Text('Galería'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          _buildImages(BuildContext),
+        ],
+      ),
+    );
+  }
+
+  void _addImage(value) async {
+    ImageSource source;
+
+    switch (value) {
+      case 1:
+        source = ImageSource.camera;
+        break;
+
+      case 2:
+        source = ImageSource.gallery;
+        break;
+    }
+
+    final image = await ImagePicker.pickImage(source: source);
+
+    if (image != null) {
+      MedicalCondition condition = _arguments['medicalCondition'];
+      _imageDBProvider.create(0, image, condition.id, (response) {
+        _patientProvider.addMedicalConditionImage(condition.id, response);
+      });
+    }
+  }
+
+  Widget _buildImages(context) {
+    MedicalCondition condition = _arguments['medicalCondition'];
+
+    if (condition.images.isEmpty) {
+      return Center(
+        child: Text('No se han seleccionado imagenes'),
+      );
+    }
+
+    return GridView.count(
+      shrinkWrap: true,
+      mainAxisSpacing: 5,
+      crossAxisSpacing: 5,
+      crossAxisCount: 3,
+      children: condition.images.map(
+        (imageDB) => Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(imageDB.file),
+            )
+          ),
+        ),
+      ).toList(),
     );
   }
 }

@@ -22,6 +22,7 @@ void main() async {
       ChangeNotifierProvider(create: (context) => VitalSignProvider()),
       ChangeNotifierProvider(create: (context) => SymptomProvider()),
       ChangeNotifierProvider(create: (context) => MedicalConditionProvider()),
+      ChangeNotifierProvider(create: (context) => ImageDBProvider()),
     ],
   ));
 }

@@ -86,4 +86,10 @@ class PatientProvider with ChangeNotifier {
     _object.historicalConditions.removeWhere((e) => id == e.id);
     notifyListeners();
   }
+
+  void addMedicalConditionImage(int conditionID, ImageDB image) {
+    final i = _object.historicalConditions.indexWhere((e) => conditionID == e.id);
+    _object.historicalConditions[i].images.add(image);
+    notifyListeners();
+  }
 }

@@ -37,9 +37,11 @@ class _MedicalHistoryViewState extends State<MedicalHistoryView> {
             medicines: _provider.object.historicalPrescriptions,
           ),
 
-          _ReproductiveHealthSection(
-            reproductiveHealth: _provider.object.reproductiveHistory.first
-          ),
+
+          _provider.object.gender ? Container() :
+            _ReproductiveHealthSection(
+              reproductiveHealth: _provider.object.reproductiveHistory.first
+            ),
 
           _ContraceptivesSection(
             birthControls: _provider.object.birthControls,

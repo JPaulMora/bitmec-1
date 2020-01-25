@@ -19,8 +19,8 @@ Prescription _$PrescriptionFromJson(Map<String, dynamic> json) {
     ..historicalCondition = json['historical_condition'] as int
     ..historicalOperation = json['historical_operation'] as int
     ..images = (json['images'] as List)
-        ?.map(
-            (e) => e == null ? null : Image.fromJson(e as Map<String, dynamic>))
+        ?.map((e) =>
+            e == null ? null : ImageDB.fromJson(e as Map<String, dynamic>))
         ?.toList();
 }
 

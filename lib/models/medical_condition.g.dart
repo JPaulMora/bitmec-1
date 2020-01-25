@@ -15,7 +15,7 @@ MedicalCondition _$MedicalConditionFromJson(Map<String, dynamic> json) {
     patient: json['patient'] as int,
   )..images = (json['images'] as List)
           ?.map((e) =>
-              e == null ? null : Image.fromJson(e as Map<String, dynamic>))
+              e == null ? null : ImageDB.fromJson(e as Map<String, dynamic>))
           ?.toList() ??
       [];
 }

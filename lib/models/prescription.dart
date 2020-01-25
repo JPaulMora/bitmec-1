@@ -15,7 +15,7 @@ class Prescription {
   @JsonKey(name: 'prescribing_doctor') String prescribingDoctor;
   @JsonKey(name: 'historical_condition') int historicalCondition;
   @JsonKey(name: 'historical_operation') int historicalOperation;
-  List<Image> images;
+  List<ImageDB> images;
 
   Prescription({
     this.id
