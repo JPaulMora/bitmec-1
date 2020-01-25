@@ -23,6 +23,11 @@ class ImageDBService {
         url = '${baseURL}medical_history/historical_operation_document/';
         break;
 
+      case 2:
+        fieldName = 'historical_prescription';
+        url = '${baseURL}medical_history/historical_prescription_document/';
+        break;
+
       default:
         throw 'URL Identifier not exits';
     }

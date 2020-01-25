@@ -8,11 +8,13 @@ class MyDateTimePicker extends StatefulWidget {
   final DateTime dateTime;
   final void Function(DateTime) onChange;
   final bool noPadding;
+  final String label;
 
   MyDateTimePicker({
     @required this.dateTime,
     @required this.onChange,
     this.noPadding = false,
+    this.label = 'Fecha',
   });
 
   @override
@@ -44,7 +46,7 @@ class _MyDateTimePickerState extends State<MyDateTimePicker> {
             controller: _ctrl,
               decoration: InputDecoration(
                 icon: Icon(Icons.date_range),
-                labelText: 'Fecha',
+                labelText: widget.label,
                 isDense: true,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: _theme.hintColor),

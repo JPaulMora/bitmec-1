@@ -15,10 +15,21 @@ class Prescription {
   @JsonKey(name: 'prescribing_doctor') String prescribingDoctor;
   @JsonKey(name: 'historical_condition') int historicalCondition;
   @JsonKey(name: 'historical_operation') int historicalOperation;
-  List<ImageDB> images;
+  @JsonKey(defaultValue: []) List<ImageDB> images;
+  int patient;
 
   Prescription({
-    this.id
+    this.id,
+    this.drug,
+    this.dose,
+    this.frequency,
+    this.prescriptionStartDate,
+    this.prescriptionEndDate,
+    this.prescribingDoctor,
+    this.historicalCondition,
+    this.historicalOperation,
+    this.images,
+    this.patient,
   });
 
   factory Prescription.fromJson(Map<String, dynamic> json) =>

@@ -24,6 +24,7 @@ void main() async {
       ChangeNotifierProvider(create: (context) => ImageDBProvider()),
       ChangeNotifierProvider(create: (context) => MedicalConditionProvider()),
       ChangeNotifierProvider(create: (context) => MedicalSurgeryProvider()),
+      ChangeNotifierProvider(create: (context) => MedicalPrescriptionProvider()),
     ],
   ));
 }
