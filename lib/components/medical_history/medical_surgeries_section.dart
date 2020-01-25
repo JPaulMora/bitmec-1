@@ -1,48 +1,47 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
+import 'package:bitmec/screens.dart';
 
-class MedicalConditionsSection extends StatelessWidget {
-  final List<MedicalCondition> conditions;
+class MedicalSurgeriesSection extends StatelessWidget {
+  final List<Surgery> surgeries;
 
-  MedicalConditionsSection({
-    Key key,
-    @required this.conditions,
-  }) : super(key: key);
+  MedicalSurgeriesSection({@required this.surgeries});
 
   @override
   Widget build(BuildContext context) {
     return ListOfSection(
-      title: 'Padecimientos',
+      title: 'Cirugias',
+      children: _buildList(context),
       onPressedAdd: () {
         Navigator.pushNamed(
           context,
-          MedicalConditionCreateUpdateScreen.routeName,
+          MedicalSurgeryCreateUpdateScreen.routeName,
           arguments: {'method': 'create'},
         );
       },
-
-      children: _buildList(context),
     );
   }
 
   List<Widget> _buildList(BuildContext context) {
-    if (conditions.isEmpty) {
-      return [Text('Aún no hay padecimientos agregados')];
+    if (surgeries.isEmpty) {
+      return [Text('Aún no hay operaciones agregadas')];
     }
 
-    return conditions.map((c) => _MedicalConditionCard(condition: c)).toList();
+    return surgeries.map
+      ((s) =>_MedicalSurgeryCard(surgery: s) ,
+    ).toList();
   }
 }
 
-class _MedicalConditionCard extends StatelessWidget {
-  final MedicalCondition condition;
+class _MedicalSurgeryCard extends StatelessWidget {
+  final Surgery surgery;
 
-  _MedicalConditionCard({
+  _MedicalSurgeryCard({
     Key key,
-    this.condition,
+    this.surgery,
   }) : super(key: key);
 
   @override
@@ -51,11 +50,11 @@ class _MedicalConditionCard extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          MedicalConditionCreateUpdateScreen.routeName,
+          MedicalSurgeryCreateUpdateScreen.routeName,
           arguments: {
             'method': 'update',
-            'medicalCondition': condition,
-          },
+            'surgery': surgery,
+          }
         );
       },
 
@@ -76,18 +75,18 @@ class _MedicalConditionCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(condition.images.isNotEmpty
-                        ? condition.images.first.file
+                    image: NetworkImage(surgery.images.isNotEmpty
+                        ? surgery.images.first.file
                         : 'https://sanitationsolutions.net/wp-content/uploads/2015/05/empty-image.png'
                     ),
-                  )
+                  ),
                 ),
               ),
 
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(condition.condition,
+                  Text(surgery.operation,
                     style: TextStyle(
                       color: Colors.blueAccent,
                       fontSize: 24.0,
@@ -96,11 +95,13 @@ class _MedicalConditionCard extends StatelessWidget {
 
                   Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
 
-                  Text('Diagnosticado por:',
-                    style: TextStyle(fontStyle: FontStyle.italic),
+                  Text('Realizada por:',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
 
-                  Text(condition.diagnosingDoctor,
+                  Text(surgery.operatingDoctor,
                     style: TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.bold,
@@ -109,10 +110,10 @@ class _MedicalConditionCard extends StatelessWidget {
                 ],
               ),
 
-              FormattedDate(condition.diagnosisDate,
+              FormattedDate(surgery.operationDate,
                 textAlign: TextAlign.end,
                 style: TextStyle(color: Colors.blueAccent),
-              ),
+              )
             ],
           ),
         ),

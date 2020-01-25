@@ -92,4 +92,26 @@ class PatientProvider with ChangeNotifier {
     _object.historicalConditions[i].images.add(image);
     notifyListeners();
   }
+
+  void addMedicalSurgery(Surgery surgery) {
+    _object.historicalOperations.add(surgery);
+    notifyListeners();
+  }
+
+  void updateMedicalSurgery(Surgery surgery) {
+    final i = _object.historicalOperations.indexWhere((e) => surgery.id == e.id);
+    _object.historicalOperations[i] = surgery;
+    notifyListeners();
+  }
+
+  void removeMedicalSurgery(int id) {
+    _object.historicalOperations.removeWhere((e) => id == e.id);
+    notifyListeners();
+  }
+
+  void addMedicalSurgeryImage(int surgeryID, ImageDB image) {
+    final i = _object.historicalOperations.indexWhere((e) => surgeryID == e.id);
+    _object.historicalOperations[i].images.add(image);
+    notifyListeners();
+  }
 }

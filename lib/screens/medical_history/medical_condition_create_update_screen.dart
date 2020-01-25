@@ -1,8 +1,4 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:bitmec/providers/image_db_provider.dart';
-import 'package:bitmec/services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
@@ -13,7 +9,7 @@ import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
 
 class MedicalConditionCreateUpdateScreen extends StatefulWidget {
-  static const routeName = '/patient/detail/medical_condition/create';
+  static const routeName = '/medical_history/medical_condition/create_update';
 
   @override
   _MedicalConditionCreateUpdateScreenState createState() =>

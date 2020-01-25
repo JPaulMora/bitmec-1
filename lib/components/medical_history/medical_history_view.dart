@@ -29,7 +29,7 @@ class _MedicalHistoryViewState extends State<MedicalHistoryView> {
             conditions: _provider.object.historicalConditions,
           ),
 
-          _MedicalSurgeriesSection(
+          MedicalSurgeriesSection(
             surgeries: _provider.object.historicalOperations,
           ),
 
@@ -47,112 +47,6 @@ class _MedicalHistoryViewState extends State<MedicalHistoryView> {
             birthControls: _provider.object.birthControls,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _MedicalSurgeriesSection extends StatelessWidget {
-  final List<Surgery> surgeries;
-
-  _MedicalSurgeriesSection({
-    Key key,
-    @required this.surgeries,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListOfSection(
-      title: 'Cirugias',
-      children: _buildList(context),
-    );
-  }
-
-  List<Widget> _buildList(BuildContext context) {
-    if (surgeries.isEmpty) {
-      return [Text('Aún no hay operaciones agregadas')];
-    }
-
-    return surgeries.map((s) =>
-      _MedicalSurgeryCard(surgery: s),
-    ).toList();
-  }
-}
-
-class _MedicalSurgeryCard extends StatelessWidget {
-  final Surgery surgery;
-
-  _MedicalSurgeryCard({
-    Key key,
-    this.surgery,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 3.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10.0,
-          vertical: 10.0,
-        ),
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              height: 150.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(surgery.images.isNotEmpty
-                    ? surgery.images.first.file
-                    : 'https://sanitationsolutions.net/wp-content/uploads/2015/05/empty-image.png'
-                  ),
-                )
-              ),
-            ),
-
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(surgery.operation,
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontSize: 24.0
-                  ),
-                ),
-
-                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
-
-                Text('Realizada por:',
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-
-                Text(surgery.operatingDoctor,
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  )
-                ),
-              ],
-            ),
-
-            Row(
-              textDirection: TextDirection.rtl,
-              children: <Widget>[
-                Text(surgery.formattedDate(),
-                  style: TextStyle(
-                    color: Colors.lightBlue,
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }

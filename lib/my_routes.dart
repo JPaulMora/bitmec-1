@@ -10,14 +10,18 @@ class MyRoutes {
     LoginScreen.routeName: (context) => LoginScreen(),
     ChatScreen.routeName: (context) => ChatScreen(),
 
+    // Medical History Routes
+    MedicalConditionCreateUpdateScreen.routeName: (context) =>
+        MedicalConditionCreateUpdateScreen(),
+    MedicalSurgeryCreateUpdateScreen.routeName: (context) =>
+      MedicalSurgeryCreateUpdateScreen(),
+
     // Patient Routes
     PatientListScreen.routeName: (context) => PatientListScreen(),
     PatientEditScreen.routeName: (context) => PatientEditScreen(),
     PatientCreateScreen.routeName: (context) => PatientCreateScreen(),
-
     PatientDetailScreen.routeName: (context) => PatientDetailScreen(),
-    MedicalConditionCreateUpdateScreen.routeName: (context) =>
-        MedicalConditionCreateUpdateScreen(),
+
     PatientDetailMedicalTraumaCreateScreen.routeName: (context) =>
         PatientDetailMedicalTraumaCreateScreen(),
     PatientDetailFamilyHistoryCreateScreen.routeName: (context) =>
