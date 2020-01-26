@@ -11,3 +11,4 @@ export 'services/medical_prescription_service.dart';
 export 'services/reproductive_history_service.dart';
 export 'services/birth_control_service.dart';
 export 'services/family_history_service.dart';
+export 'services/habit_service.dart';

@@ -10,7 +10,8 @@ class Habit {
   @JsonKey(name: 'habit_end_date') String habitEndDate;
   String quantity;
   String frequency;
-  @JsonKey(name: 'intake_method') String intakeMethod;
+  @JsonKey(name: 'intake_methods') String intakeMethods;
+  int patient;
 
   Habit({
     this.id,
@@ -19,7 +20,8 @@ class Habit {
     this.habitEndDate,
     this.quantity,
     this.frequency,
-    this.intakeMethod,
+    this.intakeMethods,
+    this.patient,
   });
 
   factory Habit.fromJson(Map<String, dynamic> json) =>

@@ -11,8 +11,7 @@ class PatientDetailHabitsView extends StatefulWidget {
       _PatientDetailHabitsViewState();
 }
 
-class _PatientDetailHabitsViewState
-    extends State<PatientDetailHabitsView> {
+class _PatientDetailHabitsViewState extends State<PatientDetailHabitsView> {
   PatientProvider _provider;
 
   @override
@@ -26,14 +25,14 @@ class _PatientDetailHabitsViewState
     return SingleChildScrollView(
       child: ListOfSection(
         title: 'Hábitos',
+        children: _buildList(context),
         onPressedAdd: () {
           Navigator.pushNamed(
             context,
-            PatientDetailHabitCreateScreen.routeName,
+            HabitCreateUpdateScreen.routeName,
+            arguments: {'method': 'create'},
           );
         },
-
-        children: _buildList(context),
       ),
     );
   }
@@ -56,58 +55,71 @@ class _HabitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10.0,
-          vertical: 10.0,
-        ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          HabitCreateUpdateScreen.routeName,
+          arguments: {
+            'method': 'update',
+            'data': habit,
+          }
+        );
+      },
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(habit.habit, style: TextStyle(
-                  color: Colors.blueAccent,
-                  fontSize: 24.0,
-                )),
+      child: Card(
+        elevation: 3.0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 10.0,
+          ),
 
-                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(habit.habit, style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 24.0,
+                  )),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text('¿Lo practica actualmente?'),
-                    Text(habit.practiceCurrently() ? 'Sí' : 'No',
-                      style: TextStyle(color: Colors.blueAccent),
-                    )
-                  ],
-                )
-              ],
-            ),
+                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                color: Colors.black12,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      FormattedDate(habit.habitStartDate, prefix: 'Fecha de inicio: '),
-                      FormattedDate(habit.habitEndDate, prefix: 'Fecha de fin:'),
+                      Text('¿Lo practica actualmente?'),
+                      Text(habit.practiceCurrently() ? 'Sí' : 'No',
+                        style: TextStyle(color: Colors.blueAccent),
+                      )
                     ],
+                  )
+                ],
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  color: Colors.black12,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        FormattedDate(habit.habitStartDate, prefix: 'Fecha de inicio: '),
+                        FormattedDate(habit.habitEndDate, prefix: 'Fecha de fin:'),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

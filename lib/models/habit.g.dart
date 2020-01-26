@@ -14,7 +14,8 @@ Habit _$HabitFromJson(Map<String, dynamic> json) {
     habitEndDate: json['habit_end_date'] as String,
     quantity: json['quantity'] as String,
     frequency: json['frequency'] as String,
-    intakeMethod: json['intake_method'] as String,
+    intakeMethods: json['intake_methods'] as String,
+    patient: json['patient'] as int,
   );
 }
 
@@ -25,5 +26,6 @@ Map<String, dynamic> _$HabitToJson(Habit instance) => <String, dynamic>{
       'habit_end_date': instance.habitEndDate,
       'quantity': instance.quantity,
       'frequency': instance.frequency,
-      'intake_method': instance.intakeMethod,
+      'intake_methods': instance.intakeMethods,
+      'patient': instance.patient,
     };

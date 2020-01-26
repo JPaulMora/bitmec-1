@@ -81,41 +81,41 @@ class _MedicalConditionCreateUpdateScreenState
     );
   }
 
-  // TODO: implement delete condition and document attached
-  void _confirmDelete(context) async {
-    bool response = await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Confirmar'),
-        content: Text('¿Estas seguro de querer eliminar este dato?'),
-        actions: <Widget>[
-          FlatButton(
-            splashColor: Colors.black12,
-            child: Text('Aceptar'),
-            onPressed: () {
-              MedicalCondition medicalCondition = _arguments['medicalCondition'];
-              _provider.remove(medicalCondition.id, (id) {
-                _patientProvider.removeMedicalCondition(id);
-                Navigator.pop(context, true);
-              });
-            },
-          ),
-
-          RaisedButton(
-            color: Colors.redAccent,
-            child: Text('Cancelar'),
-            onPressed: () {
-              Navigator.pop(context, false);
-            },
-          )
-        ],
-      )
-    );
-
-    if (response == true) {
-      Navigator.pop(context);
-    }
-  }
+  /// TODO: implement delete condition and document attached
+//  void _confirmDelete(context) async {
+//    bool response = await showDialog(
+//      context: context,
+//      builder: (context) => AlertDialog(
+//        title: Text('Confirmar'),
+//        content: Text('¿Estas seguro de querer eliminar este dato?'),
+//        actions: <Widget>[
+//          FlatButton(
+//            splashColor: Colors.black12,
+//            child: Text('Aceptar'),
+//            onPressed: () {
+//              MedicalCondition medicalCondition = _arguments['medicalCondition'];
+//              _provider.remove(medicalCondition.id, (id) {
+//                _patientProvider.removeMedicalCondition(id);
+//                Navigator.pop(context, true);
+//              });
+//            },
+//          ),
+//
+//          RaisedButton(
+//            color: Colors.redAccent,
+//            child: Text('Cancelar'),
+//            onPressed: () {
+//              Navigator.pop(context, false);
+//            },
+//          )
+//        ],
+//      )
+//    );
+//
+//    if (response == true) {
+//      Navigator.pop(context);
+//    }
+//  }
 
   Widget _buildBody(BuildContext context) {
     return SafeArea(

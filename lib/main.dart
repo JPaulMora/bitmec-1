@@ -28,6 +28,7 @@ void main() async {
       ChangeNotifierProvider(create: (context) => ReproductiveHistoryProvider()),
       ChangeNotifierProvider(create: (context) => BirthControlProvider()),
       ChangeNotifierProvider(create: (context) => FamilyHistoryProvider()),
+      ChangeNotifierProvider(create: (context) => HabitProvider()),
     ],
   ));
 }

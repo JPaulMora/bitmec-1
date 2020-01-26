@@ -173,4 +173,20 @@ class PatientProvider with ChangeNotifier {
     _object.familyMembers.removeWhere((e) => id == e.id);
     notifyListeners();
   }
+
+  void addHabit(Habit obj) {
+    _object.habits.add(obj);
+    notifyListeners();
+  }
+
+  void updateHabit(Habit obj) {
+    final i = _object.habits.indexWhere((e) => obj.id == e.id);
+    _object.habits[i] = obj;
+    notifyListeners();
+  }
+
+  void removeHabit(int id) {
+    _object.habits.removeWhere((e) => id == e.id);
+    notifyListeners();
+  }
 }
