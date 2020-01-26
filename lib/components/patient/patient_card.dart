@@ -52,7 +52,9 @@ class PatientCard extends StatelessWidget {
         shape: BoxShape.circle,
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: NetworkImage(patient.profilePicture),
+          image: NetworkImage(
+            patient.profilePicture ?? 'https://maxcdn.icons8.com/Share/icon/Users//user_male_circle_filled1600.png',
+          ),
         )
       ),
     );

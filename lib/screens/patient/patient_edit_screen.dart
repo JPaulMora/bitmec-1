@@ -1,6 +1,10 @@
+import 'package:bitmec/models.dart';
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:bitmec/components.dart';
+import 'package:bitmec/providers.dart';
 
 class PatientEditScreen extends StatefulWidget {
   static const routeName = '/patient/edit';
@@ -10,16 +14,19 @@ class PatientEditScreen extends StatefulWidget {
 }
 
 class _PatientEditScreenState extends State<PatientEditScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  PatientProvider _provider;
+
   final _nameCtrl = TextEditingController();
   final _nameNode = FocusNode();
 
   final _lastNameCtrl = TextEditingController();
   final _lastNameNode = FocusNode();
 
-  final _bornDateCtrl = TextEditingController();
-  final _bornDateNode = FocusNode();
+  var _bornDate = DateTime.now();
 
-  int _genderValue = -1;
+  var _genderValue = -1;
 
   final _cuiCtrl = TextEditingController();
   final _cuiNode = FocusNode();
@@ -30,7 +37,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
   final _countryCtrl = TextEditingController();
   final _countryNode = FocusNode();
 
-  int _departmentValue = -1;
+  var _departmentValue = 'Selecciona un género';
 
   final _cityCtrl = TextEditingController();
   final _cityNode = FocusNode();
@@ -39,17 +46,9 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
   final _addressNode = FocusNode();
 
   @override
-  void initState() {
-    super.initState();
-
-    _nameCtrl.text = 'Hello World';
-  }
-
-  @override
   void dispose() {
     _nameCtrl.dispose();
     _lastNameCtrl.dispose();
-    _bornDateCtrl.dispose();
     _cuiCtrl.dispose();
     _phoneCtrl.dispose();
 
@@ -58,41 +57,92 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_provider == null) {
+      setState(() {
+        _provider = PatientProvider.of(context);
+
+        _nameCtrl.text = _provider.object.firstName;
+        _lastNameCtrl.text = _provider.object.lastName;
+        _bornDate = DateTime.parse(_provider.object.birthDate);
+        _genderValue = _provider.object.gender ? 0 : 1;
+        _cuiCtrl.text = _provider.object.governmentId;
+        _phoneCtrl.text = _provider.object.phoneNumber;
+        _countryCtrl.text = _provider.object.country;
+        _departmentValue = _provider.object.state;
+        _cityCtrl.text = _provider.object.city;
+        _addressCtrl.text = _provider.object.city;
+      });
+    }
+
+    return Scaffold(
+      appBar: AppBar(title: Text('Editar'), centerTitle: true),
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildBody(context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Editar'),
-          centerTitle: true,
-        ),
-        body: _buildBody(context),
-      ),
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Form(
-        child: Column(
-          children: <Widget>[
-            _buildNameInput(context),
-            _buildLastNameInput(context),
-            _buildBornDateInput(context),
-            _buildGenderInput(context),
-            _buildCUIInput(context),
-            _buildPhoneInput(context),
-            _buildCountryInput(context),
-            _buildDepartmentInput(context),
-            _buildCityInput(context),
-            _buildAddressInput(context),
-            _buildSubmitButton(context),
-            Padding(padding: const EdgeInsets.only(bottom: 15.0))
-          ],
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              _nameInput(context),
+              _lastNameInput(context),
+              _bornDateInput(context),
+              _genderInput(context),
+              _cuiInput(context),
+              _phoneInput(context),
+              _countryInput(context),
+              _departmentInput(context),
+              _cityInput(context),
+              _addressInput(context),
+              MySubmitButton(onPressed: () { _onCreate(context); })
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildNameInput(BuildContext context) {
+  void _onCreate(context) {
+    if (_formKey.currentState.validate()) {
+      final formatter = DateFormat('yyyy-MM-dd');
+
+      final patient = Patient(
+        id: _provider.object.id,
+        firstName: _nameCtrl.text,
+        lastName: _lastNameCtrl.text,
+        birthDate: formatter.format(_bornDate),
+        gender: _genderValue == 1 ? true : false,
+        governmentId: _cuiCtrl.text,
+        phoneNumber: _phoneCtrl.text,
+        country: _countryCtrl.text,
+        state: _departmentValue,
+        city: _cityCtrl.text,
+        address: _addressCtrl.text,
+        alive: _provider.object.alive,
+        active: _provider.object.active,
+        birthControls: _provider.object.birthControls,
+        consultations: _provider.object.consultations,
+        familyMembers: _provider.object.familyMembers,
+        habits: _provider.object.habits,
+        historicalConditions: _provider.object.historicalConditions,
+        historicalOperations: _provider.object.historicalOperations,
+        historicalPrescriptions: _provider.object.historicalPrescriptions,
+        reproductiveHistory: _provider.object.reproductiveHistory,
+        profilePicture: _provider.object.profilePicture,
+      );
+
+      _provider.update(patient, (response) {
+        print(patient.toJson());
+        print(response.toJson());
+//        Navigator.pop(context);
+      });
+    }
+  }
+
+  Widget _nameInput(context) {
     return MyTextFormField(
       label: 'Nombre',
       ctrl: _nameCtrl,
@@ -113,17 +163,14 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     );
   }
 
-  Widget _buildLastNameInput(BuildContext context) {
+  Widget _lastNameInput(context) {
     return MyTextFormField(
       label: 'Apellido',
       ctrl: _lastNameCtrl,
       node: _lastNameNode,
       isEnabled: () => true,
       icon: Icon(Icons.person_outline),
-      submitted: (value) {
-        _lastNameNode.unfocus();
-        FocusScope.of(context).requestFocus(_bornDateNode);
-      },
+      submitted: (value) { _lastNameNode.unfocus(); },
       validator: (value) {
         if (value.trim().isEmpty) {
           return 'El apellido es requerido';
@@ -134,27 +181,18 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     );
   }
 
-  Widget _buildBornDateInput(BuildContext context) {
-    return MyTextFormField(
-      label: 'Fecha de Nacimiento',
-      ctrl: _bornDateCtrl,
-      node: _bornDateNode,
-      isEnabled: () => true,
-      icon: Icon(Icons.date_range),
-      submitted: (value) {
-        _bornDateNode.unfocus();
-      },
-      validator: (value) {
-        if (value.trim().isEmpty) {
-          return 'La fecha de nacimieno es requerida';
-        }
-
-        return null;
+  Widget _bornDateInput(context) {
+    return MyDateTimePicker(
+      dateTime: _bornDate,
+      onChange: (date) {
+        setState(() {
+          _bornDate = date;
+        });
       },
     );
   }
 
-  Widget _buildGenderInput(BuildContext context) {
+  Widget _genderInput(context) {
     return MyDropdownFormField(
       label: 'Genero',
       icon: Icon(Icons.child_care),
@@ -184,7 +222,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     );
   }
 
-  Widget _buildCUIInput(BuildContext context) {
+  Widget _cuiInput(context) {
     return MyTextFormField(
       label: 'CUI',
       ctrl: _cuiCtrl,
@@ -206,7 +244,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     );
   }
 
-  Widget _buildPhoneInput(BuildContext context) {
+  Widget _phoneInput(context) {
     return MyTextFormField(
       label: 'Teléfono',
       ctrl: _phoneCtrl,
@@ -227,7 +265,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     );
   }
 
-  Widget _buildCountryInput(BuildContext context) {
+  Widget _countryInput(context) {
     return MyTextFormField(
       label: 'País',
       ctrl: _countryCtrl,
@@ -248,41 +286,39 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     );
   }
 
-  Widget _buildDepartmentInput(BuildContext context) {
+  Widget _departmentInput(context) {
     return MyDropdownFormField(
       label: 'Departamento',
       icon: Icon(Icons.business),
       value: _departmentValue,
       items: [
-        DropdownMenuItem(
-            value: -1,
-            child: Text('Selecciona un género', style: TextStyle(
-              color: Colors.grey,
-            ))
-        ),
-        DropdownMenuItem(value: 1, child: Text('Alta Verapaz')),
-        DropdownMenuItem(value: 2, child: Text('Baja Verapaz')),
-        DropdownMenuItem(value: 3, child: Text('Chimaltenango')),
-        DropdownMenuItem(value: 4, child: Text('Chiquimula')),
-        DropdownMenuItem(value: 5, child: Text('El Progreso')),
-        DropdownMenuItem(value: 6, child: Text('El Quiché')),
-        DropdownMenuItem(value: 7, child: Text('Escuintla')),
-        DropdownMenuItem(value: 8, child: Text('Guatemala')),
-        DropdownMenuItem(value: 9, child: Text('Huehuetenango')),
-        DropdownMenuItem(value: 10, child: Text('Izabal')),
-        DropdownMenuItem(value: 11, child: Text('Jalapa')),
-        DropdownMenuItem(value: 12, child: Text('Jutiapa')),
-        DropdownMenuItem(value: 13, child: Text('Péten')),
-        DropdownMenuItem(value: 14, child: Text('Quetzaltenango')),
-        DropdownMenuItem(value: 15, child: Text('Retalhuleu')),
-        DropdownMenuItem(value: 16, child: Text('Sacatepequez')),
-        DropdownMenuItem(value: 17, child: Text('San Marcos')),
-        DropdownMenuItem(value: 18, child: Text('Santa Rosa')),
-        DropdownMenuItem(value: 19, child: Text('Sololá')),
-        DropdownMenuItem(value: 20, child: Text('Suchitepequez')),
-        DropdownMenuItem(value: 21, child: Text('Totonicapán')),
-        DropdownMenuItem(value: 22, child: Text('Zacapa')),
-      ],
+        'Selecciona un género',
+        'Alta Verapaz',
+        'Baja Verapaz',
+        'Chimaltenango',
+        'Chiquimula',
+        'El Progreso',
+        'El Quiché',
+        'Escuintla',
+        'Guatemala',
+        'Huehuetenango',
+        'Izabal',
+        'Jalapa',
+        'Jutiapa',
+        'Péten',
+        'Quetzaltenango',
+        'Retalhuleu',
+        'Sacatepequez',
+        'San Marcos',
+        'Santa Rosa',
+        'Sololá',
+        'Suchitepequez',
+        'Totonicapán',
+        'Zacapa',
+      ].map((t) => DropdownMenuItem(
+        value: t,
+        child: Text(t),
+      )).toList(),
 
       validator: (value) {
         if (value == -1) {
@@ -298,7 +334,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     );
   }
 
-  Widget _buildCityInput(BuildContext context) {
+  Widget _cityInput(context) {
     return MyTextFormField(
       label: 'Ciudad',
       ctrl: _cityCtrl,
@@ -320,7 +356,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     );
   }
 
-  Widget _buildAddressInput(BuildContext context) {
+  Widget _addressInput(context) {
     return MyTextFormField(
       label: 'Dirección',
       ctrl: _addressCtrl,
@@ -338,13 +374,6 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
 
         return null;
       },
-    );
-  }
-
-  Widget _buildSubmitButton(BuildContext context) {
-    return MySubmitButton(
-      label: 'Guardar',
-      onPressed: () {},
     );
   }
 }

@@ -20,7 +20,7 @@ class Patient {
   String address;
   bool alive;
   bool active;
-  Entity entity;
+//  Entity entity;
   List<Consultation> consultations;
   @JsonKey(name: 'historical_conditions') List<MedicalCondition> historicalConditions;
   @JsonKey(name: 'historical_operations') List<Surgery> historicalOperations;
@@ -45,7 +45,7 @@ class Patient {
     this.address,
     this.alive,
     this.active,
-    this.entity,
+//    this.entity,
     this.consultations,
     this.historicalConditions,
     this.historicalOperations,

@@ -66,6 +66,16 @@ class PatientProvider with ChangeNotifier {
     });
   }
 
+  void update(Patient obj, [Function(Patient) callback]) {
+    PatientService.update(obj).then((response) {
+      _object = obj;
+      notifyListeners();
+
+      if (callback != null)
+        callback(response);
+    });
+  }
+
   void addConsultation(Consultation consultation) {
     object.consultations.add(consultation);
     notifyListeners();

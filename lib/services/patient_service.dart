@@ -29,4 +29,15 @@ class PatientService {
     final body = jsonDecode(response.body);
     return Patient.fromJson(body);
   }
+
+  static Future<Patient> update(Patient obj) async {
+    final response = await http.patch('$url${obj.id}/');
+
+    if (response.statusCode != 200) {
+      throw response.body;
+    }
+
+    final body = jsonDecode(response.body);
+    return Patient.fromJson(body);
+  }
 }

@@ -65,7 +65,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
         }
 
         return DefaultTabController(
-          length: 5,
+          length: 4,
           child: Column(
             children: <Widget>[
               _buildTopHeader(context),
@@ -89,7 +89,9 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(_provider.object.profilePicture),
+                image: NetworkImage(
+                  _provider.object.profilePicture ?? 'https://maxcdn.icons8.com/Share/icon/Users//user_male_circle_filled1600.png'
+                ),
               )
             ),
           ),
@@ -118,7 +120,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           Tab(child: Text('Historial Médico')),
           Tab(child: Text('Historial Familiar')),
           Tab(child: Text('Hábitos')),
-          Tab(child: Text('Dependientes')),
+//          Tab(child: Text('Dependientes')),
         ],
       ),
     );
@@ -132,7 +134,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           MedicalHistoryView(),
           PatientDetailFamilyHistoryView(),
           PatientDetailHabitsView(),
-          PatientDetailDependentsView(),
+          // TODO: implement dependent
+//          PatientDetailDependentsView(),
         ],
       ),
     );
