@@ -157,4 +157,20 @@ class PatientProvider with ChangeNotifier {
     _object.birthControls.removeWhere((e) => id == e.id);
     notifyListeners();
   }
+
+  void addFamilyMember(FamilyMemberCondition member) {
+    _object.familyMembers.add(member);
+    notifyListeners();
+  }
+
+  void updateFamilyMember(FamilyMemberCondition member) {
+    final i = _object.familyMembers.indexWhere((e) => member.id == e.id);
+    _object.familyMembers[i] = member;
+    notifyListeners();
+  }
+
+  void removeFamilyMember(int id) {
+    _object.familyMembers.removeWhere((e) => id == e.id);
+    notifyListeners();
+  }
 }

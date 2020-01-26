@@ -3,35 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:bitmec/components.dart';
-import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
+import 'package:bitmec/providers.dart';
 
-class BirthControlCreateUpdateScreen extends StatefulWidget {
-  static const routeName = '/medical_history/contraceptive/create_update';
+class FamilyHistoryCreateUpdateScreen extends StatefulWidget {
+  static const routeName = '/patient/detail/family_history/create_update';
 
   @override
-  _BirthControlCreateUpdateScreenState createState() =>
-      _BirthControlCreateUpdateScreenState();
+  _FamilyHistoryCreateUpdateScreenState createState() =>
+      _FamilyHistoryCreateUpdateScreenState();
 }
 
-class _BirthControlCreateUpdateScreenState
-    extends State<BirthControlCreateUpdateScreen> {
+class _FamilyHistoryCreateUpdateScreenState
+    extends State<FamilyHistoryCreateUpdateScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _formKey = GlobalKey<FormState>();
 
   Map _arguments;
-  BirthControlProvider _provider;
+  FamilyHistoryProvider _provider;
   PatientProvider _patientProvider;
 
-  final _methodCtrl = TextEditingController();
-  final _methodNode = FocusNode();
+  final _relationshipCtrl = TextEditingController();
+  final _relationshipNode = FocusNode();
 
-  var _startDate = DateTime.now();
-  var _endDate = DateTime.now();
+  final _conditionCtrl = TextEditingController();
+  final _conditionNode = FocusNode();
 
-  final _byCtrl = TextEditingController();
-  final _byNode = FocusNode();
+  var _date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +39,18 @@ class _BirthControlCreateUpdateScreenState
         _arguments = ModalRoute.of(context).settings.arguments;
 
         if (_arguments['method'] == 'update') {
-          BirthControl contraceptive = _arguments['contraceptive'];
-          _methodCtrl.text = contraceptive.method;
-          _startDate = DateTime.parse(contraceptive.methodStartDate);
-          _endDate = DateTime.parse(contraceptive.methodEndDate);
-          _byCtrl.text = contraceptive.prescribingDoctor;
+          FamilyMemberCondition member = _arguments['member'];
+          _relationshipCtrl.text = member.relative;
+          _conditionCtrl.text = member.condition;
+          _date = member.dateDiagnosed == null ? _date
+              : DateTime.parse(member.dateDiagnosed);
         }
       });
     }
 
     if (_provider == null) {
       setState(() {
-        _provider = BirthControlProvider.of(context);
+        _provider = FamilyHistoryProvider.of(context);
       });
     }
 
@@ -95,9 +94,9 @@ class _BirthControlCreateUpdateScreenState
             splashColor: Colors.black12,
             child: Text('Aceptar'),
             onPressed: () {
-              BirthControl contraceptive = _arguments['contraceptive'];
-              _provider.remove(contraceptive.id, (id) {
-                _patientProvider.removeBirthControl(id);
+              FamilyMemberCondition member = _arguments['member'];
+              _provider.remove(member.id, (id) {
+                _patientProvider.removeFamilyMember(id);
                 Navigator.pop(context, true);
               });
             },
@@ -111,7 +110,7 @@ class _BirthControlCreateUpdateScreenState
             },
           )
         ],
-      )
+      ),
     );
 
     if (response == true) {
@@ -126,10 +125,9 @@ class _BirthControlCreateUpdateScreenState
           key: _formKey,
           child: Column(
             children: <Widget>[
-              _methodInput(context),
-              _startDateInput(context),
-              _endDateInput(context),
-              _buildByInput(context),
+              _relationshipInput(context),
+              _conditionInput(context),
+              _dateInput(context),
 
               MySubmitButton(onPressed: () { _onCreate(context); }),
             ],
@@ -143,26 +141,25 @@ class _BirthControlCreateUpdateScreenState
     if (_formKey.currentState.validate()) {
       final formatter = DateFormat('yyyy-MM-dd');
 
-      final contraceptive = BirthControl(
-        method: _methodCtrl.text,
-        methodStartDate: formatter.format(_startDate),
-        methodEndDate: formatter.format(_endDate),
-        prescribingDoctor: _byCtrl.text,
+      final member = FamilyMemberCondition(
+        relative: _relationshipCtrl.text,
+        condition: _conditionCtrl.text,
+        dateDiagnosed: formatter.format(_date),
         patient: _patientProvider.object.id,
       );
 
       switch (_arguments['method']) {
         case 'create':
-          _provider.create(contraceptive, (response) {
-            _patientProvider.addBirthControl(response);
+          _provider.create(member, (response) {
+            _patientProvider.addFamilyMember(response);
             Navigator.pop(context);
           });
           break;
 
         case 'update':
-          contraceptive.id = (_arguments['contraceptive'] as BirthControl).id;
-          _provider.update(contraceptive, (response) {
-            _patientProvider.updateBirthControl(response);
+          member.id = (_arguments['member'] as FamilyMemberCondition).id;
+          _provider.update(member, (response) {
+            _patientProvider.updateFamilyMember(response);
             Navigator.pop(context);
           });
           break;
@@ -173,14 +170,35 @@ class _BirthControlCreateUpdateScreenState
     }
   }
 
-  Widget _methodInput(context) {
+  Widget _relationshipInput(BuildContext context) {
     return MyTextFormField(
-      label: 'Anticonceptivo',
-      ctrl: _methodCtrl,
-      node: _methodNode,
+      label: 'Relación',
+      icon: Icon(Icons.face),
+      ctrl: _relationshipCtrl,
+      node: _relationshipNode,
       isEnabled: () => true,
-      icon: Icon(Icons.short_text),
-      submitted: (_) { _methodNode.unfocus(); },
+      submitted: (_) {
+        _relationshipNode.unfocus();
+        FocusScope.of(context).requestFocus(_conditionNode);
+      },
+      validator: (value) {
+        if (value.trim().isEmpty) {
+          return 'La relación es requerida';
+        }
+
+        return null;
+      },
+    );
+  }
+
+  Widget _conditionInput(BuildContext context) {
+    return MyTextFormField(
+      label: 'Condición',
+      icon: Icon(Icons.bug_report),
+      ctrl: _conditionCtrl,
+      node: _conditionNode,
+      isEnabled: () => true,
+      submitted: (_) { _conditionNode.unfocus(); },
       validator: (value) {
         if (value.trim().isEmpty) {
           return 'Este campo es requerido';
@@ -191,44 +209,13 @@ class _BirthControlCreateUpdateScreenState
     );
   }
 
-  Widget _startDateInput(BuildContext context) {
+  Widget _dateInput(BuildContext context) {
     return MyDateTimePicker(
-      dateTime: _startDate,
-      label: 'Fecha de Inicio',
+      dateTime: _date,
       onChange: (date) {
         setState(() {
-          _startDate = date;
+          _date = date;
         });
-      },
-    );
-  }
-
-  Widget _endDateInput(context) {
-    return MyDateTimePicker(
-      dateTime: _endDate,
-      label: 'Fecha de Fin',
-      onChange: (date) {
-        setState(() {
-          _endDate = date;
-        });
-      },
-    );
-  }
-
-  Widget _buildByInput(BuildContext context) {
-    return MyTextFormField(
-      label: 'Diagnosticado por',
-      ctrl: _byCtrl,
-      node: _byNode,
-      icon: Icon(Icons.person),
-      isEnabled: () => true,
-      submitted: (_) { _byNode.unfocus(); },
-      validator: (value) {
-        if (value.trim().isEmpty) {
-          return 'Este campo es requerido';
-        }
-
-        return null;
       },
     );
   }

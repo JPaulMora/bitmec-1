@@ -15,7 +15,7 @@ export 'screens/medical_history/birth_control_create_update_screen.dart';
 
 export 'screens/patient/patient_detail_screen.dart';
 export 'screens/patient/patient_detail_medical_trauma_create_screen.dart';
-export 'screens/patient/patient_detail_family_history_create_screen.dart';
+export 'screens/family_history/family_history_create_update_screen.dart';
 export 'screens/patient/patient_detail_habit_create_screen.dart';
 export 'screens/patient/patient_detail_dependent_create_screen.dart';
 

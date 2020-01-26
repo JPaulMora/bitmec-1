@@ -13,6 +13,7 @@ FamilyMemberCondition _$FamilyMemberConditionFromJson(
     relative: json['relative'] as String,
     condition: json['condition'] as String,
     dateDiagnosed: json['date_diagnosed'] as String,
+    patient: json['patient'] as int,
   );
 }
 
@@ -23,4 +24,5 @@ Map<String, dynamic> _$FamilyMemberConditionToJson(
       'relative': instance.relative,
       'condition': instance.condition,
       'date_diagnosed': instance.dateDiagnosed,
+      'patient': instance.patient,
     };

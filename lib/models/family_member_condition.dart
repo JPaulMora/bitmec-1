@@ -8,12 +8,14 @@ class FamilyMemberCondition {
   String relative;
   String condition;
   @JsonKey(name: 'date_diagnosed') String dateDiagnosed;
+  int patient;
 
   FamilyMemberCondition({
     this.id,
     this.relative,
     this.condition,
     this.dateDiagnosed,
+    this.patient,
   });
 
   factory FamilyMemberCondition.fromJson(json) =>

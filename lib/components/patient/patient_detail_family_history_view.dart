@@ -29,7 +29,8 @@ class _PatientDetailFamilyHistoryViewState
         onPressedAdd: () {
           Navigator.pushNamed(
             context,
-            PatientDetailFamilyHistoryCreateScreen.routeName
+            FamilyHistoryCreateUpdateScreen.routeName,
+            arguments: {'method': 'create'}
           );
         },
 
@@ -56,37 +57,48 @@ class _FamilyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10.0,
-          vertical: 10.0,
-        ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          FamilyHistoryCreateUpdateScreen.routeName,
+          arguments: {
+            'method': 'update',
+            'member': member,
+          }
+        );
+      },
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(member.relative, style: TextStyle(
-                  color: Colors.blueAccent,
-                  fontSize: 24.0
-                )),
-                Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
-                Text('Condición: ${member.condition}'),
-              ],
-            ),
+      child: Card(
+        elevation: 3.0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10.0,
+            vertical: 10.0,
+          ),
 
-            Row(
-              textDirection: TextDirection.rtl,
-              children: <Widget>[
-                FormattedDate(member.dateDiagnosed),
-              ],
-            ),
-          ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(member.relative, style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 24.0,
+                  )),
+
+                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+                  Text('Condición: ${member.condition}'),
+                ],
+              ),
+
+              FormattedDate(member.dateDiagnosed,
+                textAlign: TextAlign.end,
+              ),
+            ],
+          ),
         ),
       ),
     );
