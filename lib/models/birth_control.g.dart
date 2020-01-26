@@ -9,10 +9,12 @@ part of 'birth_control.dart';
 BirthControl _$BirthControlFromJson(Map<String, dynamic> json) {
   return BirthControl(
     id: json['id'] as int,
+    method: json['method'] as String,
     methodStartDate: json['method_start_date'] as String,
     methodEndDate: json['method_end_date'] as String,
     prescribingDoctor: json['prescribing_doctor'] as String,
-  )..method = json['method'] as String;
+    patient: json['patient'] as int,
+  );
 }
 
 Map<String, dynamic> _$BirthControlToJson(BirthControl instance) =>
@@ -22,4 +24,5 @@ Map<String, dynamic> _$BirthControlToJson(BirthControl instance) =>
       'method_start_date': instance.methodStartDate,
       'method_end_date': instance.methodEndDate,
       'prescribing_doctor': instance.prescribingDoctor,
+      'patient': instance.patient,
     };

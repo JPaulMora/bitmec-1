@@ -1,5 +1,4 @@
 import 'package:bitmec/screens.dart';
-import 'package:path/path.dart';
 
 class MyRoutes {
   static String initialRoute() {
@@ -20,6 +19,8 @@ class MyRoutes {
         MedicalPrescriptionCreateUpdateScreen(),
     ReproductiveHistoryCreateUpdateScreen.routeName: (context) =>
         ReproductiveHistoryCreateUpdateScreen(),
+    BirthControlCreateUpdateScreen.routeName: (context) =>
+        BirthControlCreateUpdateScreen(),
 
     // Patient Routes
     PatientListScreen.routeName: (context) => PatientListScreen(),

@@ -1,4 +1,3 @@
-import 'package:bitmec/providers/image_db_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
@@ -79,46 +78,38 @@ class _MedicalConditionCreateUpdateScreenState
       title: _arguments['method'] != 'update' ? 'Crear' : 'Actualizar',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
-//      actions: _arguments['method'] != 'update' ? null
-//        : <Widget>[
-//          IconButton(
-//            icon: Icon(Icons.delete),
-//            tooltip: 'Eliminar',
-//            onPressed: () { _confirmDelete(context); },
-//          )
-//      ],
     );
   }
 
   // TODO: implement delete condition and document attached
   void _confirmDelete(context) async {
     bool response = await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Confirmar'),
-          content: Text('¿Estas seguro de querer eliminar este dato?'),
-          actions: <Widget>[
-            FlatButton(
-              splashColor: Colors.black12,
-              child: Text('Aceptar'),
-              onPressed: () {
-                MedicalCondition medicalCondition = _arguments['medicalCondition'];
-                _provider.remove(medicalCondition.id, (id) {
-                  _patientProvider.removeMedicalCondition(id);
-                  Navigator.pop(context, true);
-                });
-              },
-            ),
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Confirmar'),
+        content: Text('¿Estas seguro de querer eliminar este dato?'),
+        actions: <Widget>[
+          FlatButton(
+            splashColor: Colors.black12,
+            child: Text('Aceptar'),
+            onPressed: () {
+              MedicalCondition medicalCondition = _arguments['medicalCondition'];
+              _provider.remove(medicalCondition.id, (id) {
+                _patientProvider.removeMedicalCondition(id);
+                Navigator.pop(context, true);
+              });
+            },
+          ),
 
-            RaisedButton(
-              color: Colors.redAccent,
-              child: Text('Cancelar'),
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-            )
-          ],
-        )
+          RaisedButton(
+            color: Colors.redAccent,
+            child: Text('Cancelar'),
+            onPressed: () {
+              Navigator.pop(context, false);
+            },
+          )
+        ],
+      )
     );
 
     if (response == true) {

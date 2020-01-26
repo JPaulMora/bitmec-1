@@ -6,8 +6,7 @@ import 'package:bitmec/models.dart';
 import 'package:bitmec/services.dart';
 
 class MedicalConditionProvider with ChangeNotifier {
-  static MedicalConditionProvider of(context) =>
-      Provider.of(context);
+  static MedicalConditionProvider of(context) => Provider.of(context);
 
   void create(MedicalCondition medicalCondition,
       [Function(MedicalCondition) callback]) {

@@ -141,4 +141,20 @@ class PatientProvider with ChangeNotifier {
     _object.reproductiveHistory = [reproductiveHistory];
     notifyListeners();
   }
+
+  void addBirthControl(BirthControl contraceptive) {
+    _object.birthControls.add(contraceptive);
+    notifyListeners();
+  }
+
+  void updateBirthControl(BirthControl contraceptive) {
+    final i = _object.birthControls.indexWhere((e) => contraceptive.id == e.id);
+    _object.birthControls[i] = contraceptive;
+    notifyListeners();
+  }
+
+  void removeBirthControl(int id) {
+    _object.birthControls.removeWhere((e) => id == e.id);
+    notifyListeners();
+  }
 }
