@@ -8,3 +8,4 @@ export 'providers/medical_condition_provider.dart';
 export 'providers/image_db_provider.dart';
 export 'providers/medical_surgery_provider.dart';
 export 'providers/medical_prescription_provider.dart';
+export 'providers/reproductive_history_provider.dart';

@@ -26,3 +26,4 @@ export 'components/medical_history/medical_conditions_section.dart';
 export 'components/medical_history/medical_history_view.dart';
 export 'components/medical_history/medical_surgeries_section.dart';
 export 'components/medical_history/medical_prescription_section.dart';
+export 'components/medical_history/reproductive_history_section.dart';

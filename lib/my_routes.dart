@@ -18,6 +18,8 @@ class MyRoutes {
         MedicalSurgeryCreateUpdateScreen(),
     MedicalPrescriptionCreateUpdateScreen.routeName: (context) =>
         MedicalPrescriptionCreateUpdateScreen(),
+    ReproductiveHistoryCreateUpdateScreen.routeName: (context) =>
+        ReproductiveHistoryCreateUpdateScreen(),
 
     // Patient Routes
     PatientListScreen.routeName: (context) => PatientListScreen(),

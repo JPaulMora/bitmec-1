@@ -11,6 +11,7 @@ class ReproductiveHistory {
   @JsonKey(name: 'live_births') int liveBirths;
   int stillborns;
   int abortions;
+  int patient;
 
   ReproductiveHistory({
     this.id,
@@ -20,6 +21,7 @@ class ReproductiveHistory {
     this.liveBirths,
     this.stillborns,
     this.abortions,
+    this.patient,
   });
 
   factory ReproductiveHistory.fromJson(Map<String, dynamic> json) =>

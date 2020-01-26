@@ -15,6 +15,7 @@ ReproductiveHistory _$ReproductiveHistoryFromJson(Map<String, dynamic> json) {
     liveBirths: json['live_births'] as int,
     stillborns: json['stillborns'] as int,
     abortions: json['abortions'] as int,
+    patient: json['patient'] as int,
   );
 }
 
@@ -28,4 +29,5 @@ Map<String, dynamic> _$ReproductiveHistoryToJson(
       'live_births': instance.liveBirths,
       'stillborns': instance.stillborns,
       'abortions': instance.abortions,
+      'patient': instance.patient,
     };

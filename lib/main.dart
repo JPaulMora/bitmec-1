@@ -25,6 +25,7 @@ void main() async {
       ChangeNotifierProvider(create: (context) => MedicalConditionProvider()),
       ChangeNotifierProvider(create: (context) => MedicalSurgeryProvider()),
       ChangeNotifierProvider(create: (context) => MedicalPrescriptionProvider()),
+      ChangeNotifierProvider(create: (context) => ReproductiveHistoryProvider()),
     ],
   ));
 }

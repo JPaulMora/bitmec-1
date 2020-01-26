@@ -10,6 +10,7 @@ export 'screens/patient/patient_create_screen.dart';
 export 'screens/medical_history/medical_condition_create_update_screen.dart';
 export 'screens/medical_history/medical_surgery_create_update_screen.dart';
 export 'screens/medical_history/medical_prescription_create_update_screen.dart';
+export 'screens/medical_history/reproductive_history_create_update.dart';
 
 export 'screens/patient/patient_detail_screen.dart';
 export 'screens/patient/patient_detail_medical_trauma_create_screen.dart';

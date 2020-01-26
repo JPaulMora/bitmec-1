@@ -136,4 +136,9 @@ class PatientProvider with ChangeNotifier {
     _object.historicalPrescriptions[i].images.add(image);
     notifyListeners();
   }
+
+  set reproductiveHistory(ReproductiveHistory reproductiveHistory) {
+    _object.reproductiveHistory = [reproductiveHistory];
+    notifyListeners();
+  }
 }
