@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
 import 'package:bitmec/providers.dart';
@@ -15,6 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   AppointmentProvider _provider;
+
+  var _filter = false;
+  var _filterDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return MyAppBar(
       scaffoldKey: _scaffoldKey,
       title: 'Citas',
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.search),
+          tooltip: 'Buscar',
+          onPressed: () {
+            setState(() {
+              _filter = !_filter;
+            });
+          },
+        )
+      ],
     );
   }
 
@@ -57,8 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    _buildTodayAppointments(context),
-                    _buildTomorrowAppointments(context),
+                    _buildFilterSection(context),
+                    _buildTodaySection(context),
+                    _buildTomorrowSection(context),
                   ],
                 ),
               )
@@ -73,6 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
     await Future.delayed(Duration(seconds: 1));
 
     setState(() {
+      _filter = false;
+      _filterDate = DateTime.now();
+
       _provider.dataLoaded = false;
       _provider.fetchAll((response) {
         setState(() {
@@ -84,7 +104,51 @@ class _HomeScreenState extends State<HomeScreen> {
     return;
   }
 
-  Widget _buildTodayAppointments(BuildContext context) {
+  Widget _buildFilterSection(context) {
+    if (_filter) {
+      bool test(Appointment appointment) {
+        if (appointment.scheduled == null) {
+          return false;
+        }
+
+        final date = DateTime.parse(appointment.scheduled);
+
+        return date.day == _filterDate.day &&
+            date.month == _filterDate.month &&
+            date.year == _filterDate.year;
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          MyDateTimePicker(
+            dateTime: _filterDate,
+            maxNow: false,
+            onChange: (date) {
+              setState(() {
+                _filterDate = date;
+              });
+            },
+          ),
+
+          AppointmentListView(
+            title: 'Filtro',
+            color: Colors.blue,
+            list: _provider.data.where(test).toList(),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0),
+            child: Divider(height: 10.0, color: Colors.grey),
+          )
+        ],
+      );
+    }
+
+    return Container();
+  }
+
+  Widget _buildTodaySection(context) {
     bool test(Appointment appointment) {
       if (appointment.scheduled == null) {
         return false;
@@ -105,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildTomorrowAppointments(BuildContext context) {
+  Widget _buildTomorrowSection(context) {
     bool test(Appointment appointment) {
       if (appointment.scheduled == null) {
         return false;

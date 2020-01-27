@@ -10,6 +10,7 @@ class MyDateTimePicker extends StatefulWidget {
   final bool noPadding;
   final String label;
   final bool timePicker;
+  final bool maxNow;
 
   MyDateTimePicker({
     @required this.dateTime,
@@ -17,6 +18,7 @@ class MyDateTimePicker extends StatefulWidget {
     this.noPadding = false,
     this.label = 'Fecha',
     this.timePicker = false,
+    this.maxNow = true,
   });
 
   @override
@@ -69,7 +71,7 @@ class _MyDateTimePickerState extends State<MyDateTimePicker> {
         context,
         showTitleActions: true,
         currentTime: this.widget.dateTime,
-        maxTime: DateTime.now(),
+        maxTime: widget.maxNow ? DateTime.now() : null,
         locale: LocaleType.es,
         onChanged: (date) {
           widget.onChange(date);
@@ -84,7 +86,7 @@ class _MyDateTimePickerState extends State<MyDateTimePicker> {
         context,
         showTitleActions: true,
         currentTime: this.widget.dateTime,
-        maxTime: DateTime.now(),
+        maxTime: widget.maxNow ? DateTime.now() : null,
         locale: LocaleType.es,
         onChanged: (date) {
           widget.onChange(date);
