@@ -1,7 +1,7 @@
+import 'package:bitmec/screens.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components.dart';
-import 'package:bitmec/screens.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
@@ -11,6 +11,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
+
   var _nameCtrl = TextEditingController();
   var _nameNode = FocusNode();
 
@@ -27,24 +30,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: _buildBody(context),
+    return Scaffold(
+      key: _scaffoldKey,
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            _buildTitle(context),
+            _buildForm(context),
+            _buildSubmitButton(context),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        _buildTitle(context),
-        _buildForm(context),
-        _buildSubmitButton(context),
-      ],
-    );
-  }
-
-  Widget _buildTitle(BuildContext context) {
+  Widget _buildTitle(context) {
     return Container(
       child: Center(
         child: Text('Bitmec', style: TextStyle(
@@ -55,8 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildForm(BuildContext context) {
+  Widget _buildForm(context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: <Widget>[
           _buildEmailField(context),
@@ -66,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildEmailField(BuildContext context) {
+  Widget _buildEmailField(context) {
     return MyTextFormField(
       label: 'Correo',
       ctrl: _nameCtrl,
@@ -92,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildPasswordField(BuildContext context) {
+  Widget _buildPasswordField(context) {
     return MyTextFormField(
       label: 'Contraseña',
       ctrl: _passCtrl,
@@ -114,11 +115,17 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSubmitButton(BuildContext context) {
+  Widget _buildSubmitButton(context) {
     return MySubmitButton(
       label: 'Ingresar',
       onPressed: () {
-        Navigator.of(context).pushNamed(HomeScreen.routeName);
+        if (_formKey.currentState.validate()) {
+          Navigator.popAndPushNamed(context, HomeScreen.routeName);
+        } else {
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
+            content: Text('¡Todos los campos debe de ser validos!'),
+          ));
+        }
       },
     );
   }
