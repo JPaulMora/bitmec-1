@@ -82,14 +82,6 @@ class _MedicalSurgeryCreateUpdateScreenState
       title: _arguments['method'] != 'update' ? 'Crear' : 'Actualizar',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
-//      actions: _arguments['method'] != 'update' ? null
-//        : <Widget>[
-//          IconButton(
-//            icon: Icon(Icons.delete),
-//            tooltip: 'Eliminar',
-//            onPressed: () { _confirmDelete(context); },
-//          )
-//      ],
     );
   }
 
@@ -250,7 +242,7 @@ class _MedicalSurgeryCreateUpdateScreenState
       items: [DropdownMenuItem(
         value: -1,
         child: Text(
-          'Selecciona un género',
+          'Selecciona un padecimiento',
           style: TextStyle(color: Colors.grey),
         )
       )]..addAll(items),

@@ -110,18 +110,21 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   Widget _buildTabBar(BuildContext context) {
     return Material(
       color: Colors.lightBlueAccent,
-      child: TabBar(
-        isScrollable: true,
-        labelColor: Colors.white,
-        indicatorColor: Colors.indigoAccent,
-        indicatorWeight: 5.0,
-        tabs: <Widget>[
-          Tab(child: Text('General')),
-          Tab(child: Text('Historial Médico')),
-          Tab(child: Text('Historial Familiar')),
-          Tab(child: Text('Hábitos')),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[TabBar(
+          isScrollable: true,
+          labelColor: Colors.white,
+          indicatorColor: Colors.indigoAccent,
+          indicatorWeight: 5.0,
+          tabs: <Widget>[
+            Tab(child: Text('General')),
+            Tab(child: Text('Historial Médico')),
+            Tab(child: Text('Historial Familiar')),
+            Tab(child: Text('Hábitos')),
 //          Tab(child: Text('Dependientes')),
-        ],
+          ],
+        )],
       ),
     );
   }

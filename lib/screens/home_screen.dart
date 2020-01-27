@@ -41,23 +41,47 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildBody(BuildContext context) {
-    if (_provider.dataLoaded == false) {
-      return SafeArea(child: Center(
-        child: CircularProgressIndicator(),
-      ));
-    }
-
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            _buildTodayAppointments(context),
-            _buildTomorrowAppointments(context),
-          ],
-        ),
+      child: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: Builder(builder: (context) {
+          if (_provider.dataLoaded == false) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return ListView(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    _buildTodayAppointments(context),
+                    _buildTomorrowAppointments(context),
+                  ],
+                ),
+              )
+            ],
+          );
+        }),
       ),
     );
+  }
+
+  Future _onRefresh() async {
+    await Future.delayed(Duration(seconds: 1));
+
+    setState(() {
+      _provider.dataLoaded = false;
+      _provider.fetchAll((response) {
+        setState(() {
+          _provider.dataLoaded = true;
+        });
+      });
+    });
+
+    return;
   }
 
   Widget _buildTodayAppointments(BuildContext context) {

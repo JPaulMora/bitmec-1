@@ -30,4 +30,35 @@ class AppointmentProvider with ChangeNotifier {
       }
     });
   }
+
+  void create(Appointment obj, [Function(Appointment) callback]) {
+    AppointmentService.create(obj).then((response) {
+      _data.add(obj..id = response.id);
+      notifyListeners();
+
+      if (callback != null)
+        callback(response);
+    });
+  }
+
+  void update(Appointment obj, [Function(Appointment) callback]) {
+    AppointmentService.update(obj).then((response) {
+      final i = _data.indexWhere((e) => obj.id == e.id);
+      _data[i] = obj;
+      notifyListeners();
+
+      if (callback != null)
+        callback(response);
+    });
+  }
+
+  void remove(int id, [Function(int) callback]) {
+    AppointmentService.remove(id).then((_) {
+      _data.removeWhere((e) => id == e.id);
+      notifyListeners();
+
+      if (callback != null)
+        callback(id);
+    });
+  }
 }

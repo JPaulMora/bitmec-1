@@ -5,15 +5,15 @@ import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 
-class AppointmentDetailScreen extends StatefulWidget {
+class ConsultationDetailScreen extends StatefulWidget {
   static const routeName = '/appointment/detail';
 
   @override
-  _AppointmentDetailScreenState createState() =>
-      _AppointmentDetailScreenState();
+  _ConsultationDetailScreenState createState() =>
+      _ConsultationDetailScreenState();
 }
 
-class _AppointmentDetailScreenState extends State<AppointmentDetailScreen> {
+class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   ConsultationProvider _provider;

@@ -20,11 +20,6 @@ class MyAppBar extends StatelessWidget implements PreferredSize {
       title: Text(title),
       centerTitle: true,
       actions: actions,
-      leading: backLeading ? null : IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () { scaffoldKey.currentState.openDrawer(); },
-        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-      )
     );
   }
 

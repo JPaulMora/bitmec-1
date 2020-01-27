@@ -9,12 +9,14 @@ class MyDateTimePicker extends StatefulWidget {
   final void Function(DateTime) onChange;
   final bool noPadding;
   final String label;
+  final bool timePicker;
 
   MyDateTimePicker({
     @required this.dateTime,
     @required this.onChange,
     this.noPadding = false,
     this.label = 'Fecha',
+    this.timePicker = false,
   });
 
   @override
@@ -62,20 +64,37 @@ class _MyDateTimePickerState extends State<MyDateTimePicker> {
   }
 
   void _showDatetimePicker(context) {
-    DatePicker.showDatePicker(
-      context,
-      showTitleActions: true,
-      currentTime: this.widget.dateTime,
-      maxTime: DateTime.now(),
-      locale: LocaleType.es,
-      onChanged: (date) {
-        widget.onChange(date);
+    if (widget.timePicker) {
+      DatePicker.showDateTimePicker(
+        context,
+        showTitleActions: true,
+        currentTime: this.widget.dateTime,
+        maxTime: DateTime.now(),
+        locale: LocaleType.es,
+        onChanged: (date) {
+          widget.onChange(date);
 
-        setState(() {
-          _ctrl.text = _formattedDate(date);
-        });
-      },
-    );
+          setState(() {
+            _ctrl.text = _formattedDate(date);
+          });
+        },
+      );
+    } else {
+      DatePicker.showDatePicker(
+        context,
+        showTitleActions: true,
+        currentTime: this.widget.dateTime,
+        maxTime: DateTime.now(),
+        locale: LocaleType.es,
+        onChanged: (date) {
+          widget.onChange(date);
+
+          setState(() {
+            _ctrl.text = _formattedDate(date);
+          });
+        },
+      );
+    }
   }
 
   String _formattedDate(DateTime date) {

@@ -55,7 +55,7 @@ class _PatientListScreenState extends State<PatientListScreen> {
   Widget _buildBody(BuildContext context) {
     return SafeArea(
       child: RefreshIndicator(
-        onRefresh: onRefresh,
+        onRefresh: _onRefresh,
         child: Builder(builder: (context) {
           if (_provider.dataLoaded == false) {
             return Center(child: CircularProgressIndicator());
@@ -85,13 +85,14 @@ class _PatientListScreenState extends State<PatientListScreen> {
     );
   }
 
-  // FixMe: fix on refresh, Not refresh!
-  Future<void> onRefresh() async {
+  Future _onRefresh() async {
     await Future.delayed(Duration(seconds: 1));
 
     setState(() {
       _provider.dataLoaded = false;
-      _provider.fetchAll();
+      _provider.fetchAll((response) {
+        _provider.dataLoaded = true;
+      });
     });
 
     return;

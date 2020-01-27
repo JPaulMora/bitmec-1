@@ -38,7 +38,11 @@ class MyRoutes {
         PatientDetailDependentCreateScreen(),
 
     // Appointment Routes
-    AppointmentDetailScreen.routeName: (context) => AppointmentDetailScreen(),
+    ConsultationDetailScreen.routeName: (context) => ConsultationDetailScreen(),
+    AppointmentListByPatientScreen.routeName: (context) =>
+        AppointmentListByPatientScreen(),
+    AppointmentCreateUpdateScreen.routeName: (context) =>
+        AppointmentCreateUpdateScreen(),
 
     // Vital Sign Routes
     VitalSignCreateScreen.routeName: (context) => VitalSignCreateScreen(),

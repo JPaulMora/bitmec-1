@@ -22,7 +22,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
       onTap: () {
         Navigator.pushNamed(
           context,
-          AppointmentDetailScreen.routeName,
+          ConsultationDetailScreen.routeName,
           arguments: {
             'method': 'update',
             'id': widget.appointment.consultation.id,
@@ -46,7 +46,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(widget.appointment.patient.profilePicture),
+                      image: NetworkImage(widget.appointment.patient.profilePicture ?? 'https://maxcdn.icons8.com/Share/icon/Users//user_male_circle_filled1600.png'),
                     ),
                   ),
                 ),

@@ -51,7 +51,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
     );
   }
   
-  Widget _buildQuickActions(BuildContext context) {
+  Widget _buildQuickActions(context) {
     return QuickActionsSection(
       children: <QuickActionIcon>[
         QuickActionIcon(
@@ -66,6 +66,10 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
           icon: Icon(Icons.calendar_today),
           color: Colors.blue,
           label: 'Citas',
+          onTap: () { Navigator.pushNamed(
+            context,
+            AppointmentListByPatientScreen.routeName
+          ); },
         ),
 
         QuickActionIcon(
@@ -77,7 +81,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
     );
   }
   
-  void _createConsultation(BuildContext context) {
+  void _createConsultation(context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -125,7 +129,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
     );
   }
 
-  Widget _buildGeneralInformation(BuildContext context) {
+  Widget _buildGeneralInformation(context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       child: Column(
@@ -233,7 +237,7 @@ class _ConsultationCard extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          AppointmentDetailScreen.routeName,
+          ConsultationDetailScreen.routeName,
           arguments: {'id': consultation.id}
         );
       },

@@ -19,7 +19,10 @@ export 'screens/habit/habit_create_update_screen.dart';
 export 'screens/patient/patient_detail_medical_trauma_create_screen.dart';
 export 'screens/patient/patient_detail_dependent_create_screen.dart';
 
-export 'screens/appointment/appointment_detail_screen.dart';
+export 'screens/consultation/consultation_detail_screen.dart';
+
+export 'screens/appointment/appointment_list_by_patient_screen.dart';
+export 'screens/appointment/appointment_create_update.dart';
 
 export 'screens/vital_sign/vital_sign_create_screen.dart';
 
