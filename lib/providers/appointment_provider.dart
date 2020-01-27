@@ -17,6 +17,11 @@ class AppointmentProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void removeData() {
+    _data = [];
+    _dataLoaded = false;
+  }
+
   static AppointmentProvider of(BuildContext context) => Provider.of(context);
 
   void fetchAll([Function(List<Appointment>) callback]) {

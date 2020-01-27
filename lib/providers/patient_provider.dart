@@ -32,6 +32,13 @@ class PatientProvider with ChangeNotifier {
     _objectLoaded = false;
   }
 
+  void removeData() {
+    _data = [];
+    _dataLoaded = false;
+    _object = null;
+    _objectLoaded = false;
+  }
+
   static PatientProvider of(BuildContext context) => Provider.of(context);
 
   void fetchAll([Function(List<Patient>) callback]) {
