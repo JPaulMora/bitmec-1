@@ -1,3 +1,4 @@
+import 'package:bitmec/models.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/screens.dart';
@@ -15,6 +16,10 @@ class _PatientListScreenState extends State<PatientListScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   PatientProvider _provider;
+
+  var _searching = false;
+  final _searchingCtrl = TextEditingController();
+  final _searchingNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +42,36 @@ class _PatientListScreenState extends State<PatientListScreen> {
   }
 
   Widget _buildAppBar(BuildContext context) {
-    return MyAppBar(
-      title: 'Pacientes',
-      scaffoldKey: _scaffoldKey,
+    return AppBar(
+      title: !_searching ? Text('Pacientes') : _searchInput(),
+      centerTitle: !_searching,
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.add),
-          tooltip: 'Agregar Paciente',
+          icon: Icon(Icons.search),
+          tooltip: 'Buscar',
           onPressed: () {
-            Navigator.pushNamed(context, PatientCreateScreen.routeName);
+            setState(() {
+              _searching = !_searching;
+              _searchingCtrl.text = '';
+             _searchingNode.unfocus();
+            });
           },
         )
       ],
+    );
+  }
+
+  Widget _searchInput() {
+    return TextField(
+      autofocus: true,
+      controller: _searchingCtrl,
+      focusNode: _searchingNode,
+      onChanged: (_) { setState(() { }); },
+      decoration: InputDecoration(
+        hintText: 'Buscar',
+        hintStyle: TextStyle(color: Colors.grey),
+        border: InputBorder.none,
+      ),
     );
   }
 
@@ -79,7 +102,7 @@ class _PatientListScreenState extends State<PatientListScreen> {
             );
           }
 
-          return _buildBodyList(context);
+          return _buildList(context);
         }),
       ),
     );
@@ -98,13 +121,19 @@ class _PatientListScreenState extends State<PatientListScreen> {
     return;
   }
 
-  Widget _buildBodyList(BuildContext context) {
+  Widget _buildList(BuildContext context) {
+    bool test(Patient patient) {
+      final exp = RegExp(_searchingCtrl.text.toLowerCase());
+      final fullName = '${patient.firstName} ${patient.lastName}'.toLowerCase();
+      return exp.hasMatch(fullName);
+    }
+
+    final items = _provider.data.where(test).toList();
+
     return Scrollbar(
       child: ListView.builder(
-        itemCount: _provider.data.length,
-        itemBuilder: (context, index) => PatientCard(
-          patient: _provider.data[index],
-        ),
+        itemCount: items.length,
+        itemBuilder: (context, i) => PatientCard(patient: items[i]),
         padding: const EdgeInsets.symmetric(
           horizontal: 15.0,
           vertical: 10.0,
