@@ -1,6 +1,6 @@
-import 'package:bitmec/screens.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 
 class LoginScreen extends StatefulWidget {

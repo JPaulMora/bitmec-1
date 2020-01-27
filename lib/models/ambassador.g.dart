@@ -23,9 +23,7 @@ Ambassador _$AmbassadorFromJson(Map<String, dynamic> json) {
     state: json['state'] as String,
     city: json['city'] as String,
     address: json['address'] as String,
-    entity: json['entity'] == null
-        ? null
-        : Entity.fromJson(json['entity'] as Map<String, dynamic>),
+    entity: _entityFromJson(json['entity']),
   )..gender = json['gender'] as bool;
 }
 
@@ -47,5 +45,5 @@ Map<String, dynamic> _$AmbassadorToJson(Ambassador instance) =>
       'state': instance.state,
       'city': instance.city,
       'address': instance.address,
-      'entity': instance.entity?.toJson(),
+      'entity': _entityToJson(instance.entity),
     };

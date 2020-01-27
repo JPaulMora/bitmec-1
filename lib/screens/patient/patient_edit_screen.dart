@@ -134,11 +134,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
         profilePicture: _provider.object.profilePicture,
       );
 
-      _provider.update(patient, (response) {
-        print(patient.toJson());
-        print(response.toJson());
-//        Navigator.pop(context);
-      });
+      // FIXME: fix update method
     }
   }
 

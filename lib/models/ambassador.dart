@@ -4,6 +4,20 @@ import 'package:bitmec/models.dart';
 
 part 'ambassador.g.dart';
 
+Entity _entityFromJson(json) {
+  if (json is Map)
+    return Entity.fromJson(json);
+
+  if (json is int)
+    return Entity(id: json);
+
+  return Entity();
+}
+
+int _entityToJson(Entity entity) {
+  return entity.id;
+}
+
 @JsonSerializable(explicitToJson: true)
 class Ambassador {
   int id;
@@ -22,6 +36,7 @@ class Ambassador {
   String state;
   String city;
   String address;
+  @JsonKey(fromJson: _entityFromJson, toJson: _entityToJson)
   Entity entity;
 
   Ambassador({

@@ -15,7 +15,6 @@ class AppointmentService {
     }
 
     List body = jsonDecode(response.body);
-
     return body.map((a) => Appointment.fromJson(a)).toList();
   }
 

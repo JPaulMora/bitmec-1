@@ -45,15 +45,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       title: 'Detalle',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.edit),
-          tooltip: 'Editar',
-          onPressed: () {
-            Navigator.pushNamed(context, PatientEditScreen.routeName);
-          },
-        )
-      ],
+      // Todo: implement edit
     );
   }
 

@@ -20,3 +20,4 @@ export 'models/lab_result.dart';
 export 'models/laboratory_order.dart';
 export 'models/ambassador.dart';
 export 'models/appointment.dart';
+export 'models/message.dart';

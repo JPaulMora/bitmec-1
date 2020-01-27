@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components.dart';
+import 'package:bitmec/providers.dart';
+import 'package:bitmec/models.dart';
 
 class ChatScreen extends StatefulWidget {
   static const routeName = '/chat';
@@ -12,47 +14,53 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  MessageProvider _provider;
+  ConsultationProvider _consultationProvider;
+
   final _msgCtrl = TextEditingController();
 
-  List<MessageModel> _msgList = [
-    MessageModel(
-      sendBy: 'Ana',
-      date: '17/03/2019',
-      message: 'asjdhasjdaksd',
-    ),
-    MessageModel(
-      sendBy: 'Ana',
-      date: '17/03/2019',
-      message: 'sakdjasdasjd',
-    ),
-    MessageModel(
-      sendBy: 'Ana',
-      date: '17/03/2019',
-      message: '119191919',
-    ),
-  ];
+  @override
+  void dispose() {
+    _provider.removeData();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: MyAppBar(
-          scaffoldKey: _scaffoldKey,
-          title: 'Chat',
-          backLeading: true,
-        ),
-        body: _buildBody(context),
-        bottomSheet: _buildBottomSheet(context),
+    if (_provider == null) {
+      setState(() {
+        _provider = MessageProvider.of(context);
+        _provider.fetchAll();
+      });
+    }
+
+    if (_consultationProvider == null) {
+      setState(() {
+        _consultationProvider = ConsultationProvider.of(context);
+      });
+    }
+
+    return Scaffold(
+      appBar: MyAppBar(
+        scaffoldKey: _scaffoldKey,
+        title: 'Chat',
       ),
+      body: _buildBody(context),
+      bottomSheet: _buildBottomSheet(context),
     );
   }
 
   Widget _buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 75.0),
-        child: Column(children: _msgToWidget(context)),
-      ),
+    if (_provider.dataLoaded == false) {
+      return SafeArea(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    return SafeArea(
+      child: _list(context),
     );
   }
 
@@ -73,6 +81,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: TextFormField(
                   controller: _msgCtrl,
                   decoration: InputDecoration(
+                    hintText: 'Mensaje...',
+                    hintStyle: TextStyle(color: Colors.grey),
                     isDense: true,
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.lightBlue),
@@ -95,38 +105,24 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _sendMessage() {
-    setState(() {
-      _msgList.add(MessageModel(
-        sendBy: 'Me',
-        date: 'Hoy',
-        sentIt: true,
-        message: _msgCtrl.text,
-      ));
 
-      _msgCtrl.text = '';
-    });
   }
 
-  List<Widget> _msgToWidget(BuildContext context) {
-    return _msgList.map((msg) => ChatMessage(
-      sendBy: msg.sendBy,
-      message: msg.message,
-      date: msg.date,
-      sentIt: msg.sentIt,
-    )).toList();
+  Widget _list(BuildContext context) {
+    test(Message msg) => msg.consultation.id == _consultationProvider.object.id;
+    map(Message msg) => ChatMessage(message: msg);
+
+    final items = _provider.data.where(test).map(map).toList().reversed.toList();
+
+    if (items.isEmpty) {
+      return Center(child: Text('No sean enviado mensajes'));
+    }
+
+    return ListView.builder(
+      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 75.0),
+      reverse: true,
+      itemCount: items.length,
+      itemBuilder: (context, i) => items[i],
+    );
   }
-}
-
-class MessageModel {
-  final String sendBy;
-  final String message;
-  final String date;
-  final bool sentIt;
-
-  MessageModel({
-    this.sendBy,
-    this.message,
-    this.date,
-    this.sentIt = false,
-  });
 }
