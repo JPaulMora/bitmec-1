@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'appointment_card.dart';
+import 'package:bitmec/components.dart';
+import 'package:bitmec/models.dart';
 
 class AppointmentListView extends StatefulWidget {
   final String title;
   final Color color;
+  final List<Appointment> list;
 
   AppointmentListView({
-    Key key,
     @required this.title,
     this.color = Colors.grey,
-  }) : super(key: key);
+    this.list = const [],
+  });
 
   @override
   _AppointmentListViewState createState() => _AppointmentListViewState();
@@ -18,9 +20,13 @@ class AppointmentListView extends StatefulWidget {
 
 class _AppointmentListViewState extends State<AppointmentListView> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 15.0,
+        vertical: 10.0,
+      ),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -28,14 +34,18 @@ class _AppointmentListViewState extends State<AppointmentListView> {
             color: widget.color,
             fontSize: 50.0,
           )),
-
-          AppointmentCard(),
-          AppointmentCard(),
-          AppointmentCard(),
-          AppointmentCard(),
-          AppointmentCard(),
-        ],
+        ]..addAll(_buildList(context)),
       ),
     );
+  }
+
+  List<Widget> _buildList(context) {
+    if (widget.list.isEmpty) {
+      return [Text('No hay citas para este día.')];
+    }
+
+    return widget.list.map(
+      (a) => AppointmentCard(appointment: a),
+    ).toList();
   }
 }

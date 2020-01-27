@@ -10,7 +10,7 @@ Consultation _$ConsultationFromJson(Map<String, dynamic> json) {
   return Consultation(
     id: json['id'] as int,
     name: json['name'] as String,
-    patient: json['patient'] as int,
+    patient: _patientFromJson(json['patient']),
     active: json['active'] as bool,
     timestamp: json['timestamp'] as String,
     vitalSigns: (json['vital_signs'] as List)

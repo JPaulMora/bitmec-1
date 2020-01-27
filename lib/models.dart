@@ -18,3 +18,5 @@ export 'models/lab_units.dart';
 export 'models/lab_format.dart';
 export 'models/lab_result.dart';
 export 'models/laboratory_order.dart';
+export 'models/ambassador.dart';
+export 'models/appointment.dart';

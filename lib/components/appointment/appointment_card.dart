@@ -1,8 +1,16 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/screens/appointment/appointment_detail_screen.dart';
+import 'package:bitmec/models.dart';
+import 'package:bitmec/screens.dart';
+import 'package:intl/intl.dart';
 
 class AppointmentCard extends StatefulWidget {
+  final Appointment appointment;
+
+  AppointmentCard({this.appointment});
+
   @override
   _AppointmentCardState createState() => _AppointmentCardState();
 }
@@ -11,7 +19,17 @@ class _AppointmentCardState extends State<AppointmentCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _gotoDetail,
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          AppointmentDetailScreen.routeName,
+          arguments: {
+            'method': 'update',
+            'id': widget.appointment.consultation.id,
+          }
+        );
+      },
+
       child: Card(
         elevation: 5.0,
         margin: const EdgeInsets.symmetric(vertical: 10.0),
@@ -25,37 +43,38 @@ class _AppointmentCardState extends State<AppointmentCard> {
                   width: 100.0,
                   height: 100.0,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage("https://images.pexels.com/photos/235805/pexels-photo-235805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),
-                      )
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(widget.appointment.patient.profilePicture),
+                    ),
                   ),
                 ),
+
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Allan Garcia', style: TextStyle(
-                              fontSize: 25.0,
-                            )),
+                            Text('${widget.appointment.patient.firstName}',
+                                style: TextStyle(fontSize: 25.0)),
 
-                            Text('Tipo De Consulta'),
+                            Text('${widget.appointment.patient.lastName}',
+                                style: TextStyle(fontSize: 25.0)),
+
+                            Text('Tipo De Consulta: ${widget.appointment.appointmentType}'),
+
+                            Text(widget.appointment.consultation.name)
                           ],
                         ),
 
-                        Row(
-                          textDirection: TextDirection.rtl,
-                          children: <Widget>[
-                            Text('Fecha : Hora')
-                          ],
-                        ),
+                        Text(DateFormat('dd/MM/yyyy hh:mm a').format(DateTime.parse(widget.appointment.scheduled)),
+                          textAlign: TextAlign.end)
                       ],
                     ),
                   ),
@@ -66,9 +85,5 @@ class _AppointmentCardState extends State<AppointmentCard> {
         ),
       ),
     );
-  }
-
-  void _gotoDetail() {
-    Navigator.pushNamed(context, AppointmentDetailScreen.routeName);
   }
 }

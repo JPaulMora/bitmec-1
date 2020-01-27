@@ -12,3 +12,4 @@ export 'providers/reproductive_history_provider.dart';
 export 'providers/birth_control_provider.dart';
 export 'providers/family_history_provider.dart';
 export 'providers/habit_provider.dart';
+export 'providers/appointment_provider.dart';

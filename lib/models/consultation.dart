@@ -3,11 +3,19 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'consultation.g.dart';
 
+int _patientFromJson(json) {
+  if (json is Map<String, dynamic>) {
+    return Patient.fromJson(json).id;
+  }
+
+  return json;
+}
+
 @JsonSerializable(explicitToJson: true)
 class Consultation {
   int id;
   String name;
-  int patient;
+  @JsonKey(fromJson: _patientFromJson) int patient;
   bool active;
   String timestamp;
   @JsonKey(name: 'vital_signs') List<VitalSign> vitalSigns;

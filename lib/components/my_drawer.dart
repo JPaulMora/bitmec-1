@@ -5,15 +5,17 @@ import 'package:bitmec/screens.dart';
 class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: _buildItems(context),
+    return SafeArea(
+      child: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: _buildItems(context),
+        ),
       ),
     );
   }
 
-  List<Widget> _buildItems(BuildContext context) {
+  List<Widget> _buildItems(context) {
     return <Widget>[
       // Appointments
       ListTile(
