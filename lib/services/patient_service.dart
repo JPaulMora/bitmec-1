@@ -11,7 +11,7 @@ class PatientService {
     final response = await http.get(url);
 
     if (response.statusCode != 200) {
-      throw response.statusCode;
+      throw response.body;
     }
 
     String responseUTF8 = utf8.decode(response.bodyBytes);
@@ -24,10 +24,12 @@ class PatientService {
     final response = await http.get('$url$id');
 
     if (response.statusCode != 200) {
-      throw 'StatusCode is not 200 in PatientServive.fetchById method';
+      throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Patient.fromJson(body);
   }
 

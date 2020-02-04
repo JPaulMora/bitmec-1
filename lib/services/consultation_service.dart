@@ -11,7 +11,7 @@ class ConsultationService {
     final response = await http.get('$url$id');
 
     if (response.statusCode != 200) {
-      throw 'SatusCode is not 200 in ConsultationService.fetchById method';
+      throw response.body;
     }
 
     final responseUTF8 = utf8.decode(response.bodyBytes);
@@ -27,7 +27,7 @@ class ConsultationService {
     );
 
     if (response.statusCode != 201) {
-      throw 'StatusCode is not 201 in ConsultationService.create method';
+      throw response.body;
     }
 
     final responseUTF8 = utf8.decode(response.bodyBytes);

@@ -14,8 +14,7 @@ class SymptomService {
     );
 
     if (response.statusCode != 201) {
-      print(response.body);
-      throw 'StatusCode is not 201 in SymptomService.create method';
+      throw response.body;
     }
 
     final responseUTF8 = utf8.decode(response.bodyBytes);

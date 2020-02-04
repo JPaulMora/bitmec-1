@@ -14,7 +14,7 @@ class VitalSignService {
     );
 
     if (response.statusCode != 201) {
-      throw 'StatusCode is not 201 in VitalSignService.create method';
+      throw response.body;
     }
 
     final responseUTF8 = utf8.decode(response.bodyBytes);
@@ -31,7 +31,7 @@ class VitalSignService {
 
     if (response.statusCode != 200) {
       print(response.body);
-      throw 'StatusCode is not 200 in VitalSignService.update method';
+      throw response.body;
     }
 
     final responseUTF8 = utf8.decode(response.bodyBytes);
@@ -44,8 +44,7 @@ class VitalSignService {
     final response = await http.delete('$url$id/');
 
     if (response.statusCode != 204) {
-      print(response.body);
-      throw 'StatusCode is not 204 in VitalSignService.remove method';
+      throw response.body;
     }
   }
 }
