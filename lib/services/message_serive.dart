@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:bitmec/models.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:http/http.dart' as http;
 
 class MessageService {
@@ -14,7 +13,9 @@ class MessageService {
       throw response.body;
     }
 
-    List body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    List body = jsonDecode(responseUTF8);
+
     return body.map((json) => Message.fromJson(json)).toList();
   }
 
@@ -28,7 +29,9 @@ class MessageService {
       throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Message.fromJson(body);
   }
 }

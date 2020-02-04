@@ -17,7 +17,9 @@ class MedicalPrescriptionService {
       throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Prescription.fromJson(body);
   }
 
@@ -31,7 +33,9 @@ class MedicalPrescriptionService {
       throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Prescription.fromJson(body);
   }
 

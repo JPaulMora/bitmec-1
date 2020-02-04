@@ -13,8 +13,10 @@ class AppointmentService {
     if (response.statusCode != 200) {
       throw response.body;
     }
+    
+    String responseUTF8 = utf8.decode(response.bodyBytes);
+    List body = jsonDecode(responseUTF8);
 
-    List body = jsonDecode(response.body);
     return body.map((a) => Appointment.fromJson(a)).toList();
   }
 
@@ -28,7 +30,9 @@ class AppointmentService {
       throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    String responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Appointment.fromJson(body);
   }
 
@@ -42,7 +46,9 @@ class AppointmentService {
       throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    String responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Appointment.fromJson(body);
   }
 

@@ -14,7 +14,9 @@ class ConsultationService {
       throw 'SatusCode is not 200 in ConsultationService.fetchById method';
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Consultation.fromJson(body);
   }
 
@@ -28,7 +30,9 @@ class ConsultationService {
       throw 'StatusCode is not 201 in ConsultationService.create method';
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Consultation.fromJson(body);
   }
 }

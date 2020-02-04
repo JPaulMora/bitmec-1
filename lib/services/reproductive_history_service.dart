@@ -17,7 +17,9 @@ class ReproductiveHistoryService {
       throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTf8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTf8);
+
     return ReproductiveHistory.fromJson(body);
   }
 
@@ -31,7 +33,9 @@ class ReproductiveHistoryService {
       throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return ReproductiveHistory.fromJson(body);
   }
 

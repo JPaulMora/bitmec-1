@@ -11,10 +11,11 @@ class PatientService {
     final response = await http.get(url);
 
     if (response.statusCode != 200) {
-      throw 'StatusCode is not 200 in PatientService.fetchAll method';
+      throw response.statusCode;
     }
 
-    List body = jsonDecode(response.body);
+    String responseUTF8 = utf8.decode(response.bodyBytes);
+    List body = jsonDecode(responseUTF8);
 
     return body.map((p) => Patient.fromJson(p)).toList();
   }

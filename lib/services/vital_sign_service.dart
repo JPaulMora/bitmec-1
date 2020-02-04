@@ -17,7 +17,9 @@ class VitalSignService {
       throw 'StatusCode is not 201 in VitalSignService.create method';
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return VitalSign.fromJson(body);
   }
 
@@ -32,7 +34,9 @@ class VitalSignService {
       throw 'StatusCode is not 200 in VitalSignService.update method';
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return VitalSign.fromJson(body);
   }
 

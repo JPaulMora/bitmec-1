@@ -18,7 +18,9 @@ class SymptomService {
       throw 'StatusCode is not 201 in SymptomService.create method';
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Symptom.fromJson(body);
   }
 
@@ -32,7 +34,9 @@ class SymptomService {
       throw response.body;
     }
 
-    final body = jsonDecode(response.body);
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
+
     return Symptom.fromJson(body);
   }
 
