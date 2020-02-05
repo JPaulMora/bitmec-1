@@ -33,7 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
           children: <Widget>[
             Center(
               child: Text('Bitmec', style: TextStyle(
-                fontSize: 100.0,
+                fontSize: 75.0,
                 color: Colors.blue,
               )),
             ),

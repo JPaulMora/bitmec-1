@@ -109,7 +109,6 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
           },
         ),
 
-        // TODO: implement chat view
         QuickActionIcon(
           icon: Icon(Icons.chat),
           color: Colors.green,
