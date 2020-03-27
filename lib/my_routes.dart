@@ -9,6 +9,7 @@ class MyRoutes {
     HomeScreen.routeName: (context) => HomeScreen(),
     LoginScreen.routeName: (context) => LoginScreen(),
     ChatScreen.routeName: (context) => ChatScreen(),
+    ConferenceScreen.routeName: (context) => ConferenceScreen(),
 
     // Medical History Routes
     MedicalConditionCreateUpdateScreen.routeName: (context) =>

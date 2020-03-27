@@ -51,8 +51,8 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         vertical: widget.noPadding ? 0.0 : 10.0,
       ),
       child: TextFormField(
-        controller: widget.ctrl,
         enabled: widget.isEnabled(),
+        controller: widget.ctrl,
         autovalidate: true,
         focusNode: widget.node,
         textInputAction: widget.action,
@@ -65,22 +65,9 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
           icon: widget.icon,
           labelText: widget.label,
           isDense: true,
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: _getColor(context)),
-          ),
-          labelStyle: _theme.inputDecorationTheme.labelStyle.copyWith(
-            color: _getColor(context),
-          ),
+          border: OutlineInputBorder(),
         ),
       ),
     );
-  }
-
-  Color _getColor(BuildContext context) {
-    if (widget.validator(widget.ctrl.text) != null) {
-      return _theme.errorColor;
-    }
-
-    return _theme.hintColor;
   }
 }

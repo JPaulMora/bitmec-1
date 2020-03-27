@@ -47,7 +47,7 @@ class _MyDropdownFormFieldState extends State<MyDropdownFormField> {
           labelText: widget.label,
           icon: widget.icon,
           isDense: true,
-          border: OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: _getColor(context)),
           ),
           labelStyle: _theme.inputDecorationTheme.labelStyle.copyWith(

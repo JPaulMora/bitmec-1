@@ -29,3 +29,4 @@ export 'screens/vital_sign/vital_sign_create_screen.dart';
 export 'screens/symptom/symptom_create_screen.dart';
 
 export 'screens/chat_screen.dart';
+export 'screens/conference_screen.dart';

@@ -1,6 +1,8 @@
-import 'package:bitmec/models.dart';
 import 'package:flutter/material.dart';
 
+import 'package:permission_handler/permission_handler.dart';
+
+import 'package:bitmec/models.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
@@ -122,7 +124,21 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
           icon: Icon(Icons.dock),
           color: Colors.lightBlueAccent,
           label: 'Consulta',
-          onTap: () {},
+          onTap: () async {
+            await PermissionHandler().requestPermissions([
+              PermissionGroup.camera,
+              PermissionGroup.microphone,
+            ]);
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (c) => ConferenceScreen(
+                  channelName: '${_provider.object.name}${_provider.object.id}${_provider.object.patient}',
+                )
+              ),
+            );
+          },
         ),
       ],
     );

@@ -110,20 +110,22 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
     return Material(
       color: Colors.lightBlueAccent,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[TabBar(
-          isScrollable: true,
-          labelColor: Colors.white,
-          indicatorColor: Colors.indigoAccent,
-          indicatorWeight: 5.0,
-          tabs: <Widget>[
-            Tab(child: Text('General')),
-            Tab(child: Text('Historial Médico')),
-            Tab(child: Text('Historial Familiar')),
-            Tab(child: Text('Hábitos')),
-//          Tab(child: Text('Dependientes')),
-          ],
-        )],
+        children: <Widget>[
+          Expanded(
+            child: TabBar(
+              isScrollable: true,
+              labelColor: Colors.white,
+              indicatorColor: Colors.blue,
+              indicatorWeight: 5.0,
+              tabs: <Widget>[
+                Tab(child: Text('General')),
+                Tab(child: Text('Historial Médico')),
+                Tab(child: Text('Historial Familiar')),
+                Tab(child: Text('Hábitos')),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
@@ -137,7 +139,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           PatientDetailFamilyHistoryView(),
           PatientDetailHabitsView(),
           // TODO: implement dependent
-//          PatientDetailDependentsView(),
+          // PatientDetailDependentsView(),
         ],
       ),
     );

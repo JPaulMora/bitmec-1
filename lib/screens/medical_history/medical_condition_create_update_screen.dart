@@ -81,7 +81,7 @@ class _MedicalConditionCreateUpdateScreenState
     );
   }
 
-  /// TODO: implement delete condition and document attached
+  // TODO: implement delete condition and document attached
 //  void _confirmDelete(context) async {
 //    bool response = await showDialog(
 //      context: context,
