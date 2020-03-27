@@ -14,9 +14,7 @@ Entity _entityFromJson(json) {
   return Entity();
 }
 
-int _entityToJson(Entity entity) {
-  return entity.id;
-}
+int _entityToJson(Entity entity) => entity?.id ?? 0;
 
 @JsonSerializable(explicitToJson: true)
 class Ambassador {

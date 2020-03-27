@@ -1,10 +1,12 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:bitmec/models.dart';
 import 'package:bitmec/screens.dart';
-import 'package:intl/intl.dart';
+import 'package:bitmec/providers.dart';
+
 
 class AppointmentCard extends StatefulWidget {
   final Appointment appointment;
@@ -16,18 +18,41 @@ class AppointmentCard extends StatefulWidget {
 }
 
 class _AppointmentCardState extends State<AppointmentCard> {
+  AppointmentProvider _provider;
+
   @override
   Widget build(BuildContext context) {
+    if (_provider == null) {
+      setState(() {
+        _provider = AppointmentProvider.of(context);
+      });
+    }
+
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          ConsultationDetailScreen.routeName,
-          arguments: {
-            'method': 'update',
-            'id': widget.appointment.consultation.id,
-          }
-        );
+        if (widget.appointment.ambassador == null) {
+          widget.appointment.ambassador = Ambassador(id: 1);
+
+          _provider.update(widget.appointment, (appointment) {
+            Navigator.pushNamed(
+              context,
+              ConsultationDetailScreen.routeName,
+              arguments: {
+                'method': 'update',
+                'id': widget.appointment.consultation.id,
+              }
+            );
+          });
+        } else {
+          Navigator.pushNamed(
+            context,
+            ConsultationDetailScreen.routeName,
+            arguments: {
+              'method': 'update',
+              'id': widget.appointment.consultation.id,
+            }
+          );
+        }
       },
 
       child: Card(

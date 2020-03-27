@@ -47,6 +47,8 @@ class AppointmentProvider with ChangeNotifier {
   }
 
   void update(Appointment obj, [Function(Appointment) callback]) {
+    print(obj.toJson());
+
     AppointmentService.update(obj).then((response) {
       final i = _data.indexWhere((e) => obj.id == e.id);
       _data[i] = obj;

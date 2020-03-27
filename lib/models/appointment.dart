@@ -28,6 +28,16 @@ int _consultationToJson(Consultation consultation) {
   return consultation.id;
 }
 
+Ambassador _ambassadorFromJson(ambassador) {
+  if (ambassador is int) return Ambassador(id: ambassador);
+  if (ambassador is Map) return Ambassador.fromJson(ambassador);
+  return Ambassador();
+}
+
+int _ambassadorToJson(Ambassador ambassador) => ambassador.id;
+
+int _doctorToJson(Doctor doctor) => doctor.id;
+
 @JsonSerializable(explicitToJson: true)
 class Appointment {
   int id;
@@ -39,8 +49,9 @@ class Appointment {
   Patient patient;
   @JsonKey(fromJson: _consultationFromJson, toJson: _consultationToJson)
   Consultation consultation;
+  @JsonKey(toJson: _ambassadorToJson, fromJson: _ambassadorFromJson)
   Ambassador ambassador;
-  Doctor doctor;
+  @JsonKey(toJson: _doctorToJson) Doctor doctor;
 
   Appointment({
     this.id,

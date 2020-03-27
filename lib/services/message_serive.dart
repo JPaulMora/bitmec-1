@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bitmec/models.dart';
+import 'package:bitmec/services.dart';
 import 'package:http/http.dart' as http;
 
 class MessageService {
@@ -32,6 +33,19 @@ class MessageService {
     final responseUTF8 = utf8.decode(response.bodyBytes);
     final body = jsonDecode(responseUTF8);
 
+    Message msg = await fetchById(Message.fromJson(body).id);
+    return msg;
+  }
+
+  static Future<Message> fetchById(int id) async {
+    final response = await http.get('$url$id');
+
+    if (response.statusCode != 200) {
+      throw response.body;
+    }
+
+    final responseUTF8 = utf8.decode(response.bodyBytes);
+    final body = jsonDecode(responseUTF8);
     return Message.fromJson(body);
   }
 }

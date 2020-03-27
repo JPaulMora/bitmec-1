@@ -33,7 +33,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
 
       setState(() {
         _provider = ConsultationProvider.of(context);
-        _provider.fetchById(args['id']);
+        _provider.fetchById(args['id'], (c) {});
       });
     }
 

@@ -38,7 +38,7 @@ class MessageProvider with ChangeNotifier {
 
   void create(Message obj, [Function(Message) callback]) {
     MessageService.create(obj).then((response) {
-      _data.add(obj..id = response.id);
+      _data.add(response);
       notifyListeners();
 
       if (callback != null)

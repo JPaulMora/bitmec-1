@@ -74,6 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
               icon: Icon(Icons.camera),
               onPressed: () {},
             ),
+
             Expanded(
               flex: 1,
               child: Padding(
@@ -94,6 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
             ),
+
             IconButton(
               icon: Icon(Icons.send),
               onPressed: _sendMessage,
@@ -105,11 +107,21 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _sendMessage() {
+    final msg = Message(
+      message: _msgCtrl.text,
+      ambassador: Ambassador(id: 1),
+      consultation: _consultationProvider.object.id,
+    );
 
+    _provider.create(msg, (_) {
+      setState(() {
+        _msgCtrl.text = '';
+      });
+    });
   }
 
   Widget _list(BuildContext context) {
-    test(Message msg) => msg.consultation.id == _consultationProvider.object.id;
+    test(Message msg) => msg.consultation == _consultationProvider.object.id;
     map(Message msg) => ChatMessage(message: msg);
 
     final items = _provider.data.where(test).map(map).toList().reversed.toList();
