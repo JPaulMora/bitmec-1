@@ -1,6 +1,8 @@
 import 'dart:async';
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+
 import 'package:flutter/material.dart';
+
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 
 class ConferenceScreen extends StatefulWidget {
   static final routeName = '/conference';
@@ -48,7 +50,7 @@ class _ConferenceScreenState extends State<ConferenceScreen> {
 
   /// Create agora sdk instance and initialize
   Future<void> _initAgoraRtcEngine() async {
-    await AgoraRtcEngine.create('ad01dc90b01147d9aaf0b13a589d1a79');
+    await AgoraRtcEngine.create('9b5b7fcf7b6445bd8732dcede9c5be8f');
     await AgoraRtcEngine.enableVideo();
   }
 

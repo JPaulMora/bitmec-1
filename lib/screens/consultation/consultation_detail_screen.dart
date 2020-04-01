@@ -134,7 +134,8 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
               context,
               MaterialPageRoute(
                 builder: (c) => ConferenceScreen(
-                  channelName: '${_provider.object.name}${_provider.object.id}${_provider.object.patient}',
+                  channelName: '1',
+//                  channelName: '${_provider.object.name}${_provider.object.id}${_provider.object.patient}',
                 )
               ),
             );
