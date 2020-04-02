@@ -1,3 +1,4 @@
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -185,7 +186,7 @@ class _AppointmentListByPatientScreenState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text('Motivo: ${appointment.formattedType()}',
-                    style: TextStyle(color: Colors.orangeAccent),
+                    style: TextStyle(color: MyTheme.skyBlue),
                   ),
 
                   Text(appointment.consultation.name),
@@ -204,8 +205,8 @@ class _AppointmentListByPatientScreenState
               ),
 
               RaisedButton(
-                textColor: Colors.white,
                 child: Text('Tomar Cita'),
+                textColor: Colors.white,
                 color: Colors.orangeAccent,
                 onPressed: () {
                   Navigator.pushNamed(

@@ -28,13 +28,13 @@ class _MySubmitButtonState extends State<MySubmitButton> {
             minWidth: 150.0,
             height: 50.0,
             child: RaisedButton(
-              child: Text(widget.label, style: TextStyle(fontSize: 25.0)),
+              child: Text(widget.label, style: TextStyle(fontSize: 20.0)),
               textColor: MyTheme.white,
-              color: MyTheme.skyBlue,
+              color: MyTheme.orange,
               onPressed: widget.onPressed,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50.0),
-                side: BorderSide(color: MyTheme.skyBlue),
+                side: BorderSide(color: MyTheme.orange),
               ),
             ),
           ),

@@ -65,7 +65,9 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
           children: <Widget>[
             _buildQuickActionsSection(context),
             _buildVitalSignsSection(context),
+            MyCustomDivider(),
             _buildSymptomsSection(context),
+            MyCustomDivider(),
             _buildLaboratoryOrdersSection(context),
           ],
         ),
@@ -78,7 +80,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
       children: <QuickActionIcon>[
         QuickActionIcon(
           icon: Icon(Icons.fiber_manual_record),
-          color: Colors.red,
+          color: Colors.redAccent,
           label: 'Signos Vitales',
           onTap: () {
             Navigator.pushNamed(
@@ -94,7 +96,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
 
         QuickActionIcon(
           icon: Icon(Icons.assignment_ind),
-          color: Colors.purple,
+          color: Colors.deepPurpleAccent,
           label: 'Sintomas',
           onTap: () {
             Navigator.pushNamed(

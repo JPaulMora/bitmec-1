@@ -132,14 +132,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
           AppointmentListView(
             title: 'Filtro',
-            color: Colors.blue,
             list: _provider.data.where(test).toList(),
           ),
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: Divider(height: 10.0, color: MyTheme.grey),
-          )
+          MyCustomDivider(),
         ],
       );
     }

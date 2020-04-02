@@ -9,7 +9,7 @@ class QuickActionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: MyTheme.tenPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -46,7 +46,7 @@ class QuickActionIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: MyTheme.tenPadding,
         child: Column(
           children: <Widget>[
             Material(
@@ -54,18 +54,11 @@ class QuickActionIcon extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100.0),
               ),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: MyTheme.tenPadding,
-                    child: IconButton(
-                      icon: icon,
-                      color: textColor,
-                      iconSize: 25.0,
-                      onPressed: onTap,
-                    ),
-                  ),
-                ],
+              child: IconButton(
+                icon: icon,
+                color: textColor,
+                iconSize: 30.0,
+                onPressed: onTap,
               ),
             ),
             Container(

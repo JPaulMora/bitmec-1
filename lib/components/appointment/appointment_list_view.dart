@@ -1,3 +1,4 @@
+import 'package:bitmec/my_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components.dart';
@@ -24,11 +25,7 @@ class _AppointmentListViewState extends State<AppointmentListView> {
     final subtitleTheme = Theme.of(context).textTheme.subtitle;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 15.0,
-        vertical: 10.0,
-      ),
-
+      padding: MyTheme.tenPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

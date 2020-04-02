@@ -47,13 +47,12 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: widget.noPadding ? 0.0 : 15.0,
+        horizontal: widget.noPadding ? 0.0 : 10.0,
         vertical: widget.noPadding ? 0.0 : 10.0,
       ),
       child: TextFormField(
         enabled: widget.isEnabled(),
         controller: widget.ctrl,
-        autovalidate: true,
         focusNode: widget.node,
         textInputAction: widget.action,
         onFieldSubmitted: widget.submitted,

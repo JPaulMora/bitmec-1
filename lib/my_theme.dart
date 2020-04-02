@@ -7,6 +7,7 @@ class MyTheme {
   static const black = Color(0xff212121);
   static const skyBlue = Color(0xff2A93D5);
   static const red = Colors.redAccent;
+  static const orange = Colors.orangeAccent;
 
   static final italicStyle = TextStyle(
     color: grey,
@@ -58,7 +59,7 @@ class MyTheme {
 
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
-      labelStyle: TextStyle(fontSize: 24.0),
+      labelStyle: TextStyle(fontSize: 15.0),
 
       border: OutlineInputBorder(borderRadius: _borderRadius),
 

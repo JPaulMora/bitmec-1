@@ -45,6 +45,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
         children: [
           _buildQuickActions(context),
           _buildGeneralInformation(context),
+          MyCustomDivider(),
           _ConsultationsSection(provider: _provider),
         ],
       ),
@@ -116,7 +117,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
           ),
 
           RaisedButton(
-            color: Colors.redAccent,
+            color: MyTheme.red,
             child: Text('Cancelar'),
             onPressed: () {
               _consultationCtrl.text = '';
@@ -130,22 +131,15 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
 
   Widget _buildGeneralInformation(context) {
     final textTheme = Theme.of(context).textTheme;
-
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: MyTheme.tenPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('General', style: textTheme.subtitle),
-
           Card(
-            elevation: 2.0,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 10.0
-              ),
-
+              padding: MyTheme.tenPadding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -191,7 +185,7 @@ class _ConsultationsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: MyTheme.tenPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -232,13 +226,8 @@ class _ConsultationCard extends StatelessWidget {
       },
 
       child: Card(
-        elevation: 2.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
