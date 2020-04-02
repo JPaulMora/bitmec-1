@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
 import 'package:bitmec/screens.dart';
@@ -19,10 +20,8 @@ class ReproductiveHistorySection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Salud Reproductiva', style: TextStyle(
-                fontSize: 30.0,
-                color: Colors.blue,
-              )),
+              Text('Salud Reproductiva',
+                  style: Theme.of(context).textTheme.subtitle),
 
               IconButton(
                 icon: Icon(Icons.edit),
@@ -38,8 +37,8 @@ class ReproductiveHistorySection extends StatelessWidget {
               ),
             ],
           ),
-
           _buildCard(context),
+
         ],
       ),
     );
@@ -47,13 +46,8 @@ class ReproductiveHistorySection extends StatelessWidget {
 
   Widget _buildCard(context) {
     return Card(
-      elevation: 3.0,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10.0,
-          vertical: 10.0,
-        ),
-
+        padding: MyTheme.tenPadding,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,9 +74,9 @@ class ReproductiveHistorySection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               FormattedDate(reproductiveHealth.firstMenstruationDate,
-                prefix: 'Primer Mestruación: '),
+                  prefix: 'Primer Mestruación: '),
               FormattedDate(reproductiveHealth.lastMenstruationDate,
-                prefix: 'Última Mestruación: '),
+                  prefix: 'Última Mestruación: '),
             ],
           ),
         ),
@@ -97,7 +91,7 @@ class ReproductiveHistorySection extends StatelessWidget {
           children: <Widget>[
             Text('¿Has tenido uno más ciclos mestruales?'),
             Text(cond ? 'Sí' : 'No',
-              style: TextStyle(color: Colors.blueAccent),
+              style: TextStyle(color: MyTheme.skyBlue),
             )
           ],
         ),
@@ -135,7 +129,7 @@ class ReproductiveHistorySection extends StatelessWidget {
           children: <Widget>[
             Text('¿Has estado embarazada?'),
             Text(cond ? 'Sí' : 'No',
-              style: TextStyle(color: Colors.blueAccent),
+              style: TextStyle(color: MyTheme.skyBlue),
             )
           ],
         ),
@@ -173,7 +167,7 @@ class ReproductiveHistorySection extends StatelessWidget {
           children: <Widget>[
             Text('¿Ha perdido algun bebé aún no nacido'),
             Text(cond ? 'Sí' : 'No',
-              style: TextStyle(color: Colors.blueAccent),
+              style: TextStyle(color: MyTheme.skyBlue),
             )
           ],
         ),

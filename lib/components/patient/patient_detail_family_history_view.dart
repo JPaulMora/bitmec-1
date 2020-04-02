@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
@@ -70,13 +71,8 @@ class _FamilyCard extends StatelessWidget {
       },
 
       child: Card(
-        elevation: 3.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -85,16 +81,18 @@ class _FamilyCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(member.relative, style: TextStyle(
-                    color: Colors.blueAccent,
                     fontSize: 24.0,
+                    color: MyTheme.skyBlue,
                   )),
-
                   Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
-                  Text('Condición: ${member.condition}'),
+                  Text('Condición: ${member.condition}',
+                    style: Theme.of(context).textTheme.body2,
+                  ),
                 ],
               ),
 
-              FormattedDate(member.dateDiagnosed,
+              FormattedDate(
+                member.dateDiagnosed,
                 textAlign: TextAlign.end,
               ),
             ],

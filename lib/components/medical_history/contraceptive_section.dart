@@ -1,3 +1,4 @@
+import 'package:bitmec/my_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components.dart';
@@ -58,7 +59,6 @@ class _ContraceptiveCard extends StatelessWidget {
       },
 
       child: Card(
-        elevation: 3.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 10.0,
@@ -69,17 +69,16 @@ class _ContraceptiveCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(contraceptive.method, style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontSize: 24.0,
-                  )),
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
-                  Text('Desde ${contraceptive.formattedStartDate()} hasta ${contraceptive.formattedEndDate()}'),
-                ],
-              )
+              Text(contraceptive.method, style: TextStyle(
+                color: MyTheme.skyBlue,
+                fontSize: 24.0,
+              )),
+              Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+              Text(
+                contraceptive.formattedDate(),
+                textDirection: TextDirection.rtl,
+                style: MyTheme.italicStyle,
+              ),
             ],
           ),
         ),

@@ -1,9 +1,9 @@
-import 'package:bitmec/providers/image_db_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
@@ -316,7 +316,7 @@ class _MedicalPrescriptionCreateUpdateScreenState
         value: -1,
         child: Text(
           'Selecciona un género',
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: MyTheme.grey),
         )
       )]..addAll(items),
 
@@ -351,7 +351,7 @@ class _MedicalPrescriptionCreateUpdateScreenState
         value: -1,
         child: Text(
           'Selecciona un género',
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: MyTheme.grey),
         )
       )]..addAll(items),
 
@@ -367,7 +367,6 @@ class _MedicalPrescriptionCreateUpdateScreenState
   Widget _buildSelectImage(context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-
       child: Column(
         children: <Widget>[
           Row(
@@ -375,7 +374,7 @@ class _MedicalPrescriptionCreateUpdateScreenState
             children: <Widget>[
               Text('Imagenes:', style: TextStyle(
                 fontSize: 25.0,
-                color: Colors.blueAccent,
+                color: MyTheme.skyBlue,
               )),
 
               DropdownButton<int>(

@@ -1,7 +1,6 @@
 import 'package:bitmec/models.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bitmec/screens.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/components.dart';
 

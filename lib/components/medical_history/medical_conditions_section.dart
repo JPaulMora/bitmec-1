@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
@@ -29,17 +30,16 @@ class MedicalConditionsSection extends StatelessWidget {
       return [Text('Aún no hay padecimientos agregados')];
     }
 
-    return conditions.map((c) => _MedicalConditionCard(condition: c)).toList();
+    return conditions.map(
+      (c) => _MedicalConditionCard(condition: c)
+    ).toList();
   }
 }
 
 class _MedicalConditionCard extends StatelessWidget {
   final MedicalCondition condition;
 
-  _MedicalConditionCard({
-    Key key,
-    this.condition,
-  }) : super(key: key);
+  _MedicalConditionCard({ this.condition });
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +56,8 @@ class _MedicalConditionCard extends StatelessWidget {
       },
 
       child: Card(
-        elevation: 3.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -85,7 +80,7 @@ class _MedicalConditionCard extends StatelessWidget {
                 children: <Widget>[
                   Text(condition.condition,
                     style: TextStyle(
-                      color: Colors.blueAccent,
+                      color: MyTheme.skyBlue,
                       fontSize: 24.0,
                     ),
                   ),
@@ -105,9 +100,10 @@ class _MedicalConditionCard extends StatelessWidget {
                 ],
               ),
 
-              FormattedDate(condition.diagnosisDate,
+              FormattedDate(
+                condition.diagnosisDate,
                 textAlign: TextAlign.end,
-                style: TextStyle(color: Colors.blueAccent),
+                color: MyTheme.skyBlue,
               ),
             ],
           ),

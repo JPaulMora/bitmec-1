@@ -1,6 +1,7 @@
-import 'package:bitmec/screens.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
+import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
 
@@ -55,13 +56,8 @@ class _MedicineCard extends StatelessWidget {
       },
 
       child: Card(
-        elevation: 3.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,10 +79,10 @@ class _MedicineCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(prescription.drug,
-                      style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontSize: 24.0
-                      )
+                    style: TextStyle(
+                      color: MyTheme.skyBlue,
+                      fontSize: 24.0
+                    )
                   ),
 
                   Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
@@ -101,9 +97,12 @@ class _MedicineCard extends StatelessWidget {
                 ],
               ),
 
-              Text(prescription.formattedDate(),
+              Text(
+                prescription.formattedDate(),
                 textAlign: TextAlign.end,
-                style: TextStyle(color: Colors.lightBlue),
+                style: MyTheme.italicStyle.copyWith(
+                  color: MyTheme.skyBlue,
+                ),
               ),
             ],
           ),

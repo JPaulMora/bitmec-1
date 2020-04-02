@@ -1,9 +1,10 @@
-import 'package:bitmec/models.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
+import 'package:bitmec/models.dart';
 
 class PatientDetailHabitsView extends StatefulWidget {
   @override
@@ -51,7 +52,7 @@ class _PatientDetailHabitsViewState extends State<PatientDetailHabitsView> {
 class _HabitCard extends StatelessWidget {
   final Habit habit;
 
-  _HabitCard({this.habit});
+  _HabitCard({ this.habit });
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +69,8 @@ class _HabitCard extends StatelessWidget {
       },
 
       child: Card(
-        elevation: 3.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,7 +79,7 @@ class _HabitCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(habit.habit, style: TextStyle(
-                    color: Colors.blueAccent,
+                    color: MyTheme.skyBlue,
                     fontSize: 24.0,
                   )),
 
@@ -94,7 +90,7 @@ class _HabitCard extends StatelessWidget {
                     children: <Widget>[
                       Text('¿Lo practica actualmente?'),
                       Text(habit.practiceCurrently() ? 'Sí' : 'No',
-                        style: TextStyle(color: Colors.blueAccent),
+                        style: TextStyle(color: MyTheme.skyBlue),
                       )
                     ],
                   )

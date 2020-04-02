@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/models.dart';
 
@@ -27,8 +28,6 @@ class PatientCard extends StatelessWidget {
 
   Widget _buildCard(BuildContext context) {
     return Card(
-      elevation: 5.0,
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: IntrinsicHeight(
@@ -60,34 +59,33 @@ class PatientCard extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Text(patient.fullName, style: TextStyle(
-                    fontSize: 25.0,
-                  )),
+                  child: Text(patient.fullName, style: MyTheme.cardHeaderTextStyle),
                 ),
 
-                Text('${patient.yearsOld} años'),
-                Text('Cui: ${patient.governmentId}'),
+                Text('${patient.yearsOld} años', style: textTheme.body2),
+                Text('Cui: ${patient.governmentId}', style: textTheme.body2),
               ],
             ),
 
-            Row(
+            Text(
+              patient.gender ? 'Hombre' : 'Mujer',
               textDirection: TextDirection.rtl,
-              children: <Widget>[
-                Text(patient.gender ? 'Hombre' : 'Mujer'),
-              ],
+              style: MyTheme.italicStyle,
             ),
           ],
         ),

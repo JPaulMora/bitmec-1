@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/providers.dart';
@@ -78,35 +79,39 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   }
 
   Widget _buildTopHeader(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Center(
-          child: Container(
-            width: 100.0,
-            height: 100.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  _provider.object.profilePicture ?? 'https://maxcdn.icons8.com/Share/icon/Users//user_male_circle_filled1600.png'
-                ),
-              )
+    final style = TextStyle(
+      color: MyTheme.black,
+      fontSize: 30.0,
+    );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Column(
+        children: <Widget>[
+          Center(
+            child: Container(
+              width: 100.0,
+              height: 100.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    _provider.object.profilePicture ?? 'https://maxcdn.icons8.com/Share/icon/Users//user_male_circle_filled1600.png'
+                  ),
+                )
+              ),
             ),
           ),
-        ),
 
-        Container(
-          margin: EdgeInsets.only(bottom: 10.0),
-          child: Text(_provider.object.firstName,
-            style: TextStyle(fontSize: 30.0),
-          ),
-        ),
-      ],
+          Text(_provider.object.firstName, style: style),
+          Text(_provider.object.lastName, style: style),
+        ],
+      ),
     );
   }
 
-  Widget _buildTabBar(BuildContext context) {
+  Widget _buildTabBar(context) {
     return Material(
       color: Colors.lightBlueAccent,
       child: Row(
@@ -115,8 +120,9 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             child: TabBar(
               isScrollable: true,
               labelColor: Colors.white,
-              indicatorColor: Colors.blue,
+              indicatorColor: MyTheme.skyBlue,
               indicatorWeight: 5.0,
+
               tabs: <Widget>[
                 Tab(child: Text('General')),
                 Tab(child: Text('Historial Médico')),
@@ -130,7 +136,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(context) {
     return Expanded(
       child: TabBarView(
         children: <Widget>[
@@ -139,7 +145,6 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           PatientDetailFamilyHistoryView(),
           PatientDetailHabitsView(),
           // TODO: implement dependent
-          // PatientDetailDependentsView(),
         ],
       ),
     );

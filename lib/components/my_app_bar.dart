@@ -20,6 +20,7 @@ class MyAppBar extends StatelessWidget implements PreferredSize {
       title: Text(title),
       centerTitle: true,
       actions: actions,
+      elevation: 0,
     );
   }
 

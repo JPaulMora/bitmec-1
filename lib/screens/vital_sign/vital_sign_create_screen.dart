@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
+
+const _paddingH10V0 = EdgeInsets.symmetric(horizontal: 10.0, vertical: 0);
+const _paddingLTRB = EdgeInsets.fromLTRB(15.0, 20.0, 0, 10.0);
 
 class VitalSignCreateScreen extends StatefulWidget {
   static const routeName = '/vital_sign/create';
@@ -113,7 +117,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
           ),
 
           RaisedButton(
-            color: Colors.redAccent,
+            color: MyTheme.red,
             child: Text('Cancelar'),
             onPressed: () {
               Navigator.pop(context, false);
@@ -192,13 +196,13 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
 
   Widget _buildPhysicalMeasuresSection(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: _paddingH10V0,
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 20.0, 0, 10.0),
+              padding: _paddingLTRB,
               child: Text('Medidas Físicas'),
             ),
 
@@ -249,13 +253,13 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
 
   Widget _buildCardiovascularMeasuresSection(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: _paddingH10V0,
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 20.0, 0, 10.0),
+              padding: _paddingLTRB,
               child: Text('Medidas Cardiovasculares'),
             ),
             MyTextFormField(
@@ -342,15 +346,16 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
 
   Widget _buildTemperatureSection(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: _paddingH10V0,
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 20.0, 0, 10.0),
+              padding: _paddingLTRB,
               child: Text('Temperatura'),
             ),
+
             MyTextFormField(
               label: 'Temperatura',
               ctrl: _temperatureCtrl,
@@ -378,15 +383,16 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
 
   Widget _buildGlucoseSection(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: _paddingH10V0,
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 20.0, 0, 10.0),
+              padding: _paddingLTRB,
               child: Text('Glucosa'),
             ),
+
             MyTextFormField(
               label: 'Glucosa',
               ctrl: _glucoseCtrl,

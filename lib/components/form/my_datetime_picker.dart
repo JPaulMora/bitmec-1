@@ -36,8 +36,6 @@ class _MyDateTimePickerState extends State<MyDateTimePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final _theme = Theme.of(context);
-
     return GestureDetector(
       onTap: () { _showDatetimePicker(context); },
       child: AbsorbPointer(
@@ -48,17 +46,10 @@ class _MyDateTimePickerState extends State<MyDateTimePicker> {
           ),
           child: TextField(
             controller: _ctrl,
-              decoration: InputDecoration(
-                icon: Icon(Icons.date_range),
-                labelText: widget.label,
-                isDense: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: _theme.hintColor),
-                ),
-                labelStyle: _theme.inputDecorationTheme.labelStyle.copyWith(
-                  color: _theme.hintColor,
-                ),
-              )
+            decoration: InputDecoration(
+              icon: Icon(Icons.date_range),
+              labelText: widget.label,
+            ),
           ),
         ),
       ),

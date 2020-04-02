@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
@@ -56,15 +56,14 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
       children: <QuickActionIcon>[
         QuickActionIcon(
           icon: Icon(Icons.add),
-          color: Colors.yellow,
+          color: Colors.teal,
           label: 'Nueva Consulta',
           onTap: () { _createConsultation(context); },
         ),
 
-        // TODO: implements appointments view
         QuickActionIcon(
           icon: Icon(Icons.calendar_today),
-          color: Colors.blue,
+          color: Colors.blueAccent,
           label: 'Citas',
           onTap: () { Navigator.pushNamed(
             context,
@@ -130,18 +129,17 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
   }
 
   Widget _buildGeneralInformation(context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('General', style: TextStyle(
-            fontSize: 30.0,
-            color: Colors.blue
-          )),
+          Text('General', style: textTheme.subtitle),
 
           Card(
-            elevation: 3.0,
+            elevation: 2.0,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10.0,
@@ -150,31 +148,30 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
 
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(_provider.object.firstName,
-                        style: TextStyle(fontSize: 25.0),
-                      ),
+                        style: MyTheme.cardHeaderTextStyle),
 
                       Text(_provider.object.lastName,
-                        style: TextStyle(fontSize: 25.0),
-                      ),
+                        style: MyTheme.cardHeaderTextStyle),
 
-                      Text('Cui: ${_provider.object.governmentId}'),
+                      Text('Cui: ${_provider.object.governmentId}',
+                        style: textTheme.body2),
 
-                      Text('Edad: ${_provider.object.yearsOld} años'),
+                      Text('Edad: ${_provider.object.yearsOld} años',
+                        style: textTheme.body2),
                     ],
                   ),
 
-                  Row(
+                  Text(
+                    _provider.object.gender ? 'Masculino' : 'Femenino',
                     textDirection: TextDirection.rtl,
-                    children: <Widget>[
-                      Text(_provider.object.gender ? 'Masculino' : 'Femenino')
-                    ],
-                  ),
+                    style: MyTheme.italicStyle,
+                  )
                 ],
               ),
             ),
@@ -188,22 +185,17 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
 class _ConsultationsSection extends StatelessWidget {
   final PatientProvider provider;
 
-  _ConsultationsSection({
-    Key key,
-    this.provider,
-  }) : super(key: key);
+  _ConsultationsSection({ this.provider });
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Consultas', style: TextStyle(
-            fontSize: 30.0,
-            color: Colors.blue,
-          )),
+          Text('Consultas', style: textTheme.subtitle),
           _buildList(context),
         ],
       ),
@@ -226,10 +218,7 @@ class _ConsultationsSection extends StatelessWidget {
 class _ConsultationCard extends StatelessWidget {
   final Consultation consultation;
 
-  _ConsultationCard({
-    Key key,
-    this.consultation,
-  }) : super(key: key);
+  _ConsultationCard({ this.consultation });
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +232,7 @@ class _ConsultationCard extends StatelessWidget {
       },
 
       child: Card(
-        elevation: 3.0,
+        elevation: 2.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 10.0,
@@ -252,7 +241,7 @@ class _ConsultationCard extends StatelessWidget {
 
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,21 +249,22 @@ class _ConsultationCard extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Text(consultation.name, style: TextStyle(
-                      color: Colors.blueAccent,
+                      color: MyTheme.skyBlue,
                       fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
                     )),
                   ),
 
-                  Text(consultation.formattedDate()),
+                  FormattedDate(consultation.timestamp),
                 ],
               ),
 
-              Row(
+              Text(
+                consultation.active ? 'Activo' : 'No Activo',
                 textDirection: TextDirection.rtl,
-                children: <Widget>[
-                  Text(consultation.active ? 'Activo' : 'No Activo'),
-                ],
+                style: TextStyle(
+                  color: consultation.active
+                    ? Colors.green : MyTheme.grey,
+                ),
               ),
             ],
           ),

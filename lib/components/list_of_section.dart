@@ -14,6 +14,7 @@ class ListOfSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       child: Column(
@@ -22,11 +23,7 @@ class ListOfSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(this.title, style: TextStyle(
-                fontSize: 30.0,
-                color: Colors.blue,
-              )),
-
+              Text(this.title, style: textTheme.subtitle),
               this.onPressedAdd != null
                 ? IconButton(
                   icon: Icon(Icons.add),

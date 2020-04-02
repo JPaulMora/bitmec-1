@@ -4,6 +4,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'package:intl/intl.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
 import 'package:bitmec/providers.dart';
@@ -75,7 +76,7 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
     return Scaffold(
       appBar: _buildAppBar(context),
       body: _buildBody(context),
-      backgroundColor: Colors.white,
+      backgroundColor: MyTheme.white,
       floatingActionButton: _sectionSelected == _sectionsLen - 1
         ? null : _buildFloatingActionButton(context),
     );
@@ -117,7 +118,7 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
             ),
 
             RaisedButton(
-              color: Colors.redAccent,
+              color: MyTheme.red,
               child: Text('Cancelar'),
               onPressed: () {
                 Navigator.pop(context, false);
@@ -135,7 +136,7 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
   Widget _buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       child: Icon(Icons.navigate_next),
-      backgroundColor: Colors.blue,
+      backgroundColor: MyTheme.skyBlue,
       onPressed: () {
         if (_sectionSelected == _sectionsLen - 1) return;
 
@@ -223,8 +224,8 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
           padding: const EdgeInsets.symmetric(vertical: 15.0),
           child: RaisedButton(
             child: Text('Cambiar Lado'),
-            color: Colors.blueAccent,
-            textColor: Colors.white,
+            color: MyTheme.skyBlue,
+            textColor: MyTheme.white,
             onPressed: () {
               if (_webViewCtrl == null) return;
 
@@ -291,7 +292,7 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
 
             return Text(message, style: TextStyle(
               fontSize: 20.0,
-              color: Colors.red,
+              color: MyTheme.red,
             ));
           }),
 
@@ -335,7 +336,7 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
 
   Widget _buildMySlider(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 15.0,
         vertical: 10.0,
       ),

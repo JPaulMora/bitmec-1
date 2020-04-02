@@ -1,12 +1,10 @@
+import 'package:bitmec/my_theme.dart';
 import 'package:flutter/material.dart';
 
 class QuickActionsSection extends StatelessWidget {
   final List<QuickActionIcon> children;
 
-  QuickActionsSection({
-    Key key,
-    this.children,
-  }) : super(key: key);
+  QuickActionsSection({ this.children });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +15,6 @@ class QuickActionsSection extends StatelessWidget {
         children: <Widget>[
           Card(
             margin: EdgeInsets.all(0.0),
-            elevation: 5.0,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(children: children),
@@ -40,7 +37,7 @@ class QuickActionIcon extends StatelessWidget {
     @required this.icon,
     this.color,
     this.label,
-    this.textColor = Colors.white,
+    this.textColor = MyTheme.white,
     this.onTap,
   });
 
@@ -60,11 +57,11 @@ class QuickActionIcon extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: MyTheme.tenPadding,
                     child: IconButton(
                       icon: icon,
                       color: textColor,
-                      iconSize: 50.0,
+                      iconSize: 25.0,
                       onPressed: onTap,
                     ),
                   ),

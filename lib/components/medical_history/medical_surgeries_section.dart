@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
 import 'package:bitmec/screens.dart';
@@ -39,10 +39,7 @@ class MedicalSurgeriesSection extends StatelessWidget {
 class _MedicalSurgeryCard extends StatelessWidget {
   final Surgery surgery;
 
-  _MedicalSurgeryCard({
-    Key key,
-    this.surgery,
-  }) : super(key: key);
+  _MedicalSurgeryCard({ this.surgery });
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +56,8 @@ class _MedicalSurgeryCard extends StatelessWidget {
       },
 
       child: Card(
-        elevation: 3.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -88,7 +80,7 @@ class _MedicalSurgeryCard extends StatelessWidget {
                 children: <Widget>[
                   Text(surgery.operation,
                     style: TextStyle(
-                      color: Colors.blueAccent,
+                      color: MyTheme.skyBlue,
                       fontSize: 24.0,
                     ),
                   ),
@@ -96,9 +88,7 @@ class _MedicalSurgeryCard extends StatelessWidget {
                   Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
 
                   Text('Realizada por:',
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                    ),
+                    style: TextStyle(fontStyle: FontStyle.italic),
                   ),
 
                   Text(surgery.operatingDoctor,
@@ -110,9 +100,10 @@ class _MedicalSurgeryCard extends StatelessWidget {
                 ],
               ),
 
-              FormattedDate(surgery.operationDate,
+              FormattedDate(
+                surgery.operationDate,
                 textAlign: TextAlign.end,
-                style: TextStyle(color: Colors.blueAccent),
+                color: MyTheme.skyBlue,
               )
             ],
           ),

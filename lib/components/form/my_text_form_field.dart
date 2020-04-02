@@ -64,8 +64,6 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         decoration: InputDecoration(
           icon: widget.icon,
           labelText: widget.label,
-          isDense: true,
-          border: OutlineInputBorder(),
         ),
       ),
     );

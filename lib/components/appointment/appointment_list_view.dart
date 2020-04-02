@@ -10,7 +10,7 @@ class AppointmentListView extends StatefulWidget {
 
   AppointmentListView({
     @required this.title,
-    this.color = Colors.grey,
+    this.color,
     this.list = const [],
   });
 
@@ -21,6 +21,8 @@ class AppointmentListView extends StatefulWidget {
 class _AppointmentListViewState extends State<AppointmentListView> {
   @override
   Widget build(context) {
+    final subtitleTheme = Theme.of(context).textTheme.subtitle;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 15.0,
@@ -30,10 +32,12 @@ class _AppointmentListViewState extends State<AppointmentListView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(widget.title, style: TextStyle(
-            color: widget.color,
-            fontSize: 50.0,
-          )),
+          Text(widget.title,
+            style: subtitleTheme.copyWith(
+              fontSize: 45.0,
+              color: widget.color ?? subtitleTheme.color
+            ),
+          ),
         ]..addAll(_buildList(context)),
       ),
     );

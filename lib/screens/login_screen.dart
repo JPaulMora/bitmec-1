@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
 
@@ -14,15 +15,15 @@ class _LoginScreenState extends State<LoginScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
 
-  var _nameCtrl = TextEditingController();
-  var _nameNode = FocusNode();
+  var _emailCtrl = TextEditingController();
+  var _emailNode = FocusNode();
 
   var _passCtrl = TextEditingController();
   var _passNode = FocusNode();
 
   @override
   void dispose() {
-    _nameCtrl.dispose();
+    _emailCtrl.dispose();
     _passCtrl.dispose();
 
     super.dispose();
@@ -33,24 +34,43 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            _buildTitle(context),
-            _buildForm(context),
-            _buildSubmitButton(context),
-          ],
+        child: Container(
+          decoration: BoxDecoration(
+            color: MyTheme.white,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              alignment: Alignment.bottomLeft,
+              image: AssetImage('assets/images/login-balloon-alt.jpg'),
+            )
+          ),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              _buildTitle(context),
+              _buildForm(context),
+              _buildSubmitButton(context),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildTitle(context) {
-    return Container(
-      child: Center(
-        child: Text('Bitmec', style: TextStyle(
-          fontSize: 100.0,
-          color: Colors.blue,
-        )),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Container(
+        width: 250.0,
+        height: 75.0,
+        child: Center(),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.center,
+            image: AssetImage('assets/images/logo.png'),
+          ),
+        ),
       ),
     );
   }
@@ -70,12 +90,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildEmailField(context) {
     return MyTextFormField(
       label: 'Correo',
-      ctrl: _nameCtrl,
-      node: _nameNode,
+      ctrl: _emailCtrl,
+      node: _emailNode,
       isEnabled: () => true,
       keyboardType: TextInputType.emailAddress,
       submitted: (value) {
-        _nameNode.unfocus();
+        _emailNode.unfocus();
         FocusScope.of(context).requestFocus(_passNode);
       },
       validator: (value) {

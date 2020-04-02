@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
 import 'package:bitmec/providers.dart';
@@ -137,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: Divider(height: 10.0, color: Colors.grey),
+            child: Divider(height: 10.0, color: MyTheme.grey),
           )
         ],
       );
@@ -162,7 +163,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return AppointmentListView(
       title: 'Hoy',
-      color: Colors.blue,
       list: _provider.data.where(test).toList(),
     );
   }
@@ -183,6 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return AppointmentListView(
       title: 'Mañana',
+      color: MyTheme.grey,
       list: _provider.data.where(test).toList(),
     );
   }

@@ -1,9 +1,9 @@
-import 'package:bitmec/providers/image_db_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
@@ -268,8 +268,8 @@ class _MedicalSurgeryCreateUpdateScreenState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text('Imagenes:', style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.blueAccent
+                fontSize: 25.0,
+                color: MyTheme.skyBlue,
               )),
 
               DropdownButton<int>(

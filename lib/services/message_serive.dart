@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:bitmec/models.dart';
-import 'package:bitmec/services.dart';
 import 'package:http/http.dart' as http;
 
 class MessageService {

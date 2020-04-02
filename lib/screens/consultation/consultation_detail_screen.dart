@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:permission_handler/permission_handler.dart';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/models.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/components.dart';
@@ -39,20 +40,16 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: _buildAppBar(context),
+      appBar: MyAppBar(
+        title: 'Detalle',
+        scaffoldKey: _scaffoldKey,
+        backLeading: true,
+      ),
       body: _buildBody(context),
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
-    return MyAppBar(
-      title: 'Detalle',
-      scaffoldKey: _scaffoldKey,
-      backLeading: true,
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody(context) {
     if (_provider.objectLoaded == false) {
       return SafeArea(
         child: Center(
@@ -76,7 +73,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
     );
   }
 
-  Widget _buildQuickActionsSection(BuildContext context) {
+  Widget _buildQuickActionsSection(context) {
     return QuickActionsSection(
       children: <QuickActionIcon>[
         QuickActionIcon(
@@ -133,10 +130,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (c) => ConferenceScreen(
-                  channelName: '1',
-//                  channelName: '${_provider.object.name}${_provider.object.id}${_provider.object.patient}',
-                )
+                builder: (c) => ConferenceScreen(channelName: '1')
               ),
             );
           },
@@ -145,7 +139,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
     );
   }
 
-  Widget _buildVitalSignsSection(BuildContext context) {
+  Widget _buildVitalSignsSection(context) {
     List<Widget> _list() {
       if (_provider.object.vitalSigns.isEmpty) {
         return [Text('No hay signos vitales agregados')];
@@ -226,9 +220,7 @@ class _VitalSignCard extends StatelessWidget {
 
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0, vertical: 10.0,
-          ),
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -302,11 +294,7 @@ class _SymptomCard extends StatelessWidget {
 
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -316,7 +304,7 @@ class _SymptomCard extends StatelessWidget {
                 children: <Widget>[
                   Text(symptom.formattedType(), style: TextStyle(
                     fontSize: 20.0,
-                    color: Colors.blue,
+                    color: MyTheme.skyBlue,
                   )),
 
                   FormattedDate(symptom.onset),
@@ -326,11 +314,7 @@ class _SymptomCard extends StatelessWidget {
               Container(
                 color: Colors.black12,
                 margin: const EdgeInsets.only(top: 5.0),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10.0,
-                  vertical: 10.0,
-                ),
-
+                padding: MyTheme.tenPadding,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -362,21 +346,19 @@ class _LaboratoryOrderCard extends StatelessWidget {
       onTap: () {},
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(labOrder.labFormat.name, style: TextStyle(
-                color: Colors.blueAccent,
+                color: MyTheme.skyBlue,
                 fontSize: 20.0,
               )),
 
-              Text('Ordenado por: ${labOrder.doctor.firstName} ${labOrder.doctor.lastName}'),
+              Text('Ordenado por: ${labOrder.doctor.firstName} ${labOrder.doctor.lastName}',
+                style: Theme.of(context).textTheme.body2,
+              ),
             ],
           ),
         ),

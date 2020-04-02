@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'birth_control.g.dart';
@@ -24,13 +26,12 @@ class BirthControl {
 
   Map toJson() => _$BirthControlToJson(this);
 
-  String formattedStartDate() {
-    final date = DateTime.parse(methodStartDate);
-    return '${date.day}/${date.month}/${date.year}';
+  String _formatDate(dStr) {
+    if (dStr == null) return 'sin fecha';
+    final date = DateTime.parse(dStr);
+    return DateFormat('dd/MM/yyyy').format(date);
   }
 
-  String formattedEndDate() {
-    final date = DateTime.parse(methodEndDate);
-    return '${date.day}/${date.month}/${date.year}';
-  }
+  String formattedDate() =>
+      'Desde ${_formatDate(methodStartDate)} hasta ${_formatDate(methodEndDate)}';
 }
