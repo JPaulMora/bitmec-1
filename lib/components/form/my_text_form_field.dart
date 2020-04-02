@@ -1,3 +1,4 @@
+import 'package:bitmec/my_theme.dart';
 import 'package:flutter/material.dart';
 
 class MyTextFormField extends StatefulWidget {
@@ -46,10 +47,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
     }
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: widget.noPadding ? 0.0 : 10.0,
-        vertical: widget.noPadding ? 0.0 : 10.0,
-      ),
+      padding: widget.noPadding ? const EdgeInsets.all(0) : MyTheme.tenPadding,
       child: TextFormField(
         enabled: widget.isEnabled(),
         controller: widget.ctrl,
@@ -61,7 +59,6 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         keyboardType: widget.keyboardType,
         obscureText: widget.obscureText,
         decoration: InputDecoration(
-          icon: widget.icon,
           labelText: widget.label,
         ),
       ),

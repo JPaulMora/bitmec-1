@@ -318,7 +318,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
 
       validator: (value) {
         if (value == -1) {
-          return 'El género es requerido';
+          return 'El departamento es requerido';
         }
 
         return null;

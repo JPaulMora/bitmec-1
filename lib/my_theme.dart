@@ -8,6 +8,7 @@ class MyTheme {
   static const skyBlue = Color(0xff2A93D5);
   static const red = Colors.redAccent;
   static const orange = Colors.orangeAccent;
+  static const accent = Colors.lightBlueAccent;
 
   static final italicStyle = TextStyle(
     color: grey,
@@ -23,11 +24,12 @@ class MyTheme {
 
   static const tenPadding = EdgeInsets.all(10.0);
 
-  static final _borderRadius = BorderRadius.circular(5.0);
+  static final borderRadius = BorderRadius.circular(8.0);
 
   static ThemeData light() => ThemeData(
     primaryColor: skyBlue,
     backgroundColor: white,
+    accentColor: accent,
     hintColor: skyBlue,
     errorColor: red,
 
@@ -46,9 +48,10 @@ class MyTheme {
 
     appBarTheme: AppBarTheme(
       color: white,
-      elevation: 0,
+      elevation: 1,
       iconTheme: IconThemeData(color: black),
       actionsIconTheme: IconThemeData(color: black),
+      brightness: Brightness.light,
       textTheme: TextTheme(
         title: TextStyle(
           color: black,
@@ -61,15 +64,15 @@ class MyTheme {
       isDense: true,
       labelStyle: TextStyle(fontSize: 15.0),
 
-      border: OutlineInputBorder(borderRadius: _borderRadius),
+      border: OutlineInputBorder(borderRadius: borderRadius),
 
       disabledBorder: OutlineInputBorder(
-        borderRadius: _borderRadius,
+        borderRadius: borderRadius,
         borderSide: BorderSide(color: grey),
       ),
 
       errorBorder: OutlineInputBorder(
-        borderRadius: _borderRadius,
+        borderRadius: borderRadius,
         borderSide: BorderSide(color: red)
       ),
     ),

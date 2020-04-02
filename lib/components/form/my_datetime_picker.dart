@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import 'package:bitmec/my_theme.dart';
+
 class MyDateTimePicker extends StatefulWidget {
   final DateTime dateTime;
   final void Function(DateTime) onChange;
@@ -40,14 +42,10 @@ class _MyDateTimePickerState extends State<MyDateTimePicker> {
       onTap: () { _showDatetimePicker(context); },
       child: AbsorbPointer(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: widget.noPadding ? 0.0 : 15.0,
-            vertical: widget.noPadding ? 0.0 : 10.0,
-          ),
+          padding: widget.noPadding ? const EdgeInsets.all(0) : MyTheme.tenPadding,
           child: TextField(
             controller: _ctrl,
             decoration: InputDecoration(
-              icon: Icon(Icons.date_range),
               labelText: widget.label,
             ),
           ),
