@@ -32,10 +32,18 @@ class _MyDrawerState extends State<MyDrawer> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             Center(
-              child: Text('Bitmec', style: TextStyle(
-                fontSize: 75.0,
-                color: Colors.blue,
-              )),
+              child: Container(
+                width: 250.0,
+                height: 75.0,
+                child: Center(),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.center,
+                    image: AssetImage('assets/images/logo.png'),
+                  ),
+                ),
+              ),
             ),
 
             Divider(height: 10.0, color: Colors.grey),
