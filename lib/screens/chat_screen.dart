@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatScreen extends StatefulWidget {
   static const routeName = '/chat';
@@ -30,13 +32,14 @@ class _ChatScreenState extends State<ChatScreen> {
     if (_provider == null) {
       setState(() {
         _provider = MessageProvider.of(context);
-        _provider.fetchAll();
+        _provider.fetchAll(_refresh);
       });
     }
 
     if (_consultationProvider == null) {
       setState(() {
         _consultationProvider = ConsultationProvider.of(context);
+        print(_consultationProvider.object.id);
       });
     }
 
@@ -48,6 +51,12 @@ class _ChatScreenState extends State<ChatScreen> {
       body: _buildBody(context),
       bottomSheet: _buildBottomSheet(context),
     );
+  }
+
+  void _refresh(_) {
+    Future.delayed(Duration(seconds: 5)).then((_) {
+      _provider.fetchAll(_refresh);
+    });
   }
 
   Widget _buildBody(BuildContext context) {
@@ -72,7 +81,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.camera),
-              onPressed: () {},
+              onPressed: _sendImage,
             ),
 
             Expanded(
@@ -106,6 +115,14 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  void _sendImage() async {
+    final image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    _provider.sendImage({
+      'image': image,
+      'consultation': _consultationProvider.object.id,
+    });
+  }
+
   void _sendMessage() {
     final msg = Message(
       message: _msgCtrl.text,
@@ -121,8 +138,14 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _list(BuildContext context) {
-    test(Message msg) => msg.consultation == _consultationProvider.object.id;
-    map(Message msg) => ChatMessage(message: msg);
+    bool test(msg) {
+      if (msg is Message)
+        return msg.consultation == _consultationProvider.object.id;
+
+      return true;
+    }
+
+    map(msg) => ChatMessage(message: msg);
 
     final items = _provider.data.where(test).map(map).toList().reversed.toList();
 

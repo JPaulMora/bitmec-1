@@ -1,3 +1,5 @@
+import 'package:bitmec/components.dart';
+import 'package:bitmec/my_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,12 +8,19 @@ import 'package:intl/intl.dart' as intl;
 import 'package:bitmec/models.dart';
 
 class ChatMessage extends StatelessWidget {
-  final Message message;
+  final dynamic message;
 
-  ChatMessage({this.message});
+  ChatMessage({ this.message });
 
   @override
   Widget build(BuildContext context) {
+    if (message is Message)
+      return _isMessage(context);
+
+    return _isMap(context);
+  }
+
+  Widget _isMessage(context) {
     String sendBy = 'Sin enviador registrado';
 
     if (message.doctor != null) {
@@ -44,8 +53,8 @@ class ChatMessage extends StatelessWidget {
             ),
 
             padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
-              vertical: 10.0
+                horizontal: 10.0,
+                vertical: 10.0
             ),
 
             child: Column(
@@ -65,19 +74,36 @@ class ChatMessage extends StatelessWidget {
                   )),
                 ),
 
-                Text(
-                  intl.DateFormat('dd/MM/yyyy hh:mm a').format(DateTime.parse(message.timestamp)),
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 13.0,
-                    fontStyle: FontStyle.italic,
-                  ),
-                )
+                FormattedDate(
+                  message.timestamp,
+                  format: 'dd/MM/yyyy hh:mm a',
+                  color: textColor,
+                ),
               ],
             ),
           )
         ],
       ),
+    );
+  }
+
+  Widget _isMap(context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        FormattedDate(message['timestamp'], format: 'dd/MM/yyyy hh:mm a'),
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 10.0),
+          height: 250,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fitHeight,
+              alignment: Alignment.center,
+              image: NetworkImage(message['image']),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

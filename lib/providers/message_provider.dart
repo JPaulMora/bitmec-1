@@ -7,8 +7,16 @@ import 'package:bitmec/models.dart';
 import 'package:bitmec/services.dart';
 
 class MessageProvider with ChangeNotifier {
-  List<Message> _data = [];
-  List<Message> get data => _data;
+  List<dynamic> _data = [];
+  List<dynamic> get data {
+    _data.sort((a, b) {
+      final dA = DateTime.parse(a is Message ? a.timestamp : a['timestamp']);
+      final dB = DateTime.parse(b is Message ? b.timestamp : b['timestamp']);
+      return dA.compareTo(dB);
+    });
+
+    return _data;
+  }
 
   bool _dataLoaded = false;
   bool get dataLoaded => _dataLoaded;
@@ -24,7 +32,7 @@ class MessageProvider with ChangeNotifier {
 
   static MessageProvider of(BuildContext context) => Provider.of(context);
 
-  void fetchAll([Function(List<Message>) callback]) {
+  void fetchAll([Function(List<dynamic>) callback]) {
     MessageService.fetchAll().then((response) {
       _data = response;
       _dataLoaded = true;
@@ -41,8 +49,16 @@ class MessageProvider with ChangeNotifier {
       _data.add(response);
       notifyListeners();
 
-      if (callback != null)
-        callback(response);
+      if (callback != null) callback(response);
+    });
+  }
+
+  void sendImage(Map msg, [Function(Map) callback]) {
+    MessageService.sendImage(msg).then((response) {
+      _data.add(response);
+      notifyListeners();
+
+      if (callback != null) callback(response);
     });
   }
 }
