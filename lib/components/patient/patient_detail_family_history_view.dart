@@ -58,7 +58,7 @@ class _FamilyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return GeneralCard(
       onTap: () {
         Navigator.pushNamed(
           context,
@@ -70,34 +70,24 @@ class _FamilyCard extends StatelessWidget {
         );
       },
 
-      child: Card(
-        child: Padding(
-          padding: MyTheme.tenPadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(member.relative, style: TextStyle(
-                    fontSize: 24.0,
-                    color: MyTheme.skyBlue,
-                  )),
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
-                  Text('Condición: ${member.condition}',
-                    style: Theme.of(context).textTheme.body2,
-                  ),
-                ],
-              ),
+      header: Text(member.relative, style: TextStyle(
+        fontSize: 24.0,
+        color: MyTheme.skyBlue,
+      )),
 
-              FormattedDate(
-                member.dateDiagnosed,
-                textAlign: TextAlign.end,
-              ),
-            ],
+      children: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text('Condición: ${member.condition}',
+            style: Theme.of(context).textTheme.body2,
           ),
-        ),
+
+          FormattedDate(
+            member.dateDiagnosed,
+            textAlign: TextAlign.end,
+          ),
+        ],
       ),
     );
   }

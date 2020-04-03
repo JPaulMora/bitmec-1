@@ -211,16 +211,15 @@ class _ConsultationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onTap = () {
-      Navigator.pushNamed(
-        context,
-        ConsultationDetailScreen.routeName,
-        arguments: {'id': consultation.id}
-      );
-    };
-
     return GeneralCard(
-      onTap: onTap,
+      onTap: () {
+        Navigator.pushNamed(
+            context,
+            ConsultationDetailScreen.routeName,
+            arguments: {'id': consultation.id}
+        );
+      },
+
       header: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Text(consultation.name, style: TextStyle(fontSize: 20.0)),
