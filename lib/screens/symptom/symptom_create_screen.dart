@@ -135,8 +135,8 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
 
   Widget _buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
-      child: Icon(Icons.navigate_next),
-      backgroundColor: MyTheme.skyBlue,
+      child: Icon(Icons.navigate_next, color: Colors.white),
+      backgroundColor: MyTheme.orange,
       onPressed: () {
         if (_sectionSelected == _sectionsLen - 1) return;
 
@@ -224,7 +224,6 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
           padding: const EdgeInsets.symmetric(vertical: 15.0),
           child: RaisedButton(
             child: Text('Cambiar Lado'),
-            color: MyTheme.skyBlue,
             textColor: MyTheme.white,
             onPressed: () {
               if (_webViewCtrl == null) return;

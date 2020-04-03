@@ -85,5 +85,13 @@ class MyTheme {
         borderRadius: BorderRadius.circular(10.0),
       )
     ),
+
+    buttonTheme: ButtonThemeData(
+      buttonColor: orange,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50.0),
+        side: BorderSide(color: orange),
+      ),
+    )
   );
 }

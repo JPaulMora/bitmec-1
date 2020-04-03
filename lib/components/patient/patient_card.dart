@@ -69,10 +69,8 @@ class PatientCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Text(patient.fullName, style: MyTheme.cardHeaderTextStyle),
-            ),
+            Text(patient.firstName, style: MyTheme.cardHeaderTextStyle),
+            Text(patient.lastName, style: MyTheme.cardHeaderTextStyle),
 
             RowWithIcon(
               icon: FontAwesomeIcons.birthdayCake,
