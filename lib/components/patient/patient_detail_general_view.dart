@@ -16,7 +16,7 @@ class PatientDetailGeneralView extends StatefulWidget {
 class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
   PatientProvider _provider;
   ConsultationProvider _consultationProvider;
-  
+
   final _consultationCtrl = TextEditingController();
   final _consultationNode = FocusNode();
 
@@ -44,44 +44,14 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildQuickActions(context),
           _buildGeneralInformation(context),
           _ConsultationsSection(provider: _provider),
         ],
       ),
     );
   }
-  
-  Widget _buildQuickActions(context) {
-    return QuickActionsSection(
-      children: <QuickActionIcon>[
-        QuickActionIcon(
-          icon: Icon(Icons.add),
-          color: MyTheme.orange,
-          label: 'Nueva Consulta',
-          onTap: () { _createConsultation(context); },
-        ),
 
-        QuickActionIcon(
-          icon: Icon(Icons.calendar_today),
-          color: MyTheme.skyBlue,
-          label: 'Citas',
-          onTap: () { Navigator.pushNamed(
-            context,
-            AppointmentListByPatientScreen.routeName
-          ); },
-        ),
-
-        QuickActionIcon(
-          icon: Icon(Icons.monetization_on),
-          color: Colors.green,
-          label: 'Créditos',
-        ),
-      ],
-    );
-  }
-  
-  void _createConsultation(context) {
+  void createConsultation(context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -115,7 +85,6 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
               });
             },
           ),
-
           RaisedButton(
             color: MyTheme.red,
             child: Text('Cancelar'),

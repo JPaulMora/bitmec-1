@@ -5,8 +5,13 @@ import 'package:bitmec/my_theme.dart';
 class RowWithIcon extends StatelessWidget {
   final IconData icon;
   final String text;
+  final String fontFamily;
 
-  RowWithIcon({ this.icon, this.text });
+  RowWithIcon({
+    this.icon,
+    this.text,
+    this.fontFamily = '',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,11 @@ class RowWithIcon extends StatelessWidget {
         children: <Widget>[
           Icon(icon, size: textTheme.body2.fontSize - 5, color: MyTheme.skyBlue),
           Padding(padding: const EdgeInsets.only(left: 5.0)),
-          Text(text, style: textTheme.body2)
+          Text(text, style: textTheme.body2.copyWith(
+            fontFamily: fontFamily.isEmpty
+                ? textTheme.body2.fontFamily
+                : fontFamily,
+          ))
         ],
       ),
     );

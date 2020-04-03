@@ -5,7 +5,8 @@ class MyTheme {
   static const white = Colors.white;
   static const grey = Color(0xff8F8F8F);
   static const black = Color(0xff212121);
-  static const skyBlue = Color(0xff2A93D5);
+//  static const skyBlue = Color(0xff2A93D5);
+  static const skyBlue = Colors.orangeAccent;
   static const red = Colors.redAccent;
   static const orange = Colors.orangeAccent;
   static const accent = Colors.lightBlueAccent;
