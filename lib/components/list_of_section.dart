@@ -25,7 +25,7 @@ class ListOfSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(this.title, style: textTheme.subtitle),
+              Text(this.title.toUpperCase(), style: textTheme.subtitle),
               this.onPressedAdd != null
                 ? IconButton(
                   icon: Icon(Icons.add),

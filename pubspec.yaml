@@ -38,3 +38,10 @@ flutter:
   assets:
     - assets/
     - assets/images/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
+          style: italic

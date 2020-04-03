@@ -39,7 +39,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
         _consultationProvider = ConsultationProvider.of(context);
       });
     }
-    
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

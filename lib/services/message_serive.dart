@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
@@ -7,32 +6,29 @@ import 'package:dio/dio.dart' as dio;
 import 'package:bitmec/models.dart';
 
 class MessageService {
-  static const url = 'http://bitmec.herokuapp.com/api/consultations/message/';
+  static const urlMsg = 'https://bitmec.herokuapp.com/api/consultations/message/';
+  static const urlImage = 'https://bitmec.herokuapp.com/api/consultations/image/';
 
-  static Future<List<dynamic>> fetchAll() async {
-    final response = await http.get('$url');
-    if (response.statusCode != 200) throw response.body;
-    final responseUTF8 = utf8.decode(response.bodyBytes);
-    List body = jsonDecode(responseUTF8);
-    final messages = body.map((json) => Message.fromJson(json)).toList();
+  static Future<List<dynamic>> fetchAll(int consultation) async {
+    final dioInst = dio.Dio();
 
-    final responseImg = await http.get('http://bitmec.herokuapp.com/api/consultations/image/');
-    if (responseImg.statusCode != 200) throw responseImg.body;
-    final responseUTF8Img = utf8.decode(responseImg.bodyBytes);
-    List bodyImg = jsonDecode(responseUTF8Img);
-    final imgs = bodyImg.map((json) => {
-      'id': json['id'],
-      'image': json['image'],
-      'timestamp': json['timestamp'],
-    }).toList();
+    final formMsg = dio.FormData.fromMap({'current_consultation': consultation});
+    final resMsg = await dioInst.post(urlMsg, data: formMsg);
+    if (resMsg.statusCode != 200) throw resMsg.data;
+    final messages = resMsg.data.map((json) => Message.fromJson(json)).toList();
+
+    final formImg = dio.FormData.fromMap({'current_consultation': consultation});
+    final resImage = await dioInst.post(urlImage, data: formImg);
+    if (resImage.statusCode != 200) throw resImage.data;
+    final images = resImage.data;
 
     return <dynamic>[]
       ..addAll(messages)
-      ..addAll(imgs);
+      ..addAll(images);
   }
 
   static Future<Message> create(Message message) async {
-    final response = await http.post(url,
+    final response = await http.post(urlMsg,
       body: jsonEncode(message.toJson()),
       headers: {'Content-Type': 'application/json'},
     );
@@ -49,7 +45,7 @@ class MessageService {
   }
 
   static Future<Message> fetchById(int id) async {
-    final response = await http.get('$url$id/');
+    final response = await http.get('$urlMsg$id/');
 
     if (response.statusCode != 200) {
       throw response.body;

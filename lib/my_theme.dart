@@ -26,6 +26,7 @@ class MyTheme {
   static final borderRadius = BorderRadius.circular(8.0);
 
   static ThemeData light() => ThemeData(
+    fontFamily: 'Montserrat',
     primaryColor: skyBlue,
     scaffoldBackgroundColor: white,
     accentColor: accent,

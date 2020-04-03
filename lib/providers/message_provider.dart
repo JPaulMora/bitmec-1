@@ -32,8 +32,8 @@ class MessageProvider with ChangeNotifier {
 
   static MessageProvider of(BuildContext context) => Provider.of(context);
 
-  void fetchAll([Function(List<dynamic>) callback]) {
-    MessageService.fetchAll().then((response) {
+  void fetchAll(int consultationId, [Function(List<dynamic>) callback]) {
+    MessageService.fetchAll(consultationId).then((response) {
       _data = response;
       _dataLoaded = true;
       notifyListeners();

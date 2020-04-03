@@ -29,17 +29,17 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_provider == null) {
-      setState(() {
-        _provider = MessageProvider.of(context);
-        _provider.fetchAll(_refresh);
-      });
-    }
-
     if (_consultationProvider == null) {
       setState(() {
         _consultationProvider = ConsultationProvider.of(context);
         print(_consultationProvider.object.id);
+      });
+    }
+
+    if (_provider == null) {
+      setState(() {
+        _provider = MessageProvider.of(context);
+        _provider.fetchAll(_consultationProvider.object.id, _refresh);
       });
     }
 
@@ -55,7 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _refresh(_) {
     Future.delayed(Duration(seconds: 5)).then((_) {
-      _provider.fetchAll(_refresh);
+      _provider.fetchAll(_consultationProvider.object.id, _refresh);
     });
   }
 
