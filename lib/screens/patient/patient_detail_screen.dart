@@ -79,19 +79,14 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   }
 
   Widget _buildTopHeader(BuildContext context) {
-    final style = TextStyle(
-      color: MyTheme.black,
-      fontSize: 30.0,
-    );
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
         children: <Widget>[
           Center(
             child: Container(
-              width: 100.0,
-              height: 100.0,
+              width: 75.0,
+              height: 75.0,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
@@ -104,8 +99,10 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             ),
           ),
 
-          Text(_provider.object.firstName, style: style),
-          Text(_provider.object.lastName, style: style),
+          Text(_provider.object.fullName, style: TextStyle(
+            color: MyTheme.black,
+            fontSize: 20.0,
+          )),
         ],
       ),
     );

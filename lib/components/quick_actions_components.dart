@@ -1,4 +1,5 @@
 import 'package:bitmec/my_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class QuickActionsSection extends StatelessWidget {
@@ -11,13 +12,15 @@ class QuickActionsSection extends StatelessWidget {
     return Padding(
       padding: MyTheme.tenPadding,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Card(
             margin: EdgeInsets.all(0.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(children: children),
+              child: Row(
+                children: children,
+              ),
             ),
           )
         ],

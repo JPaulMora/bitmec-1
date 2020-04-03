@@ -18,17 +18,16 @@ class MyTheme {
 
   static final cardHeaderTextStyle = TextStyle(
     color: black,
-    fontSize: 25.0,
+    fontSize: 20.0,
     fontWeight: FontWeight.normal,
   );
 
   static const tenPadding = EdgeInsets.all(10.0);
-
   static final borderRadius = BorderRadius.circular(8.0);
 
   static ThemeData light() => ThemeData(
     primaryColor: skyBlue,
-    backgroundColor: white,
+    scaffoldBackgroundColor: white,
     accentColor: accent,
     hintColor: skyBlue,
     errorColor: red,
@@ -78,8 +77,12 @@ class MyTheme {
     ),
 
     cardTheme: CardTheme(
-      elevation: 2.0,
+      elevation: 0.0,
       margin: const EdgeInsets.symmetric(vertical: 10.0),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.black12),
+        borderRadius: BorderRadius.circular(10.0),
+      )
     ),
   );
 }

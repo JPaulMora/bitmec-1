@@ -61,7 +61,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             _buildQuickActionsSection(context),
             _buildVitalSignsSection(context),

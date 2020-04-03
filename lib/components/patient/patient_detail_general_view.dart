@@ -5,6 +5,7 @@ import 'package:bitmec/components.dart';
 import 'package:bitmec/providers.dart';
 import 'package:bitmec/models.dart';
 import 'package:bitmec/screens.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PatientDetailGeneralView extends StatefulWidget {
   @override
@@ -41,11 +42,10 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
     
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildQuickActions(context),
           _buildGeneralInformation(context),
-          MyCustomDivider(),
           _ConsultationsSection(provider: _provider),
         ],
       ),
@@ -144,28 +144,23 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(_provider.object.firstName,
-                        style: MyTheme.cardHeaderTextStyle),
+                  Text(_provider.object.fullName,
+                      style: MyTheme.cardHeaderTextStyle),
 
-                      Text(_provider.object.lastName,
-                        style: MyTheme.cardHeaderTextStyle),
-
-                      Text('Cui: ${_provider.object.governmentId}',
-                        style: textTheme.body2),
-
-                      Text('Edad: ${_provider.object.yearsOld} años',
-                        style: textTheme.body2),
-                    ],
+                  RowWithIcon(
+                    icon: FontAwesomeIcons.idCard,
+                    text: _provider.object.governmentId.toString(),
                   ),
 
-                  Text(
-                    _provider.object.gender ? 'Masculino' : 'Femenino',
-                    textDirection: TextDirection.rtl,
-                    style: MyTheme.italicStyle,
-                  )
+                  RowWithIcon(
+                    icon: FontAwesomeIcons.birthdayCake,
+                    text: '${_provider.object.yearsOld} años',
+                  ),
+
+                  RowWithIcon(
+                    icon: FontAwesomeIcons.transgender,
+                    text: _provider.object.gender ? 'Hombre' : 'Mujer',
+                  ),
                 ],
               ),
             ),
@@ -216,48 +211,37 @@ class _ConsultationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          ConsultationDetailScreen.routeName,
-          arguments: {'id': consultation.id}
-        );
-      },
+    final onTap = () {
+      Navigator.pushNamed(
+        context,
+        ConsultationDetailScreen.routeName,
+        arguments: {'id': consultation.id}
+      );
+    };
 
-      child: Card(
-        child: Padding(
-          padding: MyTheme.tenPadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Text(consultation.name, style: TextStyle(
-                      color: MyTheme.skyBlue,
-                      fontSize: 30.0,
-                    )),
-                  ),
-
-                  FormattedDate(consultation.timestamp),
-                ],
-              ),
-
-              Text(
-                consultation.active ? 'Activo' : 'No Activo',
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                  color: consultation.active
-                    ? Colors.green : MyTheme.grey,
-                ),
-              ),
-            ],
+    return GeneralCard(
+      onTap: onTap,
+      header: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Text(consultation.name, style: TextStyle(fontSize: 20.0)),
+      ),
+      children: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          RowWithIcon(
+            icon: FontAwesomeIcons.calendar,
+            text: FormattedDate(consultation.timestamp).formatted,
           ),
-        ),
+
+          Text(
+            consultation.active ? 'Activo' : 'No Activo',
+            textDirection: TextDirection.rtl,
+            style: TextStyle(
+              color: consultation.active ? Colors.green : MyTheme.grey,
+            ),
+          ),
+        ],
       ),
     );
   }

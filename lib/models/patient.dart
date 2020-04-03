@@ -61,7 +61,7 @@ class Patient {
 
   Map<String, dynamic> toJson() => _$PatientToJson(this);
 
-  String get fullName => '$firstName\n$lastName';
+  String get fullName => '$firstName $lastName';
 
   int get yearsOld {
     final now = DateTime.now();

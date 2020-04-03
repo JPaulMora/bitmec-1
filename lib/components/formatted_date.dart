@@ -23,7 +23,7 @@ class FormattedDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '$prefix$_formatted',
+      '$prefix$formatted',
       textAlign: textAlign,
       style: MyTheme.italicStyle.copyWith(
         color: color ?? MyTheme.italicStyle.color,
@@ -31,7 +31,7 @@ class FormattedDate extends StatelessWidget {
     );
   }
 
-  String get _formatted {
+  String get formatted {
     if (text == null) return 'Sin fecha';
 
     final date = DateTime.parse(text);

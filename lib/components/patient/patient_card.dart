@@ -1,8 +1,10 @@
+import 'package:bitmec/components.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/models.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PatientCard extends StatelessWidget {
   final Patient patient;
@@ -29,10 +31,10 @@ class PatientCard extends StatelessWidget {
   Widget _buildCard(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: MyTheme.tenPadding,
         child: IntrinsicHeight(
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               _buildImage(context),
               _buildContent(context),
@@ -45,8 +47,8 @@ class PatientCard extends StatelessWidget {
 
   Widget _buildImage(BuildContext context) {
     return Container(
-      width: 100.0,
-      height: 100.0,
+      width: 75.0,
+      height: 75.0,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(
@@ -60,32 +62,31 @@ class PatientCard extends StatelessWidget {
   }
 
   Widget _buildContent(context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Text(patient.fullName, style: MyTheme.cardHeaderTextStyle),
-                ),
-
-                Text('${patient.yearsOld} años', style: textTheme.body2),
-                Text('Cui: ${patient.governmentId}', style: textTheme.body2),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Text(patient.fullName, style: MyTheme.cardHeaderTextStyle),
             ),
 
-            Text(
-              patient.gender ? 'Hombre' : 'Mujer',
-              textDirection: TextDirection.rtl,
-              style: MyTheme.italicStyle,
+            RowWithIcon(
+              icon: FontAwesomeIcons.birthdayCake,
+              text: '${patient.yearsOld} años',
+            ),
+
+            RowWithIcon(
+              icon: FontAwesomeIcons.idCard,
+              text: patient.governmentId.toString(),
+            ),
+
+            RowWithIcon(
+              icon: FontAwesomeIcons.transgender,
+              text: patient.gender ? 'Hombre' : 'Mujer',
             ),
           ],
         ),
