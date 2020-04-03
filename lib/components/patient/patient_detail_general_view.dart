@@ -57,7 +57,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
       children: <QuickActionIcon>[
         QuickActionIcon(
           icon: Icon(Icons.add),
-          color: Colors.teal,
+          color: MyTheme.orange,
           label: 'Nueva Consulta',
           onTap: () { _createConsultation(context); },
         ),
@@ -136,7 +136,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('General', style: textTheme.subtitle),
+          Text('General'.toUpperCase(), style: textTheme.subtitle),
           Card(
             child: Padding(
               padding: MyTheme.tenPadding,
@@ -184,7 +184,7 @@ class _ConsultationsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Consultas', style: textTheme.subtitle),
+          Text('Consultas'.toUpperCase(), style: textTheme.subtitle),
           _buildList(context),
         ],
       ),
@@ -214,9 +214,9 @@ class _ConsultationCard extends StatelessWidget {
     return GeneralCard(
       onTap: () {
         Navigator.pushNamed(
-            context,
-            ConsultationDetailScreen.routeName,
-            arguments: {'id': consultation.id}
+          context,
+          ConsultationDetailScreen.routeName,
+          arguments: {'id': consultation.id}
         );
       },
 

@@ -6,7 +6,6 @@ import 'package:bitmec/models.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/providers.dart';
 
-
 class AppointmentCard extends StatefulWidget {
   final Appointment appointment;
 
@@ -37,10 +36,8 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return GestureDetector(
       onTap: () => _onTap(context),
       child: Card(
-        elevation: 5.0,
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: MyTheme.tenPadding,
           child: IntrinsicHeight(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +110,9 @@ class _AppointmentCardState extends State<AppointmentCard> {
                   style: MyTheme.cardHeaderTextStyle),
 
                 Text('Tipo De Consulta: ${widget.appointment.appointmentType}',
-                  style: _theme.textTheme.body2),
+                  style: _theme.textTheme.body2.copyWith(
+                    color: MyTheme.skyBlue,
+                  )),
 
                 Text(widget.appointment.consultation.name,
                   style: _theme.textTheme.body2),

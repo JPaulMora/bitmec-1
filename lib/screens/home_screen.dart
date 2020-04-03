@@ -74,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: <Widget>[
                     _buildFilterSection(context),
                     _buildTodaySection(context),
+                    MyCustomDivider(),
                     _buildTomorrowSection(context),
                   ],
                 ),
@@ -131,10 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           AppointmentListView(
-            title: 'Filtro',
+            title: 'Filtro'.toUpperCase(),
             list: _provider.data.where(test).toList(),
           ),
-
           MyCustomDivider(),
         ],
       );
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return AppointmentListView(
-      title: 'Hoy',
+      title: 'Hoy'.toUpperCase(),
       list: _provider.data.where(test).toList(),
     );
   }
@@ -178,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return AppointmentListView(
-      title: 'Mañana',
+      title: 'Mañana'.toUpperCase(),
       color: MyTheme.grey,
       list: _provider.data.where(test).toList(),
     );

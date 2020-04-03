@@ -110,14 +110,14 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   Widget _buildTabBar(context) {
     return Material(
-      color: Colors.lightBlueAccent,
+      color: MyTheme.skyBlue,
       child: Row(
         children: <Widget>[
           Expanded(
             child: TabBar(
               isScrollable: true,
               labelColor: Colors.white,
-              indicatorColor: MyTheme.skyBlue,
+              indicatorColor: MyTheme.orange,
               indicatorWeight: 5.0,
 
               tabs: <Widget>[
