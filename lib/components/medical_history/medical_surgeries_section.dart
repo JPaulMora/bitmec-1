@@ -78,10 +78,11 @@ class _MedicalSurgeryCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
                   Text(surgery.operation,
                     style: TextStyle(
                       color: MyTheme.skyBlue,
-                      fontSize: 24.0,
+                      fontSize: 20.0,
                     ),
                   ),
 
@@ -103,7 +104,6 @@ class _MedicalSurgeryCard extends StatelessWidget {
               FormattedDate(
                 surgery.operationDate,
                 textAlign: TextAlign.end,
-                color: MyTheme.skyBlue,
               )
             ],
           ),

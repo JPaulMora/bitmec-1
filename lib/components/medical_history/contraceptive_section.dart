@@ -60,20 +60,28 @@ class _ContraceptiveCard extends StatelessWidget {
 
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(contraceptive.method, style: TextStyle(
                 color: MyTheme.skyBlue,
-                fontSize: 24.0,
+                fontSize: 20.0,
               )),
               Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
+
+              Text('Diagnosticado por:',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+
+              Text(contraceptive.prescribingDoctor,
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
               Text(
                 contraceptive.formattedDate(),
                 textDirection: TextDirection.rtl,

@@ -78,10 +78,11 @@ class _MedicineCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
                   Text(prescription.drug,
                     style: TextStyle(
                       color: MyTheme.skyBlue,
-                      fontSize: 24.0
+                      fontSize: 20.0
                     )
                   ),
 
@@ -100,9 +101,7 @@ class _MedicineCard extends StatelessWidget {
               Text(
                 prescription.formattedDate(),
                 textAlign: TextAlign.end,
-                style: MyTheme.italicStyle.copyWith(
-                  color: MyTheme.skyBlue,
-                ),
+                style: MyTheme.italicStyle,
               ),
             ],
           ),
