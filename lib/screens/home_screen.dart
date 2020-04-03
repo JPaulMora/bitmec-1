@@ -72,6 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/login-balloon.jpg'),
+                        ),
+                      ),
+                    ),
+
                     _buildFilterSection(context),
                     _buildTodaySection(context),
                     MyCustomDivider(),
