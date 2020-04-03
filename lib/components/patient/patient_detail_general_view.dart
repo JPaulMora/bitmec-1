@@ -64,7 +64,7 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
 
         QuickActionIcon(
           icon: Icon(Icons.calendar_today),
-          color: Colors.blueAccent,
+          color: MyTheme.skyBlue,
           label: 'Citas',
           onTap: () { Navigator.pushNamed(
             context,
