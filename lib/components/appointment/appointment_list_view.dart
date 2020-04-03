@@ -31,7 +31,7 @@ class _AppointmentListViewState extends State<AppointmentListView> {
         children: <Widget>[
           Text(widget.title,
             style: subtitleTheme.copyWith(
-              fontSize: 30.0,
+              fontSize: 25.0,
               color: widget.color ?? subtitleTheme.color
             ),
           ),

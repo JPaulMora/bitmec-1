@@ -70,6 +70,11 @@ class _PatientListScreenState extends State<PatientListScreen> {
         hintText: 'Buscar',
         hintStyle: TextStyle(color: Colors.grey),
         border: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        errorBorder: InputBorder.none,
+        focusedErrorBorder: InputBorder.none,
+        disabledBorder: InputBorder.none,
       ),
     );
   }

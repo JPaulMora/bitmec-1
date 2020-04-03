@@ -64,8 +64,25 @@ class MyTheme {
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
       labelStyle: TextStyle(fontSize: 15.0),
+      border: OutlineInputBorder(
+        borderRadius: borderRadius,
+        borderSide: BorderSide(color: grey),
+      ),
 
-      border: OutlineInputBorder(borderRadius: borderRadius),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: borderRadius,
+        borderSide: BorderSide(color: grey),
+      ),
+
+      focusedBorder: OutlineInputBorder(
+        borderRadius: borderRadius,
+        borderSide: BorderSide(color: grey),
+      ),
+
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: borderRadius,
+        borderSide: BorderSide(color: grey),
+      ),
 
       disabledBorder: OutlineInputBorder(
         borderRadius: borderRadius,
@@ -79,10 +96,11 @@ class MyTheme {
     ),
 
     cardTheme: CardTheme(
-      elevation: 0.0,
+      elevation: 3.0,
+      color: white,
       margin: const EdgeInsets.symmetric(vertical: 10.0),
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.black12),
+        side: BorderSide(color: white),
         borderRadius: BorderRadius.circular(10.0),
       )
     ),

@@ -4,6 +4,7 @@ import 'package:bitmec/my_theme.dart';
 import 'package:bitmec/components.dart';
 import 'package:bitmec/models.dart';
 import 'package:bitmec/providers.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -168,8 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
           date.year == now.year;
     }
 
+    final now = DateTime.now();
     return AppointmentListView(
-      title: 'Hoy'.toUpperCase(),
+      title: DateFormat.yMMMMd().format(now),
       list: _provider.data.where(test).toList(),
     );
   }
@@ -188,8 +190,9 @@ class _HomeScreenState extends State<HomeScreen> {
           date.year == tomorrow.year;
     }
 
+    final tomorrow = DateTime.now().add(Duration(days: 1));
     return AppointmentListView(
-      title: 'Mañana'.toUpperCase(),
+      title: DateFormat.yMMMMd().format(tomorrow),
       color: MyTheme.grey,
       list: _provider.data.where(test).toList(),
     );
