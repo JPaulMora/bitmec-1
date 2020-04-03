@@ -41,7 +41,7 @@ class MyTheme {
 
       subtitle: TextStyle(
         color: skyBlue,
-        fontSize: 30.0,
+        fontSize: 20.0,
         fontWeight: FontWeight.normal,
       ),
     ),

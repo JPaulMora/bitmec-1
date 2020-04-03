@@ -114,6 +114,7 @@ class _AppointmentListByPatientScreenState
       children: <Widget>[
         Center(
           child: Container(
+            margin: const EdgeInsets.only(top: 10.0),
             width: 100.0,
             height: 100.0,
             decoration: BoxDecoration(
@@ -129,9 +130,12 @@ class _AppointmentListByPatientScreenState
         ),
 
         Container(
-          margin: EdgeInsets.only(bottom: 10.0),
-          child: Text('${_patientProvider.object.firstName} ${_patientProvider.object.lastName}',
-            style: TextStyle(fontSize: 25.0),
+          padding: EdgeInsets.only(top: 10.0),
+          child: Column(
+            children: <Widget>[
+              Text('${_patientProvider.object.firstName}', style: TextStyle(fontSize: 20.0)),
+              Text('${_patientProvider.object.lastName}', style: TextStyle(fontSize: 20.0)),
+            ],
           ),
         ),
       ],
@@ -167,12 +171,7 @@ class _AppointmentListByPatientScreenState
       },
 
       child: Card(
-        elevation: 3,
-        margin: const EdgeInsets.symmetric(
-          horizontal: 10.0,
-          vertical: 10.0,
-        ),
-
+        margin: MyTheme.tenPadding,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 10.0,

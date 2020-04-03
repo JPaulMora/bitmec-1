@@ -305,7 +305,6 @@ class _SymptomCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(symptom.formattedType(), style: TextStyle(
-                    fontSize: 20.0,
                     color: MyTheme.skyBlue,
                   )),
 
@@ -321,7 +320,6 @@ class _SymptomCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(symptom.formattedLocation(), style: TextStyle(
-                      fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                     )),
 
@@ -355,7 +353,6 @@ class _LaboratoryOrderCard extends StatelessWidget {
             children: <Widget>[
               Text(labOrder.labFormat.name, style: TextStyle(
                 color: MyTheme.skyBlue,
-                fontSize: 20.0,
               )),
 
               Text('Ordenado por: ${labOrder.doctor.firstName} ${labOrder.doctor.lastName}',
