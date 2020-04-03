@@ -56,67 +56,55 @@ class _HabitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return GeneralCard(
       onTap: () {
         Navigator.pushNamed(
-          context,
-          HabitCreateUpdateScreen.routeName,
-          arguments: {
-            'method': 'update',
-            'data': habit,
-          }
+            context,
+            HabitCreateUpdateScreen.routeName,
+            arguments: {
+              'method': 'update',
+              'data': habit,
+            }
         );
       },
 
-      child: Card(
-        child: Padding(
-          padding: MyTheme.tenPadding,
-          child: Column(
+      header: Text(habit.habit, style: TextStyle(
+        color: MyTheme.skyBlue,
+        fontSize: 24.0,
+      )),
+
+      children: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(habit.habit, style: TextStyle(
-                    color: MyTheme.skyBlue,
-                    fontSize: 24.0,
-                  )),
-
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text('¿Lo practica actualmente?'),
-                      Text(habit.practiceCurrently() ? 'Sí' : 'No',
-                        style: TextStyle(color: MyTheme.skyBlue),
-                      )
-                    ],
-                  )
-                ],
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  color: Colors.black12,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        FormattedDate(habit.habitStartDate, prefix: 'Fecha de inicio: '),
-                        FormattedDate(habit.habitEndDate, prefix: 'Fecha de fin:'),
-                      ],
-                    ),
-                  ),
-                ),
+              Text('¿Lo practica actualmente?'),
+              Text(habit.practiceCurrently() ? 'Sí' : 'No',
+                style: TextStyle(color: MyTheme.skyBlue),
               )
             ],
           ),
-        ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              color: Colors.black12,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    FormattedDate(habit.habitStartDate, prefix: 'Fecha de inicio: '),
+                    FormattedDate(habit.habitEndDate, prefix: 'Fecha de fin:'),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
