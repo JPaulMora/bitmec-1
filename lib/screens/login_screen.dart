@@ -94,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
       node: _emailNode,
       isEnabled: () => true,
       keyboardType: TextInputType.emailAddress,
+      fillColor: MyTheme.white,
       submitted: (value) {
         _emailNode.unfocus();
         FocusScope.of(context).requestFocus(_passNode);
@@ -120,6 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
       node: _passNode,
       isEnabled: () => true,
       action: TextInputAction.done,
+      fillColor: MyTheme.white,
       obscureText: true,
       submitted: (value) {
         _passNode.unfocus();

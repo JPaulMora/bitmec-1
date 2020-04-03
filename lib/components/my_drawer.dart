@@ -1,3 +1,4 @@
+import 'package:bitmec/my_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/screens.dart';
@@ -33,8 +34,9 @@ class _MyDrawerState extends State<MyDrawer> {
           children: <Widget>[
             Center(
               child: Container(
-                width: 250.0,
-                height: 75.0,
+                width: 150.0,
+                height: 50.0,
+                margin: MyTheme.tenPadding,
                 child: Center(),
                 decoration: BoxDecoration(
                   image: DecorationImage(
