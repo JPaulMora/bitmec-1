@@ -64,7 +64,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       children: [
         SpeedDialChild(
           child: Icon(Icons.add, color: MyTheme.white),
-          backgroundColor: MyTheme.orange,
+          backgroundColor: Colors.lightBlue,
           onTap: () => _createConsultation(context),
         ),
 
@@ -105,13 +105,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
         ),
 
         actions: <Widget>[
-          FlatButton(
-            splashColor: Colors.black12,
-            child: Text('Agregar'),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100.0),
-              side: BorderSide(color: MyTheme.skyBlue)
-            ),
+          RaisedButton(
+            child: Text('Agregar', style: TextStyle(color: MyTheme.white)),
             onPressed: () {
               final consultation = Consultation(
                 name: _consultationCtrl.text,
@@ -127,8 +122,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             },
           ),
 
-          RaisedButton(
-            color: MyTheme.red,
+          FlatButton(
             child: Text('Cancelar'),
             onPressed: () {
               _consultationCtrl.text = '';
@@ -136,7 +130,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(100.0),
-              side: BorderSide(color: MyTheme.red)
+              side: BorderSide(color: Colors.white)
             ),
           ),
         ],

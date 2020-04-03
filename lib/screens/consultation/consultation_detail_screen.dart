@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:permission_handler/permission_handler.dart';
 
@@ -46,6 +47,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
         backLeading: true,
       ),
       body: _buildBody(context),
+      floatingActionButton: _buildSpeedDial(context),
     );
   }
 
@@ -63,7 +65,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            _buildQuickActionsSection(context),
+//            _buildQuickActionsSection(context),
             _buildVitalSignsSection(context),
             MyCustomDivider(),
             _buildSymptomsSection(context),
@@ -75,13 +77,17 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
     );
   }
 
-  Widget _buildQuickActionsSection(context) {
-    return QuickActionsSection(
-      children: <QuickActionIcon>[
-        QuickActionIcon(
-          icon: Icon(Icons.fiber_manual_record),
-          color: Colors.redAccent,
-          label: 'Signos Vitales',
+  Widget _buildSpeedDial(context) {
+    return SpeedDial(
+      elevation: 0,
+      backgroundColor: MyTheme.skyBlue,
+      animatedIcon: AnimatedIcons.menu_close,
+      animatedIconTheme: IconThemeData(color: Colors.white),
+      overlayOpacity: 0.0,
+      children: [
+        SpeedDialChild(
+          child: Icon(Icons.fiber_manual_record, color: MyTheme.white),
+          backgroundColor: Colors.redAccent,
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -94,10 +100,9 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
           },
         ),
 
-        QuickActionIcon(
-          icon: Icon(Icons.assignment_ind),
-          color: Colors.deepPurpleAccent,
-          label: 'Sintomas',
+        SpeedDialChild(
+          child: Icon(Icons.assignment_ind, color: MyTheme.white),
+          backgroundColor: Colors.deepPurpleAccent,
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -110,19 +115,17 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
           },
         ),
 
-        QuickActionIcon(
-          icon: Icon(Icons.chat),
-          color: Colors.green,
-          label: 'Chat',
+        SpeedDialChild(
+          child: Icon(Icons.chat, color: MyTheme.white),
+          backgroundColor: Colors.green,
           onTap: () {
             Navigator.pushNamed(context, ChatScreen.routeName);
           },
         ),
 
-        QuickActionIcon(
-          icon: Icon(Icons.dock),
-          color: Colors.lightBlueAccent,
-          label: 'Consulta',
+        SpeedDialChild(
+          child: Icon(Icons.dock, color: MyTheme.white),
+          backgroundColor: Colors.lightBlueAccent,
           onTap: () async {
             await PermissionHandler().requestPermissions([
               PermissionGroup.camera,
@@ -132,7 +135,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (c) => ConferenceScreen(channelName: '1')
+                  builder: (c) => ConferenceScreen(channelName: '1')
               ),
             );
           },
