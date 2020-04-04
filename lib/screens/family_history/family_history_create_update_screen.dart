@@ -70,7 +70,7 @@ class _FamilyHistoryCreateUpdateScreenState
     final notUpdating = _arguments['method'] != 'update';
 
     return MyAppBar(
-      title: notUpdating ? 'Crear' : 'Actualizar',
+      title: notUpdating ? 'Crear Historial Familiar' : 'Actualizar Historial Familiar',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
       actions: notUpdating ? null : [

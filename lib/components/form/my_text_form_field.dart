@@ -64,7 +64,6 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         obscureText: widget.obscureText,
         decoration: InputDecoration(
           labelText: widget.label,
-          labelStyle: widget.ctrl.text.isNotEmpty ? null : TextStyle(color: Colors.grey),
           filled: widget.fillColor != null ? true : false,
           fillColor: widget.fillColor,
         ),

@@ -93,7 +93,7 @@ class _ReproductiveHistoryCreateUpdateScreenState
 
   Widget _buildAppBar(BuildContext context) {
     return MyAppBar(
-      title: 'Actualizar',
+      title: 'Actualizar Salud Reproductiva',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
     );

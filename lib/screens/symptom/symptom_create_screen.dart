@@ -84,7 +84,7 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
 
   Widget _buildAppBar(BuildContext context) {
     return MyAppBar(
-      title: 'Create',
+      title: '${_arguments['method'] == 'update' ? 'Actualizar' : 'Crear'} Síntoma',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
       actions: _arguments['method'] != 'update' ? null

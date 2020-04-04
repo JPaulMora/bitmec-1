@@ -82,7 +82,7 @@ class _HabitCreateUpdateScreenState extends State<HabitCreateUpdateScreen> {
     final notUpdating = _arguments['method'] != 'update';
 
     return MyAppBar(
-      title: notUpdating ? 'Crear' : 'Actualizar',
+      title: notUpdating ? 'Crear Hábito' : 'Actualizar Hábito',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
       actions: notUpdating ? null : [

@@ -5,7 +5,6 @@ import 'package:bitmec/components.dart';
 import 'package:bitmec/screens.dart';
 import 'package:bitmec/providers.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:bitmec/models.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PatientDetailScreen extends StatefulWidget {
@@ -19,10 +18,6 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   PatientProvider _provider;
-  ConsultationProvider _consultationProvider;
-
-  final _consultationCtrl = TextEditingController();
-  final _consultationNode = FocusNode();
 
   @override
   void dispose() {
@@ -41,12 +36,6 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       });
     }
 
-    if (_consultationProvider == null) {
-      setState(() {
-        _consultationProvider = ConsultationProvider.of(context);
-      });
-    }
-
     return Scaffold(
       key: _scaffoldKey,
       appBar: _buildAppBar(context),
@@ -56,21 +45,27 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   }
 
   Widget _buildSpeedDial(context) {
+    labelWidget(text) => Container(
+      child: Text(text, style: TextStyle(color: Colors.white)),
+      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
+      margin: EdgeInsets.only(right: 18.0),
+      decoration: BoxDecoration(
+        color: MyTheme.black,
+        borderRadius: BorderRadius.all(Radius.circular(3.0)),
+      ),
+    );
+    
     return SpeedDial(
       elevation: 0,
-      backgroundColor: MyTheme.primary,
+      backgroundColor: MyTheme.secondary,
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(color: Colors.white),
-      overlayOpacity: 0.0,
+      overlayOpacity: 0.5,
       children: [
-        SpeedDialChild(
-          child: Icon(Icons.add, color: MyTheme.white),
-          backgroundColor: Colors.lightBlue,
-          onTap: () => _createConsultation(context),
-        ),
         SpeedDialChild(
           child: Icon(Icons.calendar_today, color: MyTheme.white),
           backgroundColor: MyTheme.primary,
+          labelWidget: labelWidget('Citas'),
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -78,68 +73,20 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             );
           },
         ),
+        
         SpeedDialChild(
           child: Icon(Icons.attach_money, color: MyTheme.white),
           backgroundColor: Colors.green,
+          labelWidget: labelWidget('Cash'),
           onTap: () => {},
         ),
       ],
     );
   }
 
-  void _createConsultation(context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Agregar Consulta'),
-        content: MyTextFormField(
-          noPadding: true,
-          label: 'Nombre',
-          ctrl: _consultationCtrl,
-          node: _consultationNode,
-          isEnabled: () => true,
-          submitted: (_) {},
-          validator: (value) => value.trim().isEmpty
-              ? 'El valor es requerido' : null,
-        ),
-
-        actions: <Widget>[
-          RaisedButton(
-            child: Text('Agregar', style: TextStyle(color: MyTheme.white)),
-            onPressed: () {
-              final consultation = Consultation(
-                name: _consultationCtrl.text,
-                active: true,
-                patient: _provider.object.id,
-              );
-
-              _consultationProvider.create(consultation, (c) {
-                _consultationCtrl.text = '';
-                _provider.addConsultation(c);
-                Navigator.pop(context);
-              });
-            },
-          ),
-
-          FlatButton(
-            child: Text('Cancelar'),
-            onPressed: () {
-              _consultationCtrl.text = '';
-              Navigator.pop(context);
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100.0),
-              side: BorderSide(color: Colors.white)
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildAppBar(BuildContext context) {
     return MyAppBar(
-      title: 'Detalle',
+      title: 'Detalle de Paciente',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
       actions: <Widget>[
@@ -182,9 +129,9 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
         width: 100.0,
         height: 100.0,
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: MyTheme.grey,
           shape: BoxShape.circle,
-          border: Border.all(color: MyTheme.primary, width: 2.5),
+          border: Border.all(color: MyTheme.secondary, width: 2.5),
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
@@ -287,7 +234,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             child: TabBar(
               isScrollable: true,
               labelColor: Colors.white,
-              indicatorColor: MyTheme.white,
+              indicatorColor: MyTheme.secondary,
               indicatorWeight: 5.0,
 
               tabs: <Widget>[

@@ -66,7 +66,7 @@ class _AppointmentCreateUpdateScreenState extends State<AppointmentCreateUpdateS
     final notUpdating = _arguments['method'] != 'update';
 
     return MyAppBar(
-      title: notUpdating ? 'Crear' : 'Actualizar',
+      title: notUpdating ? 'Crear Consulta' : 'Actualizar Consulta',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
       actions: notUpdating ? null : [

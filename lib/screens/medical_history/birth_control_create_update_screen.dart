@@ -71,7 +71,7 @@ class _BirthControlCreateUpdateScreenState
     final notUpdating = _arguments['method'] != 'update';
 
     return MyAppBar(
-      title: notUpdating ? 'Crear' : 'Actualizar',
+      title: notUpdating ? 'Crear Anticonceptivo' : 'Actualizar Anticonceptivo',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
       actions: notUpdating ? null : [

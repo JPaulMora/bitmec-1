@@ -89,7 +89,7 @@ class _MedicalPrescriptionCreateUpdateScreenState
 
   Widget _buildAppBar(BuildContext context) {
     return MyAppBar(
-      title: _arguments['method'] != 'update' ? 'Crear' : 'Actualizar',
+      title: _arguments['method'] != 'update' ? 'Crear Medicamento' : 'Actualizar Medicamento',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
     );

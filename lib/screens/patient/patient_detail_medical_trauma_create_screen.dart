@@ -35,7 +35,7 @@ class _PatientDetailMedicalTraumaCreateScreenState
 
   Widget _buildAppBar(BuildContext context) {
     return MyAppBar(
-      title: 'Crear',
+      title: 'Crear Trauma',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
     );

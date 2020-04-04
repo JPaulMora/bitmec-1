@@ -79,7 +79,7 @@ class _MedicalSurgeryCreateUpdateScreenState
 
   Widget _buildAppBar(BuildContext context) {
     return MyAppBar(
-      title: _arguments['method'] != 'update' ? 'Crear' : 'Actualizar',
+      title: _arguments['method'] != 'update' ? 'Crear Cirugía' : 'Actualizar Cirugía',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
     );
@@ -267,10 +267,7 @@ class _MedicalSurgeryCreateUpdateScreenState
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Imagenes:', style: TextStyle(
-                fontSize: 25.0,
-                color: MyTheme.primary,
-              )),
+              Text('Imagenes:', style: Theme.of(context).textTheme.subtitle),
 
               DropdownButton<int>(
                 icon: Icon(Icons.camera),

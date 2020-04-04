@@ -75,7 +75,7 @@ class _PatientEditScreenState extends State<PatientEditScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text('Editar'), centerTitle: true),
+      appBar: AppBar(title: Text('Actualizar Paciente'), centerTitle: true),
       body: _buildBody(context),
     );
   }

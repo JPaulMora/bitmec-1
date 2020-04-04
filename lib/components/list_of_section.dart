@@ -34,6 +34,13 @@ class ListOfSection extends StatelessWidget {
             ],
           ),
 
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 5.0),
+            height: 2.0,
+            width: 18.0,
+            color: MyTheme.primary,
+          ),
+
           Column(children: this.children)
         ],
       ),

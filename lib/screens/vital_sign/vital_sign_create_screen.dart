@@ -83,7 +83,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
 
   Widget _buildAppBar(BuildContext context) {
     return MyAppBar(
-      title: 'Crear',
+      title: '${_arguments['method'] == 'update' ? 'Actualizar' : 'Crear'} Signo Vital',
       scaffoldKey: _scaffoldKey,
       backLeading: true,
       actions: _arguments['method'] != 'update' ? null
@@ -203,7 +203,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
           children: <Widget>[
             Padding(
               padding: _paddingLTRB,
-              child: Text('Medidas Físicas'),
+              child: Text('Medidas Físicas', style: Theme.of(context).textTheme.subtitle),
             ),
 
             MyTextFormField(
@@ -260,7 +260,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
           children: <Widget>[
             Padding(
               padding: _paddingLTRB,
-              child: Text('Medidas Cardiovasculares'),
+              child: Text('Medidas Cardiovasculares', style: Theme.of(context).textTheme.subtitle),
             ),
             MyTextFormField(
               label: 'Sistólica',
@@ -353,7 +353,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
           children: <Widget>[
             Padding(
               padding: _paddingLTRB,
-              child: Text('Temperatura'),
+              child: Text('Temperatura', style: Theme.of(context).textTheme.subtitle),
             ),
 
             MyTextFormField(
@@ -390,7 +390,7 @@ class _VitalSignCreateScreenState extends State<VitalSignCreateScreen> {
           children: <Widget>[
             Padding(
               padding: _paddingLTRB,
-              child: Text('Glucosa'),
+              child: Text('Glucosa', style: Theme.of(context).textTheme.subtitle),
             ),
 
             MyTextFormField(

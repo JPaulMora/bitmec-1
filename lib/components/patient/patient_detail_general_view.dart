@@ -96,79 +96,97 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
       ),
     );
   }
-
-  Widget _buildGeneralInformation(context) {
-    final textTheme = Theme.of(context).textTheme;
-    return Padding(
-      padding: MyTheme.tenPadding,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text('General'.toUpperCase(), style: textTheme.subtitle),
-          Card(
-            child: Padding(
-              padding: MyTheme.tenPadding,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Text(_provider.object.fullName,
-                      style: MyTheme.cardHeaderTextStyle),
-
-                  RowWithIcon(
-                    icon: FontAwesomeIcons.idCard,
-                    text: _provider.object.governmentId.toString(),
-                  ),
-
-                  RowWithIcon(
-                    icon: FontAwesomeIcons.birthdayCake,
-                    text: '${_provider.object.yearsOld} años',
-                  ),
-
-                  RowWithIcon(
-                    icon: FontAwesomeIcons.transgender,
-                    text: _provider.object.gender ? 'Hombre' : 'Mujer',
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }
 
-class _ConsultationsSection extends StatelessWidget {
+class _ConsultationsSection extends StatefulWidget {
   final PatientProvider provider;
 
   _ConsultationsSection({ this.provider });
 
   @override
+  __ConsultationsSectionState createState() => __ConsultationsSectionState();
+}
+
+class __ConsultationsSectionState extends State<_ConsultationsSection> {
+  ConsultationProvider _consultationProvider;
+
+  final _consultationCtrl = TextEditingController();
+
+  final _consultationNode = FocusNode();
+
+  @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return Padding(
-      padding: MyTheme.tenPadding,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text('Consultas'.toUpperCase(), style: textTheme.subtitle),
-          _buildList(context),
+    if (_consultationProvider == null) {
+      setState(() {
+        _consultationProvider = ConsultationProvider.of(context);
+      });
+    }
+
+    return ListOfSection(
+      title: 'Consultas',
+      onPressedAdd: () => _createConsultation(context),
+      children: _buildList(context),
+    );
+  }
+
+  void _createConsultation(context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Agregar Consulta'),
+        content: MyTextFormField(
+          noPadding: true,
+          label: 'Nombre',
+          ctrl: _consultationCtrl,
+          node: _consultationNode,
+          isEnabled: () => true,
+          submitted: (_) {},
+          validator: (value) => value.trim().isEmpty
+              ? 'El valor es requerido' : null,
+        ),
+
+        actions: <Widget>[
+          RaisedButton(
+            child: Text('Agregar', style: TextStyle(color: MyTheme.white)),
+            onPressed: () {
+              final consultation = Consultation(
+                name: _consultationCtrl.text,
+                active: true,
+                patient: widget.provider.object.id,
+              );
+
+              _consultationProvider.create(consultation, (c) {
+                _consultationCtrl.text = '';
+                widget.provider.addConsultation(c);
+                Navigator.pop(context);
+              });
+            },
+          ),
+
+          FlatButton(
+            child: Text('Cancelar'),
+            onPressed: () {
+              _consultationCtrl.text = '';
+              Navigator.pop(context);
+            },
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100.0),
+                side: BorderSide(color: Colors.white)
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildList(BuildContext context) {
-    if (provider.object.consultations.isEmpty) {
-      return Text('Aún no hay consultas agregadas');
+  List<Widget> _buildList(BuildContext context) {
+    if (widget.provider.object.consultations.isEmpty) {
+      return [Text('Aún no hay consultas agregadas')];
     }
 
-    return Column(
-      children: provider.object.consultations.map((c) =>
+    return widget.provider.object.consultations.map((c) =>
         _ConsultationCard(consultation: c)
-      ).toList(),
-    );
+    ).toList();
   }
 }
 
@@ -190,7 +208,7 @@ class _ConsultationCard extends StatelessWidget {
 
       header: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Text(consultation.name, style: TextStyle(fontSize: 20.0)),
+        child: Text(consultation.name, style: Theme.of(context).textTheme.subtitle),
       ),
       children: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

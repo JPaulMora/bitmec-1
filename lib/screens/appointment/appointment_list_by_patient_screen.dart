@@ -112,13 +112,14 @@ class _AppointmentListByPatientScreenState
   Widget _buildTopHeader(context) {
     return Column(
       children: <Widget>[
-        Center(
-          child: Container(
+        Center(child: Container(
             margin: const EdgeInsets.only(top: 10.0),
             width: 100.0,
             height: 100.0,
             decoration: BoxDecoration(
+              color: MyTheme.grey,
               shape: BoxShape.circle,
+              border: Border.all(color: MyTheme.secondary, width: 2.5),
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
@@ -126,8 +127,7 @@ class _AppointmentListByPatientScreenState
                 ),
               ),
             ),
-          ),
-        ),
+          )),
 
         Container(
           padding: EdgeInsets.only(top: 10.0),
@@ -173,22 +173,17 @@ class _AppointmentListByPatientScreenState
       child: Card(
         margin: MyTheme.tenPadding,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 10.0,
-          ),
-
+          padding: MyTheme.tenPadding,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Motivo: ${appointment.formattedType()}',
-                    style: TextStyle(color: MyTheme.primary),
-                  ),
+                  Text(appointment.consultation.name,
+                    style: Theme.of(context).textTheme.subtitle,),
 
-                  Text(appointment.consultation.name),
+                  Text('${appointment.formattedType()}'),
 
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -206,7 +201,6 @@ class _AppointmentListByPatientScreenState
               RaisedButton(
                 child: Text('Tomar Cita'),
                 textColor: Colors.white,
-                color: Colors.orangeAccent,
                 onPressed: () {
                   Navigator.pushNamed(
                     context,

@@ -40,7 +40,7 @@ class MyTheme {
       ),
 
       subtitle: TextStyle(
-        color: primary,
+        fontFamily: 'Poppins',
         fontSize: 20.0,
         fontWeight: FontWeight.normal,
       ),

@@ -42,7 +42,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: MyAppBar(
-        title: 'Detalle',
+        title: 'Detalle De Consulta',
         scaffoldKey: _scaffoldKey,
         backLeading: true,
       ),
@@ -78,16 +78,27 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
   }
 
   Widget _buildSpeedDial(context) {
+    labelWidget(text) => Container(
+      child: Text(text, style: TextStyle(color: Colors.white)),
+      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
+      margin: EdgeInsets.only(right: 18.0),
+      decoration: BoxDecoration(
+        color: MyTheme.black,
+        borderRadius: BorderRadius.all(Radius.circular(3.0)),
+      ),
+    );
+    
     return SpeedDial(
       elevation: 0,
-      backgroundColor: MyTheme.primary,
+      backgroundColor: MyTheme.secondary,
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(color: Colors.white),
-      overlayOpacity: 0.0,
+      overlayOpacity: 0.5,
       children: [
         SpeedDialChild(
           child: Icon(Icons.fiber_manual_record, color: MyTheme.white),
           backgroundColor: Colors.redAccent,
+          labelWidget: labelWidget('Signos Vitales'),
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -103,6 +114,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
         SpeedDialChild(
           child: Icon(Icons.assignment_ind, color: MyTheme.white),
           backgroundColor: Colors.deepPurpleAccent,
+          labelWidget: labelWidget('Síntomas'),
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -118,6 +130,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
         SpeedDialChild(
           child: Icon(Icons.chat, color: MyTheme.white),
           backgroundColor: Colors.green,
+          labelWidget: labelWidget('Chat'),
           onTap: () {
             Navigator.pushNamed(context, ChatScreen.routeName);
           },
@@ -126,6 +139,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
         SpeedDialChild(
           child: Icon(Icons.dock, color: MyTheme.white),
           backgroundColor: Colors.lightBlueAccent,
+          labelWidget: labelWidget('Video'),
           onTap: () async {
             await PermissionHandler().requestPermissions([
               PermissionGroup.camera,

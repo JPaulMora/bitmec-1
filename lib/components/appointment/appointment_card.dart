@@ -154,7 +154,8 @@ class _AppointmentCardState extends State<AppointmentCard> {
       height: 75.0,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: MyTheme.primary, width: 2.5),
+          color: MyTheme.grey,
+          border: Border.all(color: MyTheme.secondary, width: 2.5),
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
