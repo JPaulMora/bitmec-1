@@ -15,6 +15,7 @@ class MyTextFormField extends StatefulWidget {
   final Icon icon;
   final bool noPadding;
   final Color fillColor;
+  final TextStyle labelStyle;
 
   MyTextFormField({
     Key key,
@@ -31,6 +32,7 @@ class MyTextFormField extends StatefulWidget {
     this.icon,
     this.noPadding = false,
     this.fillColor,
+    this.labelStyle,
   }) : super(key: key);
 
   @override
@@ -62,6 +64,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         obscureText: widget.obscureText,
         decoration: InputDecoration(
           labelText: widget.label,
+          labelStyle: widget.ctrl.text.isNotEmpty ? null : TextStyle(color: Colors.grey),
           filled: widget.fillColor != null ? true : false,
           fillColor: widget.fillColor,
         ),

@@ -58,7 +58,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   Widget _buildSpeedDial(context) {
     return SpeedDial(
       elevation: 0,
-      backgroundColor: MyTheme.secondary,
+      backgroundColor: MyTheme.primary,
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(color: Colors.white),
       overlayOpacity: 0.0,
@@ -68,7 +68,6 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           backgroundColor: Colors.lightBlue,
           onTap: () => _createConsultation(context),
         ),
-
         SpeedDialChild(
           child: Icon(Icons.calendar_today, color: MyTheme.white),
           backgroundColor: MyTheme.primary,
@@ -79,7 +78,6 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             );
           },
         ),
-
         SpeedDialChild(
           child: Icon(Icons.attach_money, color: MyTheme.white),
           backgroundColor: Colors.green,
@@ -186,7 +184,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
         decoration: BoxDecoration(
           color: Colors.grey,
           shape: BoxShape.circle,
-          border: Border.all(color: MyTheme.secondary, width: 2.5),
+          border: Border.all(color: MyTheme.primary, width: 2.5),
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
@@ -289,7 +287,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
             child: TabBar(
               isScrollable: true,
               labelColor: Colors.white,
-              indicatorColor: MyTheme.secondary,
+              indicatorColor: MyTheme.white,
               indicatorWeight: 5.0,
 
               tabs: <Widget>[

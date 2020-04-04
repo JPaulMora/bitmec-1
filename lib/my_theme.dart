@@ -5,11 +5,11 @@ class MyTheme {
   static const white = Colors.white;
   static const grey = Color(0xff8F8F8F);
   static const black = Color(0xff212121);
-  static const primary = Colors.orangeAccent;
+  static const primary = Color(0xff2A93D5);
+  static const secondary = Colors.orangeAccent;
   static const red = Colors.redAccent;
   static const orange = Colors.orangeAccent;
   static const accent = Colors.lightBlueAccent;
-  static const secondary = Colors.pinkAccent;
 
   static final italicStyle = TextStyle(
     color: grey,
