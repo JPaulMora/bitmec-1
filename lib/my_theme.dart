@@ -8,7 +8,6 @@ class MyTheme {
   static const primary = Color(0xff2A93D5);
   static const secondary = Colors.orangeAccent;
   static const red = Colors.redAccent;
-  static const orange = Colors.orangeAccent;
   static const accent = Colors.lightBlueAccent;
 
   static final italicStyle = TextStyle(
@@ -105,10 +104,10 @@ class MyTheme {
     ),
 
     buttonTheme: ButtonThemeData(
-      buttonColor: orange,
+      buttonColor: secondary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50.0),
-        side: BorderSide(color: orange),
+        side: BorderSide(color: secondary),
       ),
     )
   );

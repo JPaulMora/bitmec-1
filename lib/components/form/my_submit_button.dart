@@ -30,11 +30,11 @@ class _MySubmitButtonState extends State<MySubmitButton> {
             child: RaisedButton(
               child: Text(widget.label, style: TextStyle(fontSize: 20.0)),
               textColor: MyTheme.white,
-              color: MyTheme.orange,
+              color: MyTheme.secondary,
               onPressed: widget.onPressed,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50.0),
-                side: BorderSide(color: MyTheme.orange),
+                side: BorderSide(color: MyTheme.secondary),
               ),
             ),
           ),

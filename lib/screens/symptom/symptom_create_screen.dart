@@ -136,7 +136,7 @@ class _SymptomCreateScreenState extends State<SymptomCreateScreen> {
   Widget _buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
       child: Icon(Icons.navigate_next, color: Colors.white),
-      backgroundColor: MyTheme.orange,
+      backgroundColor: MyTheme.secondary,
       onPressed: () {
         if (_sectionSelected == _sectionsLen - 1) return;
 
