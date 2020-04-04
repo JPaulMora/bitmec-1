@@ -21,7 +21,7 @@ class RowWithIcon extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Icon(icon, size: textTheme.body2.fontSize - 5, color: MyTheme.skyBlue),
+          Icon(icon, size: textTheme.body2.fontSize - 5, color: MyTheme.primary),
           Padding(padding: const EdgeInsets.only(left: 5.0)),
           Text(text, style: textTheme.body2.copyWith(
             fontFamily: fontFamily.isEmpty

@@ -16,7 +16,7 @@ class ContraceptivesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListOfSection(
-      title: 'Anticonceptivos',
+      title: 'Anticonceptivos'.toUpperCase(),
       children: _buildList(context),
       onPressedAdd: () {
         Navigator.pushNamed(
@@ -66,7 +66,7 @@ class _ContraceptiveCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(contraceptive.method, style: TextStyle(
-                color: MyTheme.skyBlue,
+                fontFamily: 'Poppins',
                 fontSize: 20.0,
               )),
               Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),

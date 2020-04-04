@@ -126,7 +126,7 @@ class _MyDropdownFormFieldState extends State<MyDropdownFormField> {
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Text(widget.label,
           style: TextStyle(
-            color: MyTheme.skyBlue,
+            color: MyTheme.primary,
             fontSize: 12.0,
           ),
         ),

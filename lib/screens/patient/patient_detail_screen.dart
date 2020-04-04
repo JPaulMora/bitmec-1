@@ -6,6 +6,7 @@ import 'package:bitmec/screens.dart';
 import 'package:bitmec/providers.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:bitmec/models.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PatientDetailScreen extends StatefulWidget {
   static const routeName = '/patient/detail';
@@ -57,7 +58,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   Widget _buildSpeedDial(context) {
     return SpeedDial(
       elevation: 0,
-      backgroundColor: MyTheme.skyBlue,
+      backgroundColor: MyTheme.secondary,
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(color: Colors.white),
       overlayOpacity: 0.0,
@@ -70,7 +71,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
         SpeedDialChild(
           child: Icon(Icons.calendar_today, color: MyTheme.white),
-          backgroundColor: MyTheme.skyBlue,
+          backgroundColor: MyTheme.primary,
           onTap: () {
             Navigator.pushNamed(
               context,
@@ -176,30 +177,104 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   }
 
   Widget _buildTopHeader(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: Container(
-              width: 75.0,
-              height: 75.0,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    _provider.object.profilePicture ?? 'https://maxcdn.icons8.com/Share/icon/Users//user_male_circle_filled1600.png'
-                  ),
-                )
-              ),
+    Widget _thumbnail() => Container(
+      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      alignment: FractionalOffset.center,
+      child: Container(
+        width: 100.0,
+        height: 100.0,
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          shape: BoxShape.circle,
+          border: Border.all(color: MyTheme.secondary, width: 2.5),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(
+              _provider.object.profilePicture
+                  ?? 'https://maxcdn.icons8.com/Share/icon/Users//user_male_circle_filled1600.png'
             ),
-          ),
+          )
+        ),
+      ),
+    );
 
-          Text(_provider.object.fullName, style: TextStyle(
-            color: MyTheme.black,
-            fontSize: 20.0,
+    Widget _headerContent() => Container(
+      margin: const EdgeInsets.only(top: 45.0),
+      constraints: new BoxConstraints.expand(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(_provider.object.firstName, style: TextStyle(
+            fontFamily: 'Poppins',
+            color: Colors.black,
+            fontSize: 18.0,
+            fontWeight: FontWeight.w600,
           )),
+
+          Text(_provider.object.lastName, style: TextStyle(
+            fontFamily: 'Poppins',
+            color: Colors.black,
+            fontSize: 18.0,
+            fontWeight: FontWeight.w600,
+          )),
+
+          Container(height: 10.0),
+          Text(_provider.object.address, style: TextStyle(
+            color: Colors.black,
+            fontSize: 12.0,
+          )),
+          Container(height: 10.0),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              RowWithIcon(
+                icon: FontAwesomeIcons.birthdayCake,
+                text: '${_provider.object.yearsOld} años',
+              ),
+
+              Container(width: 25.0),
+              RowWithIcon(
+                icon: FontAwesomeIcons.transgender,
+                text: _provider.object.gender ? 'Hombre' : 'Mujer',
+              ),
+
+              Container(width: 25.0),
+              RowWithIcon(
+                icon: FontAwesomeIcons.idCard,
+                text: _provider.object.governmentId,
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+
+    Widget _topCard() => Container(
+      child: _headerContent(),
+      height: 160.0,
+      margin: const EdgeInsets.only(top: 70.0),
+      decoration: new BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: <BoxShadow>[
+          new BoxShadow(
+            color: Colors.black12,
+            blurRadius: 10.0,
+            offset: Offset(0.0, 10.0),
+          ),
+        ],
+      ),
+    );
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 20.0),
+      child: new Stack(
+        children: <Widget>[
+          _topCard(),
+          _thumbnail(),
         ],
       ),
     );
@@ -207,14 +282,14 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   Widget _buildTabBar(context) {
     return Material(
-      color: MyTheme.skyBlue,
+      color: MyTheme.primary,
       child: Row(
         children: <Widget>[
           Expanded(
             child: TabBar(
               isScrollable: true,
               labelColor: Colors.white,
-              indicatorColor: MyTheme.orange,
+              indicatorColor: MyTheme.secondary,
               indicatorWeight: 5.0,
 
               tabs: <Widget>[

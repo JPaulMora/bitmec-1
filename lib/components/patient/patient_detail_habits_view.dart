@@ -59,17 +59,17 @@ class _HabitCard extends StatelessWidget {
     return GeneralCard(
       onTap: () {
         Navigator.pushNamed(
-            context,
-            HabitCreateUpdateScreen.routeName,
-            arguments: {
-              'method': 'update',
-              'data': habit,
-            }
+          context,
+          HabitCreateUpdateScreen.routeName,
+          arguments: {
+            'method': 'update',
+            'data': habit,
+          }
         );
       },
 
       header: Text(habit.habit, style: TextStyle(
-        color: MyTheme.skyBlue,
+        fontFamily: 'Poppins',
         fontSize: 24.0,
       )),
 
@@ -82,7 +82,7 @@ class _HabitCard extends StatelessWidget {
             children: <Widget>[
               Text('¿Lo practica actualmente?'),
               Text(habit.practiceCurrently() ? 'Sí' : 'No',
-                style: TextStyle(color: MyTheme.skyBlue),
+                style: TextStyle(color: MyTheme.primary),
               )
             ],
           ),

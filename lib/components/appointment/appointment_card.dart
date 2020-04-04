@@ -120,7 +120,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
             margin: const EdgeInsets.symmetric(vertical: 5.0),
             height: 2.0,
             width: 18.0,
-            color: MyTheme.skyBlue,
+            color: MyTheme.primary,
           ),
 
           Row(
@@ -154,7 +154,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
       height: 75.0,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: MyTheme.skyBlue, width: 2.5),
+          border: Border.all(color: MyTheme.primary, width: 2.5),
           image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(

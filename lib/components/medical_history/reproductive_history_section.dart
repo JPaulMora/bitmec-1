@@ -20,8 +20,8 @@ class ReproductiveHistorySection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Salud Reproductiva',
-                  style: Theme.of(context).textTheme.subtitle),
+              Text('Salud Reproductiva'.toUpperCase(),
+                style: Theme.of(context).textTheme.subtitle),
 
               IconButton(
                 icon: Icon(Icons.edit),
@@ -91,7 +91,7 @@ class ReproductiveHistorySection extends StatelessWidget {
           children: <Widget>[
             Text('¿Has tenido uno más ciclos mestruales?'),
             Text(cond ? 'Sí' : 'No',
-              style: TextStyle(color: MyTheme.skyBlue),
+              style: TextStyle(color: MyTheme.primary),
             )
           ],
         ),
@@ -129,7 +129,7 @@ class ReproductiveHistorySection extends StatelessWidget {
           children: <Widget>[
             Text('¿Has estado embarazada?'),
             Text(cond ? 'Sí' : 'No',
-              style: TextStyle(color: MyTheme.skyBlue),
+              style: TextStyle(color: MyTheme.primary),
             )
           ],
         ),
@@ -167,7 +167,7 @@ class ReproductiveHistorySection extends StatelessWidget {
           children: <Widget>[
             Text('¿Ha perdido algun bebé aún no nacido'),
             Text(cond ? 'Sí' : 'No',
-              style: TextStyle(color: MyTheme.skyBlue),
+              style: TextStyle(color: MyTheme.primary),
             )
           ],
         ),

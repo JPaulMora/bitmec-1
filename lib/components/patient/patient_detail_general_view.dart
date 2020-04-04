@@ -44,7 +44,6 @@ class _PatientDetailGeneralViewState extends State<PatientDetailGeneralView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildGeneralInformation(context),
           _ConsultationsSection(provider: _provider),
         ],
       ),

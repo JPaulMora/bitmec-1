@@ -13,7 +13,7 @@ class MedicalConditionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListOfSection(
-      title: 'Padecimientos',
+      title: 'Padecimientos'.toUpperCase(),
       children: _buildList(context),
       onPressedAdd: () {
         Navigator.pushNamed(
@@ -56,32 +56,19 @@ class _MedicalConditionCard extends StatelessWidget {
       },
 
       child: Card(
-        child: Padding(
-          padding: MyTheme.tenPadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                height: 150.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(condition.images.isNotEmpty
-                        ? condition.images.first.file
-                        : 'https://sanitationsolutions.net/wp-content/uploads/2015/05/empty-image.png'
-                    ),
-                  )
-                ),
-              ),
-
-              Column(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            _image(context),
+            Padding(
+              padding: MyTheme.tenPadding,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
                   Text(condition.condition,
                     style: TextStyle(
-                      color: MyTheme.skyBlue,
+                      fontFamily: 'Poppins',
                       fontSize: 20.0,
                     ),
                   ),
@@ -98,17 +85,35 @@ class _MedicalConditionCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+
+                  FormattedDate(
+                    condition.diagnosisDate,
+                    textAlign: TextAlign.end,
+                  ),
                 ],
               ),
-
-              FormattedDate(
-                condition.diagnosisDate,
-                textAlign: TextAlign.end,
-              ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
   }
+
+  Widget _image(context) => Container(
+    height: 150.0,
+    decoration: BoxDecoration(
+      color: Colors.black12,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(10.0),
+        topRight: Radius.circular(10.0),
+      ),
+      image: DecorationImage(
+        fit: BoxFit.cover,
+        image: NetworkImage(condition.images.isNotEmpty
+          ? condition.images.first.file
+          : 'https://sanitationsolutions.net/wp-content/uploads/2015/05/empty-image.png'
+        ),
+      )
+    ),
+  );
 }

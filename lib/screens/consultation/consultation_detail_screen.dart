@@ -80,7 +80,7 @@ class _ConsultationDetailScreenState extends State<ConsultationDetailScreen> {
   Widget _buildSpeedDial(context) {
     return SpeedDial(
       elevation: 0,
-      backgroundColor: MyTheme.skyBlue,
+      backgroundColor: MyTheme.primary,
       animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(color: Colors.white),
       overlayOpacity: 0.0,
@@ -308,7 +308,7 @@ class _SymptomCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(symptom.formattedType(), style: TextStyle(
-                    color: MyTheme.skyBlue,
+                    color: MyTheme.primary,
                   )),
 
                   FormattedDate(symptom.onset),
@@ -355,7 +355,7 @@ class _LaboratoryOrderCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(labOrder.labFormat.name, style: TextStyle(
-                color: MyTheme.skyBlue,
+                color: MyTheme.primary,
               )),
 
               Text('Ordenado por: ${labOrder.doctor.firstName} ${labOrder.doctor.lastName}',

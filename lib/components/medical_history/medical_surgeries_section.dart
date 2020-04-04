@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bitmec/my_theme.dart';
@@ -13,7 +14,7 @@ class MedicalSurgeriesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListOfSection(
-      title: 'Cirugias',
+      title: 'Cirugias'.toUpperCase(),
       children: _buildList(context),
       onPressedAdd: () {
         Navigator.pushNamed(
@@ -56,32 +57,19 @@ class _MedicalSurgeryCard extends StatelessWidget {
       },
 
       child: Card(
-        child: Padding(
-          padding: MyTheme.tenPadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                height: 150.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(surgery.images.isNotEmpty
-                        ? surgery.images.first.file
-                        : 'https://sanitationsolutions.net/wp-content/uploads/2015/05/empty-image.png'
-                    ),
-                  ),
-                ),
-              ),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            _image(),
+            Padding(
+              padding: MyTheme.tenPadding,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 5.0)),
                   Text(surgery.operation,
                     style: TextStyle(
-                      color: MyTheme.skyBlue,
+                      fontFamily: 'Poppins',
                       fontSize: 20.0,
                     ),
                   ),
@@ -98,17 +86,35 @@ class _MedicalSurgeryCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+
+                  FormattedDate(
+                    surgery.operationDate,
+                    textAlign: TextAlign.end,
+                  )
                 ],
               ),
-
-              FormattedDate(
-                surgery.operationDate,
-                textAlign: TextAlign.end,
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
   }
+
+  Widget _image() => Container(
+    height: 150.0,
+    decoration: BoxDecoration(
+      color: Colors.black12,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(10.0),
+        topRight: Radius.circular(10.0),
+      ),
+      image: DecorationImage(
+        fit: BoxFit.cover,
+        image: NetworkImage(surgery.images.isNotEmpty
+            ? surgery.images.first.file
+            : 'https://sanitationsolutions.net/wp-content/uploads/2015/05/empty-image.png'
+        ),
+      ),
+    ),
+  );
 }

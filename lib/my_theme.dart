@@ -5,11 +5,11 @@ class MyTheme {
   static const white = Colors.white;
   static const grey = Color(0xff8F8F8F);
   static const black = Color(0xff212121);
-//  static const skyBlue = Color(0xff2A93D5);
-  static const skyBlue = Colors.orangeAccent;
+  static const primary = Colors.orangeAccent;
   static const red = Colors.redAccent;
   static const orange = Colors.orangeAccent;
   static const accent = Colors.lightBlueAccent;
+  static const secondary = Colors.pinkAccent;
 
   static final italicStyle = TextStyle(
     color: grey,
@@ -28,10 +28,10 @@ class MyTheme {
 
   static ThemeData light() => ThemeData(
     fontFamily: 'Montserrat',
-    primaryColor: skyBlue,
+    primaryColor: primary,
     scaffoldBackgroundColor: white,
     accentColor: accent,
-    hintColor: skyBlue,
+    hintColor: primary,
     errorColor: red,
 
     textTheme: TextTheme(
@@ -41,7 +41,7 @@ class MyTheme {
       ),
 
       subtitle: TextStyle(
-        color: skyBlue,
+        color: primary,
         fontSize: 20.0,
         fontWeight: FontWeight.normal,
       ),
@@ -100,7 +100,6 @@ class MyTheme {
       color: white,
       margin: const EdgeInsets.symmetric(vertical: 10.0),
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: white),
         borderRadius: BorderRadius.circular(10.0),
       )
     ),

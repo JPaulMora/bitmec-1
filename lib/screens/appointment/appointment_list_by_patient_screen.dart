@@ -185,7 +185,7 @@ class _AppointmentListByPatientScreenState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text('Motivo: ${appointment.formattedType()}',
-                    style: TextStyle(color: MyTheme.skyBlue),
+                    style: TextStyle(color: MyTheme.primary),
                   ),
 
                   Text(appointment.consultation.name),

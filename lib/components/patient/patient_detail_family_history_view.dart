@@ -72,7 +72,7 @@ class _FamilyCard extends StatelessWidget {
 
       header: Text(member.relative, style: TextStyle(
         fontSize: 24.0,
-        color: MyTheme.skyBlue,
+        fontFamily: 'Poppins',
       )),
 
       children: Column(

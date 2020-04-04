@@ -76,7 +76,7 @@ class PatientCard extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 5.0),
             height: 2.0,
             width: 18.0,
-            color: MyTheme.skyBlue,
+            color: MyTheme.primary,
           ),
 
           Row(
@@ -104,8 +104,8 @@ class PatientCard extends StatelessWidget {
       height: 75.0,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: MyTheme.skyBlue,
-        border: Border.all(color: MyTheme.skyBlue, width: 2.5),
+        color: MyTheme.primary,
+        border: Border.all(color: MyTheme.primary, width: 2.5),
         image: DecorationImage(
           fit: BoxFit.cover,
           image: NetworkImage(

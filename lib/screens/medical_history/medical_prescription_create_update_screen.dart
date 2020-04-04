@@ -374,7 +374,7 @@ class _MedicalPrescriptionCreateUpdateScreenState
             children: <Widget>[
               Text('Imagenes:', style: TextStyle(
                 fontSize: 25.0,
-                color: MyTheme.skyBlue,
+                color: MyTheme.primary,
               )),
 
               DropdownButton<int>(
