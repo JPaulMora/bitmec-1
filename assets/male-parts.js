@@ -331,7 +331,7 @@
 	},
 	'mal_16':{
 	  'id': 16,
-		'hover': 'Genitales (Pene y Testículos)',
+		'hover': 'Genitales',
 		'enable':true,
 		'url':'http://www.thelink.com/',
 		'target':'same_window',

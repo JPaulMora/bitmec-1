@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:bitmec/my_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 class ConferenceScreen extends StatefulWidget {
   static final routeName = '/conference';
@@ -21,6 +24,8 @@ class _ConferenceScreenState extends State<ConferenceScreen> {
   static final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
+  bool camera = true;
+  String time = 'Loading...';
 
   @override
   void dispose() {
@@ -35,8 +40,8 @@ class _ConferenceScreenState extends State<ConferenceScreen> {
   @override
   void initState() {
     super.initState();
-    // initialize agora sdk
     initialize();
+    Timer.periodic(Duration(seconds: 1), _getTime);
   }
 
   Future<void> initialize() async {
@@ -134,6 +139,28 @@ class _ConferenceScreenState extends State<ConferenceScreen> {
     );
   }
 
+  Widget _buildCameras() {
+    final views = _getRenderViews();
+    return Container(
+      color: Colors.grey,
+      child: views.length > 1 ? views[1] : Container(),
+    );
+  }
+
+  Widget _preview() {
+    return Container(
+      alignment: Alignment.bottomRight,
+      padding: const EdgeInsets.only(bottom: 100.0, right: 15.0),
+      child: Container(
+        width: 100.0,
+        height: 175.0,
+        color: Colors.black,
+        child: !camera ? Container()
+            : AgoraRenderWidget(0, local: true, preview: true),
+      ),
+    );
+  }
+
   /// Video layout wrapper
   Widget _viewRows() {
     final views = _getRenderViews();
@@ -172,50 +199,107 @@ class _ConferenceScreenState extends State<ConferenceScreen> {
     return Container();
   }
 
+  Widget _time() {
+    return Container(
+      alignment: Alignment.bottomLeft,
+      padding: const EdgeInsets.only(bottom: 100.0, left: 15.0),
+      child: Text(time, style: TextStyle(
+        color: Colors.white,
+        fontSize: 60.0,
+      )),
+    );
+  }
+
+  _getTime(_) {
+    final now = DateTime.now();
+    final formatted = DateFormat('hh:mm').format(now);
+    setState(() {
+      time = formatted;
+    });
+  }
+
   /// Toolbar layout
   Widget _toolbar() {
     return Container(
       alignment: Alignment.bottomCenter,
-      padding: const EdgeInsets.symmetric(vertical: 48),
+      padding: const EdgeInsets.only(bottom: 30.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          RawMaterialButton(
-            onPressed: _onToggleMute,
-            child: Icon(
-              muted ? Icons.mic_off : Icons.mic,
-              color: muted ? Colors.white : Colors.blueAccent,
-              size: 20.0,
+          Expanded(
+            child: RawMaterialButton(
+              onPressed: () {Navigator.pop(context);},
+              child: Icon(
+                Icons.featured_play_list,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: MyTheme.secondary,
+              padding: const EdgeInsets.all(10.0),
             ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: muted ? Colors.blueAccent : Colors.white,
-            padding: const EdgeInsets.all(12.0),
           ),
-          RawMaterialButton(
-            onPressed: () => _onCallEnd(context),
-            child: Icon(
-              Icons.call_end,
-              color: Colors.white,
-              size: 35.0,
+
+          Expanded(
+            child: RawMaterialButton(
+              onPressed: _onToggleCamera,
+              child: Icon(
+                Icons.camera_alt,
+                color: !camera ? Colors.white : Colors.blueAccent,
+                size: 25.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: !camera ? Colors.blueAccent : Colors.white,
+              padding: const EdgeInsets.all(10.0),
             ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: Colors.redAccent,
-            padding: const EdgeInsets.all(15.0),
           ),
-          RawMaterialButton(
-            onPressed: _onSwitchCamera,
-            child: Icon(
-              Icons.switch_camera,
-              color: Colors.blueAccent,
-              size: 20.0,
+
+          Expanded(
+            child: RawMaterialButton(
+              onPressed: _onToggleMute,
+              child: Icon(
+                muted ? Icons.mic_off : Icons.mic,
+                color: muted ? Colors.white : Colors.blueAccent,
+                size: 25.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: muted ? Colors.blueAccent : Colors.white,
+              padding: const EdgeInsets.all(10.0),
             ),
-            shape: CircleBorder(),
-            elevation: 2.0,
-            fillColor: Colors.white,
-            padding: const EdgeInsets.all(12.0),
-          )
+          ),
+
+          Expanded(
+            child: RawMaterialButton(
+              onPressed: _onSwitchCamera,
+              child: Icon(
+                Icons.switch_camera,
+                color: Colors.blueAccent,
+                size: 25.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: Colors.white,
+              padding: const EdgeInsets.all(10.0),
+            ),
+          ),
+
+          Expanded(
+            child: RawMaterialButton(
+              onPressed: () => _onCallEnd(context),
+              child: Icon(
+                Icons.call_end,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: Colors.redAccent,
+              padding: const EdgeInsets.all(10.0),
+            ),
+          ),
         ],
       ),
     );
@@ -223,6 +307,18 @@ class _ConferenceScreenState extends State<ConferenceScreen> {
 
   void _onCallEnd(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  void _onToggleCamera() {
+    setState(() {
+      camera = !camera;
+    });
+
+    if (camera) {
+      AgoraRtcEngine.enableVideo();
+    } else {
+      AgoraRtcEngine.disableVideo();
+    }
   }
 
   void _onToggleMute() {
@@ -243,7 +339,9 @@ class _ConferenceScreenState extends State<ConferenceScreen> {
       body: Center(
         child: Stack(
           children: <Widget>[
-            _viewRows(),
+            _buildCameras(),
+            _preview(),
+            _time(),
             _toolbar(),
           ],
         ),
