@@ -5,10 +5,12 @@ import 'package:bitmec/my_theme.dart';
 class MySubmitButton extends StatefulWidget {
   final String label;
   final VoidCallback onPressed;
+  final String fontFamily;
 
   MySubmitButton({
     Key key,
     this.label = 'Guardar',
+    this.fontFamily = 'Montserrat',
     @required this.onPressed,
   }) : super(key: key);
 
@@ -28,7 +30,12 @@ class _MySubmitButtonState extends State<MySubmitButton> {
             minWidth: 150.0,
             height: 50.0,
             child: RaisedButton(
-              child: Text(widget.label, style: TextStyle(fontSize: 20.0)),
+              child: Text(widget.label,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontFamily: widget.fontFamily,
+                )
+              ),
               textColor: MyTheme.white,
               color: MyTheme.secondary,
               onPressed: widget.onPressed,

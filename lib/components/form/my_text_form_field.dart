@@ -16,6 +16,8 @@ class MyTextFormField extends StatefulWidget {
   final bool noPadding;
   final Color fillColor;
   final TextStyle labelStyle;
+  final String fontFamily;
+  final InputDecoration decoration;
 
   MyTextFormField({
     Key key,
@@ -33,6 +35,8 @@ class MyTextFormField extends StatefulWidget {
     this.noPadding = false,
     this.fillColor,
     this.labelStyle,
+    this.fontFamily = 'Montserrat',
+    this.decoration,
   }) : super(key: key);
 
   @override
@@ -62,9 +66,12 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         maxLines: widget.maxLines,
         keyboardType: widget.keyboardType,
         obscureText: widget.obscureText,
-        decoration: InputDecoration(
+        decoration: widget.decoration ?? InputDecoration(
           labelText: widget.label,
           filled: widget.fillColor != null ? true : false,
+          labelStyle: Theme.of(context).inputDecorationTheme.labelStyle.copyWith(
+            fontFamily: widget.fontFamily,
+          ),
           fillColor: widget.fillColor,
         ),
       ),

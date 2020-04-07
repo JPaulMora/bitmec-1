@@ -33,24 +33,33 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Color(0xFFE4E5E7),
       body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            color: MyTheme.white,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              alignment: Alignment.bottomLeft,
-              image: AssetImage('assets/images/login-balloon-alt.jpg'),
-            )
-          ),
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: Colors.black12,
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      alignment: Alignment.bottomCenter,
+                      image: AssetImage('assets/images/login-balloon.jpg'),
+                    ),
+                  ),
+                ),
 
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              _buildTitle(context),
-              _buildForm(context),
-              _buildSubmitButton(context),
-            ],
+                _buildForm(context),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: _buildSubmitButton(context),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -76,13 +85,63 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildForm(context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          _buildEmailField(context),
-          _buildPasswordField(context),
-        ],
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0)
+      ),
+
+      margin: const EdgeInsets.fromLTRB(30.0, 50.0, 30.0, 20.0),
+
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 35.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: 150.0,
+                    height: 35.0,
+                    child: Center(),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        alignment: Alignment.center,
+                        image: AssetImage('assets/images/logo.png'),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+
+            MyCustomDivider(),
+
+            Padding(
+              padding: MyTheme.tenPadding,
+              child: Text('Inicio de Sesión'.toUpperCase(),
+                style: Theme.of(context).textTheme.subtitle,
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 5.0),
+                height: 2.0,
+                width: 18.0,
+                color: MyTheme.primary,
+              ),
+            ),
+
+            _buildEmailField(context),
+            _buildPasswordField(context),
+            Padding(padding: const EdgeInsets.only(bottom: 15.0))
+          ],
+        ),
       ),
     );
   }
