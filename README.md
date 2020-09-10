@@ -1,6 +1,6 @@
-# bitmec
+# App Bitmec de Aisstente Telemedicina
 
-Bitmec application
+Este app es para uso de los afiliados de la plataforma Bitmec Telemedicina como asistentes locales.
 
 ## Getting Started
 
